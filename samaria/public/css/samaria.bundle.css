@@ -1,0 +1,20 @@
+/**
+ * Samaria Frappe v16 Desk Bundle CSS
+ */
+
+:root {
+	--samaria-brand-primary: #10b981;
+	--samaria-brand-dark: #064e3b;
+	--samaria-brand-light: #d1fae5;
+}
+
+.samaria-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.25rem 0.5rem;
+	border-radius: 9999px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	background-color: var(--samaria-brand-light);
+	color: var(--samaria-brand-dark);
+}

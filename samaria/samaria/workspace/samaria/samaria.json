@@ -1,0 +1,59 @@
+{
+ "charts": [],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Samaria ERP Hub\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Welcome to the Samaria Module in Frappe v16. Manage application configurations, integrations, and core workflows.\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Settings & Configuration\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Samaria Setting\",\"label\":\"Samaria Setting\",\"description\":\"Configure API, webhooks, and core modules\"}]}}]",
+ "creation": "2026-09-02 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "package",
+ "idx": 0,
+ "indicator_color": "blue",
+ "is_hidden": 0,
+ "label": "Samaria",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Settings & Configuration",
+   "link_count": 1,
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Samaria Setting",
+   "link_count": 0,
+   "link_to": "Samaria Setting",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Samaria",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "",
+   "format": "",
+   "label": "Samaria Settings",
+   "link_to": "Samaria Setting",
+   "type": "DocType"
+  }
+ ],
+ "title": "Samaria"
+}

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "samaria"
+authors = [
+    { name = "Samaria Team", email = "admin@samaria.local" }
+]
+description = "Samaria custom Frappe Module & App for version-16"
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = [
+    # "frappe~=16.0.0" # Installed in bench environment
+]
+
+[project.urls]
+Homepage = "https://github.com/samaria/samaria"
+Repository = "https://github.com/samaria/samaria.git"
+
+[tool.flit.sdist]
+exclude = [
+    ".git*",
+    "**/__pycache__",
+    "node_modules",
+    "*.pyc"
+]

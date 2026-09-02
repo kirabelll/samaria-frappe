@@ -1,0 +1,3 @@
+# Patches are executed in the order they are defined.
+# Examples:
+# samaria.patches.v1_0.set_default_settings
