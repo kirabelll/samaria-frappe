@@ -1,0 +1,146 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:coupon_no",
+ "creation": "2026-09-02 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_general",
+  "coupon_no",
+  "factory",
+  "cement_purchase",
+  "tonnage",
+  "column_break_1",
+  "status",
+  "collected_by",
+  "collected_date",
+  "section_handover",
+  "handed_over_to",
+  "handover_date",
+  "column_break_2",
+  "used_date",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_general",
+   "fieldtype": "Section Break",
+   "label": "Coupon Details"
+  },
+  {
+   "fieldname": "coupon_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Coupon Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "factory",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Factory",
+   "options": "Cement Factory",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cement_purchase",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Cement Purchase Order",
+   "options": "Cement Purchase",
+   "reqd": 1
+  },
+  {
+   "default": "40",
+   "fieldname": "tonnage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Tonnage (Tons)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Collected",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Collected\nIn Custody\nHanded Over\nUsed\nReturned\nCancelled\nLost"
+  },
+  {
+   "fieldname": "collected_by",
+   "fieldtype": "Data",
+   "label": "Collected By"
+  },
+  {
+   "default": "Today",
+   "fieldname": "collected_date",
+   "fieldtype": "Date",
+   "label": "Collected Date"
+  },
+  {
+   "fieldname": "section_handover",
+   "fieldtype": "Section Break",
+   "label": "Handover & Usage"
+  },
+  {
+   "fieldname": "handed_over_to",
+   "fieldtype": "Data",
+   "label": "Handed Over To (Driver/Transporter)"
+  },
+  {
+   "fieldname": "handover_date",
+   "fieldtype": "Date",
+   "label": "Handover Date"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "used_date",
+   "fieldtype": "Date",
+   "label": "Used / Lifted Date"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Cement Coupon",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

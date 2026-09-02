@@ -1,0 +1,193 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-02 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_general",
+  "item_code",
+  "item_name",
+  "effective_date",
+  "column_break_1",
+  "approved_price",
+  "approved_by",
+  "section_cost_buildup",
+  "manufacturer_price",
+  "freight",
+  "insurance",
+  "customs",
+  "inland_transport",
+  "column_break_2",
+  "bank_cost",
+  "warehouse_cost",
+  "handling_cost",
+  "wastage_allowance",
+  "other_costs",
+  "section_pricing_result",
+  "total_cost",
+  "margin_percent",
+  "column_break_3",
+  "recommended_price"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_general",
+   "fieldtype": "Section Break",
+   "label": "Item Pricing Overview"
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Medical Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "effective_date",
+   "fieldtype": "Date",
+   "label": "Effective Date"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Approved Selling Price (ETB)"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Data",
+   "label": "Approved By"
+  },
+  {
+   "fieldname": "section_cost_buildup",
+   "fieldtype": "Section Break",
+   "label": "Landing Cost Build-up"
+  },
+  {
+   "fieldname": "manufacturer_price",
+   "fieldtype": "Currency",
+   "label": "Manufacturer / FOB Price (ETB)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "freight",
+   "fieldtype": "Currency",
+   "label": "Freight Cost"
+  },
+  {
+   "fieldname": "insurance",
+   "fieldtype": "Currency",
+   "label": "Insurance Cost"
+  },
+  {
+   "fieldname": "customs",
+   "fieldtype": "Currency",
+   "label": "Customs Duty & Taxes"
+  },
+  {
+   "fieldname": "inland_transport",
+   "fieldtype": "Currency",
+   "label": "Inland Transport"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_cost",
+   "fieldtype": "Currency",
+   "label": "Bank / LC Charges"
+  },
+  {
+   "fieldname": "warehouse_cost",
+   "fieldtype": "Currency",
+   "label": "Warehouse & Storage"
+  },
+  {
+   "fieldname": "handling_cost",
+   "fieldtype": "Currency",
+   "label": "Handling Cost"
+  },
+  {
+   "fieldname": "wastage_allowance",
+   "fieldtype": "Currency",
+   "label": "Wastage Allowance"
+  },
+  {
+   "fieldname": "other_costs",
+   "fieldtype": "Currency",
+   "label": "Other Overhead Costs"
+  },
+  {
+   "fieldname": "section_pricing_result",
+   "fieldtype": "Section Break",
+   "label": "Margin & Recommended Price"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Landed Cost (ETB)",
+   "read_only": 1
+  },
+  {
+   "default": "25",
+   "fieldname": "margin_percent",
+   "fieldtype": "Percent",
+   "label": "Target Margin (%)"
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "recommended_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Recommended Price (ETB)",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Medical Pricing",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

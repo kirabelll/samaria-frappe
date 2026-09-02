@@ -1,0 +1,184 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-09-02 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_general",
+  "naming_series",
+  "purchase",
+  "factory",
+  "customer",
+  "customer_name",
+  "column_break_1",
+  "status",
+  "lifting_date",
+  "truck",
+  "coupon",
+  "delivery_note_no",
+  "section_weighbridge",
+  "factory_weighbridge_ref",
+  "factory_weight",
+  "buyer_weighbridge_qty",
+  "column_break_2",
+  "shortage_qty",
+  "shortage_penalty"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_general",
+   "fieldtype": "Section Break",
+   "label": "Lifting Details"
+  },
+  {
+   "default": "CLIFT-.YYYY.-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CLIFT-.YYYY.-.#####",
+   "reqd": 1
+  },
+  {
+   "fieldname": "purchase",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Cement Purchase",
+   "options": "Cement Purchase",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "purchase.factory",
+   "fieldname": "factory",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Factory",
+   "options": "Cement Factory",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Lifted",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Lifted\nDelivered\nVerified\nCancelled"
+  },
+  {
+   "default": "Today",
+   "fieldname": "lifting_date",
+   "fieldtype": "Date",
+   "label": "Lifting Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "truck",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Truck Plate No",
+   "options": "Truck",
+   "reqd": 1
+  },
+  {
+   "fieldname": "coupon",
+   "fieldtype": "Link",
+   "label": "Coupon Used",
+   "options": "Cement Coupon"
+  },
+  {
+   "fieldname": "delivery_note_no",
+   "fieldtype": "Data",
+   "label": "Delivery Note / Pad No"
+  },
+  {
+   "fieldname": "section_weighbridge",
+   "fieldtype": "Section Break",
+   "label": "Weighbridge & Shortages"
+  },
+  {
+   "fieldname": "factory_weighbridge_ref",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Factory Weighbridge Ref / Ticket",
+   "reqd": 1
+  },
+  {
+   "fieldname": "factory_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Factory Weight (Tons)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "buyer_weighbridge_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Buyer Weighbridge Weight (Tons)"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "shortage_qty",
+   "fieldtype": "Float",
+   "label": "Shortage Quantity (Tons)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "shortage_penalty",
+   "fieldtype": "Currency",
+   "label": "Shortage Penalty (ETB)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Cement Lifting",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

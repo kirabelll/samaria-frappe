@@ -1,0 +1,331 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-09-02 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_general",
+  "naming_series",
+  "dispatch_date",
+  "customer",
+  "customer_name",
+  "supplier",
+  "supplier_name",
+  "column_break_1",
+  "status",
+  "delivery_date",
+  "pad_number",
+  "section_logistics",
+  "transporter",
+  "transporter_name",
+  "truck",
+  "truck_capacity",
+  "column_break_2",
+  "driver_name",
+  "item_code",
+  "item_name",
+  "section_volumes",
+  "loaded_volume",
+  "delivered_volume",
+  "shortage_volume",
+  "column_break_3",
+  "transport_rate",
+  "aggregate_value",
+  "customer_price",
+  "section_financials",
+  "gross_truck_fee",
+  "shortage_deduction",
+  "net_truck_payment",
+  "column_break_4",
+  "customer_receivable",
+  "supplier_payable",
+  "net_profit_amount",
+  "section_attachments",
+  "telegram_proof",
+  "column_break_5",
+  "signed_invoice"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_general",
+   "fieldtype": "Section Break",
+   "label": "Dispatch Overview"
+  },
+  {
+   "default": "DISP-.#####",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "DISP-.#####",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "dispatch_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Dispatch Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Supplier / Quarry",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "supplier.supplier_name",
+   "fieldname": "supplier_name",
+   "fieldtype": "Data",
+   "label": "Supplier Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Dispatched",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Dispatched\nDelivered\nVerified\nSettled\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "label": "Delivery Date"
+  },
+  {
+   "fieldname": "pad_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Delivery Pad / Receipt No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_logistics",
+   "fieldtype": "Section Break",
+   "label": "Transport & Vehicle Details"
+  },
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transporter",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "transporter.supplier_name",
+   "fieldname": "transporter_name",
+   "fieldtype": "Data",
+   "label": "Transporter Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "truck",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Truck Plate No",
+   "options": "Truck",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "truck.capacity",
+   "fieldname": "truck_capacity",
+   "fieldtype": "Float",
+   "label": "Truck Capacity (m³)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "truck.driver_name",
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Material / Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item_code.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_volumes",
+   "fieldtype": "Section Break",
+   "label": "Volumes & Rates"
+  },
+  {
+   "fieldname": "loaded_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Loaded Volume (m³)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivered_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Delivered Volume (m³)"
+  },
+  {
+   "fieldname": "shortage_volume",
+   "fieldtype": "Float",
+   "label": "Shortage Volume (m³)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transport_rate",
+   "fieldtype": "Currency",
+   "label": "Transport Rate (ETB/m³)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "aggregate_value",
+   "fieldtype": "Currency",
+   "label": "Supplier Rate (ETB/m³)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_price",
+   "fieldtype": "Currency",
+   "label": "Customer Price (ETB/m³)"
+  },
+  {
+   "fieldname": "section_financials",
+   "fieldtype": "Section Break",
+   "label": "Calculated Financials"
+  },
+  {
+   "fieldname": "gross_truck_fee",
+   "fieldtype": "Currency",
+   "label": "Gross Truck Fee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "shortage_deduction",
+   "fieldtype": "Currency",
+   "label": "Shortage Deduction",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_truck_payment",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Net Transporter Payment",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer_receivable",
+   "fieldtype": "Currency",
+   "label": "Customer Receivable",
+   "read_only": 1
+  },
+  {
+   "fieldname": "supplier_payable",
+   "fieldtype": "Currency",
+   "label": "Supplier Payable",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_profit_amount",
+   "fieldtype": "Currency",
+   "label": "Net Margin",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_attachments",
+   "fieldtype": "Section Break",
+   "label": "Proof & Invoices"
+  },
+  {
+   "fieldname": "telegram_proof",
+   "fieldtype": "Attach",
+   "label": "Telegram / Photo Proof"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "signed_invoice",
+   "fieldtype": "Attach",
+   "label": "Signed Delivery Invoice"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Aggregate Delivery",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

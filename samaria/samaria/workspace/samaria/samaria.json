@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Samaria ERP Hub\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Welcome to the Samaria Module in Frappe v16. Manage application configurations, integrations, and core workflows.\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Settings & Configuration\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Samaria Setting\",\"label\":\"Samaria Setting\",\"description\":\"Configure API, webhooks, and core modules\"}]}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Samaria Operations Hub\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Unified Operations and Division Management for Aggregate, Cement, and Medical divisions in Frappe v16.\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Aggregate Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Aggregate Delivery\",\"label\":\"Aggregate Delivery\",\"description\":\"Stone & aggregate dispatches, weighbridge, transport fees, shortages\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transporter Agreement\",\"label\":\"Transporter Agreement\",\"description\":\"Agreements with transporters and quarry sites\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Truck\",\"label\":\"Trucks\",\"description\":\"Registered fleet and vehicle capacities\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transport Association\",\"label\":\"Transport Associations\",\"description\":\"Transporter unions & association fee tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Aggregate Settlement\",\"label\":\"Aggregate Settlement\",\"description\":\"Transporter payment sheets & batch settlements\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Cement Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Purchase\",\"label\":\"Cement Purchase\",\"description\":\"Factory cement orders, quotas, and remaining balances\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Lifting\",\"label\":\"Cement Lifting\",\"description\":\"Weighbridge weigh-ins, shortage deductions, and customer dispatch\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Coupon\",\"label\":\"Cement Coupon\",\"description\":\"Physical coupon lifecycle & custody tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Factory\",\"label\":\"Cement Factories\",\"description\":\"Supplying plants, terms, and rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Balance\",\"label\":\"Cement Balance\",\"description\":\"Real-time plant balances\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Medical Division\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch\",\"label\":\"Medical Batch\",\"description\":\"Batch inventory, lot numbers, expiry tracking, and quarantine\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Request\",\"label\":\"Medical Request\",\"description\":\"Medicine orders, quotes, and delivery approvals\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Pricing\",\"label\":\"Medical Pricing\",\"description\":\"Landed cost build-up and margin calculation\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch Adjustment\",\"label\":\"Batch Adjustment\",\"description\":\"Reconciliations, expiry write-offs, and damage logs\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Agreements & Settings\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Sales Agreement\",\"label\":\"Sales Agreement\",\"description\":\"Customer price agreements with VAT incl/excl rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Supplier Agreement\",\"label\":\"Supplier Agreement\",\"description\":\"Supplier purchase agreements with VAT rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Samaria Setting\",\"label\":\"Samaria Setting\",\"description\":\"Module settings and integration parameters\"}]}}]",
  "creation": "2026-09-02 12:00:00.000000",
  "custom_blocks": [],
  "docstatus": 0,
@@ -16,11 +16,214 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Settings & Configuration",
-   "link_count": 1,
+   "label": "Aggregate Operations",
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 1,
    "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Aggregate Delivery",
+   "link_count": 0,
+   "link_to": "Aggregate Delivery",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transporter Agreement",
+   "link_count": 0,
+   "link_to": "Transporter Agreement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Truck",
+   "link_count": 0,
+   "link_to": "Truck",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transport Association",
+   "link_count": 0,
+   "link_to": "Transport Association",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Aggregate Settlement",
+   "link_count": 0,
+   "link_to": "Aggregate Settlement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Operations",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Purchase",
+   "link_count": 0,
+   "link_to": "Cement Purchase",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Lifting",
+   "link_count": 0,
+   "link_to": "Cement Lifting",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Coupon",
+   "link_count": 0,
+   "link_to": "Cement Coupon",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Factory",
+   "link_count": 0,
+   "link_to": "Cement Factory",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Balance",
+   "link_count": 0,
+   "link_to": "Cement Balance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Division",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Batch",
+   "link_count": 0,
+   "link_to": "Medical Batch",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Request",
+   "link_count": 0,
+   "link_to": "Medical Request",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Pricing",
+   "link_count": 0,
+   "link_to": "Medical Pricing",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Batch Adjustment",
+   "link_count": 0,
+   "link_to": "Medical Batch Adjustment",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Agreements & Settings",
+   "link_count": 3,
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Agreement",
+   "link_count": 0,
+   "link_to": "Sales Agreement",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier Agreement",
+   "link_count": 0,
+   "link_to": "Supplier Agreement",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
   },
   {
    "dependencies": "",
@@ -30,7 +233,7 @@
    "link_count": 0,
    "link_to": "Samaria Setting",
    "link_type": "DocType",
-   "onboard": 1,
+   "onboard": 0,
    "type": "Link"
   }
  ],
@@ -47,13 +250,37 @@
  "sequence_id": 1.0,
  "shortcuts": [
   {
-   "color": "Grey",
+   "color": "Blue",
    "doc_view": "",
    "format": "",
-   "label": "Samaria Settings",
-   "link_to": "Samaria Setting",
+   "label": "New Aggregate Dispatch",
+   "link_to": "Aggregate Delivery",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "",
+   "format": "",
+   "label": "New Cement Lifting",
+   "link_to": "Cement Lifting",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "",
+   "format": "",
+   "label": "Medical Batches",
+   "link_to": "Medical Batch",
+   "type": "DocType"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "",
+   "format": "",
+   "label": "Sales Agreements",
+   "link_to": "Sales Agreement",
    "type": "DocType"
   }
  ],
- "title": "Samaria"
+ "title": "Samaria Operations"
 }
