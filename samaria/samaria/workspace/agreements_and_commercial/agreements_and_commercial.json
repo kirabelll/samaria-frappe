@@ -1,0 +1,139 @@
+{
+ "charts": [],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Commercial Agreements & Compliance\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Manage client sales agreements, quarry supplier agreements, transporter matrices, and global module configurations.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Sales Agreements\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier Agreements\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Financial Summary Report\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Agreements & Contracts\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Sales Agreement\",\"label\":\"Sales Agreements\",\"description\":\"Customer price agreements with VAT incl/excl rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Supplier Agreement\",\"label\":\"Supplier Agreements\",\"description\":\"Supplier purchase agreements with VAT rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transporter Agreement\",\"label\":\"Transporter Agreements\",\"description\":\"Agreements with transporters and quarry sites\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Samaria Setting\",\"label\":\"Samaria Settings\",\"description\":\"Module settings and integration parameters\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Commercial & Project Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Project Financial Summary Report\",\"description\":\"Project commitments, turnover, and gross profit breakdown\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Aggregate Project Dispatch Report\",\"label\":\"Aggregate Project Dispatch Report\",\"description\":\"Dispatch volumes and net receivables per project\"}]}}]",
+ "creation": "2026-09-02 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "file-text",
+ "idx": 0,
+ "indicator_color": "purple",
+ "is_hidden": 0,
+ "label": "Agreements & Commercial",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Agreements & Contracts",
+   "link_count": 4,
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Sales Agreement",
+   "link_count": 0,
+   "link_to": "Sales Agreement",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Supplier Agreement",
+   "link_count": 0,
+   "link_to": "Supplier Agreement",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transporter Agreement",
+   "link_count": 0,
+   "link_to": "Transporter Agreement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Samaria Setting",
+   "link_count": 0,
+   "link_to": "Samaria Setting",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Commercial & Project Reports",
+   "link_count": 2,
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project Financial Summary Report",
+   "link_count": 0,
+   "link_to": "Project Financial Summary Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Aggregate Project Dispatch Report",
+   "link_count": 0,
+   "link_to": "Aggregate Project Dispatch Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Agreements & Commercial",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 5.0,
+ "shortcuts": [
+  {
+   "color": "Purple",
+   "doc_view": "",
+   "format": "",
+   "label": "Sales Agreements",
+   "link_to": "Sales Agreement",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "format": "",
+   "label": "Supplier Agreements",
+   "link_to": "Supplier Agreement",
+   "type": "DocType"
+  },
+  {
+   "color": "Cyan",
+   "doc_view": "",
+   "format": "",
+   "label": "Financial Summary Report",
+   "link_to": "Project Financial Summary Report",
+   "type": "Report"
+  }
+ ],
+ "title": "Commercial Agreements & Compliance"
+}

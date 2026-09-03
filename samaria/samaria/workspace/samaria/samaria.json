@@ -1,13 +1,13 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Samaria Operations Hub\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Unified Operations and Division Management for Aggregate, Cement, and Medical divisions in Frappe v16.\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Aggregate Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Aggregate Delivery\",\"label\":\"Aggregate Delivery\",\"description\":\"Stone & aggregate dispatches, weighbridge, transport fees, shortages\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transporter Agreement\",\"label\":\"Transporter Agreement\",\"description\":\"Agreements with transporters and quarry sites\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Truck\",\"label\":\"Trucks\",\"description\":\"Registered fleet and vehicle capacities\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transport Association\",\"label\":\"Transport Associations\",\"description\":\"Transporter unions & association fee tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Aggregate Settlement\",\"label\":\"Aggregate Settlement\",\"description\":\"Transporter payment sheets & batch settlements\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Cement Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Purchase\",\"label\":\"Cement Purchase\",\"description\":\"Factory cement orders, quotas, and remaining balances\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Lifting\",\"label\":\"Cement Lifting\",\"description\":\"Weighbridge weigh-ins, shortage deductions, and customer dispatch\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Coupon\",\"label\":\"Cement Coupon\",\"description\":\"Physical coupon lifecycle & custody tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Factory\",\"label\":\"Cement Factories\",\"description\":\"Supplying plants, terms, and rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Balance\",\"label\":\"Cement Balance\",\"description\":\"Real-time plant balances\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Medical Division\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch\",\"label\":\"Medical Batch\",\"description\":\"Batch inventory, lot numbers, expiry tracking, and quarantine\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Request\",\"label\":\"Medical Request\",\"description\":\"Medicine orders, quotes, and delivery approvals\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Pricing\",\"label\":\"Medical Pricing\",\"description\":\"Landed cost build-up and margin calculation\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch Adjustment\",\"label\":\"Batch Adjustment\",\"description\":\"Reconciliations, expiry write-offs, and damage logs\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Agreements & Settings\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Sales Agreement\",\"label\":\"Sales Agreement\",\"description\":\"Customer price agreements with VAT incl/excl rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Supplier Agreement\",\"label\":\"Supplier Agreement\",\"description\":\"Supplier purchase agreements with VAT rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Samaria Setting\",\"label\":\"Samaria Setting\",\"description\":\"Module settings and integration parameters\"}]}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Samaria Operations Hub\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Unified Operations and Division Management for Aggregate, Cement, Medical, and Commercial divisions in Frappe v16.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Executive Dashboard\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Aggregate Dispatch\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Cement Lifting\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Medical Batches\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project Reports\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Aggregate Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Aggregate Delivery\",\"label\":\"Aggregate Delivery\",\"description\":\"Stone & aggregate dispatches, weighbridge, transport fees, shortages\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transporter Agreement\",\"label\":\"Transporter Agreement\",\"description\":\"Agreements with transporters and quarry sites\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Truck\",\"label\":\"Trucks\",\"description\":\"Registered fleet and vehicle capacities\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transport Association\",\"label\":\"Transport Associations\",\"description\":\"Transporter unions & association fee tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Aggregate Settlement\",\"label\":\"Aggregate Settlement\",\"description\":\"Transporter payment sheets & batch settlements\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Cement Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Purchase\",\"label\":\"Cement Purchase\",\"description\":\"Factory cement orders, quotas, and remaining balances\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Lifting\",\"label\":\"Cement Lifting\",\"description\":\"Weighbridge weigh-ins, shortage deductions, and customer dispatch\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Coupon\",\"label\":\"Cement Coupon\",\"description\":\"Physical coupon lifecycle & custody tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Factory\",\"label\":\"Cement Factories\",\"description\":\"Supplying plants, terms, and rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Balance\",\"label\":\"Cement Balance\",\"description\":\"Real-time plant balances\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Medical Division\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch\",\"label\":\"Medical Batch\",\"description\":\"Batch inventory, lot numbers, expiry tracking, and quarantine\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Request\",\"label\":\"Medical Request\",\"description\":\"Medicine orders, quotes, and delivery approvals\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Pricing\",\"label\":\"Medical Pricing\",\"description\":\"Landed cost build-up and margin calculation\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch Adjustment\",\"label\":\"Batch Adjustment\",\"description\":\"Reconciliations, expiry write-offs, and damage logs\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Project Analytics & Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Aggregate Project Dispatch Report\",\"label\":\"Aggregate Dispatch Report\",\"description\":\"Dispatch volumes, net margin, and shortage deductions per project\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Cement Project Lifting and Balance Report\",\"label\":\"Cement Lifting Report\",\"description\":\"Plant lifting vs buyer weighbridge quantities & penalties\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Medical Project Inventory Report\",\"label\":\"Medical Inventory Report\",\"description\":\"Lot-level pharmaceutical expiry tracking & valuations\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Financial Summary Report\",\"description\":\"Consolidated margin and commitments across client projects\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Agreements & Settings\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Sales Agreement\",\"label\":\"Sales Agreement\",\"description\":\"Customer price agreements with VAT incl/excl rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Supplier Agreement\",\"label\":\"Supplier Agreement\",\"description\":\"Supplier purchase agreements with VAT rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Samaria Setting\",\"label\":\"Samaria Setting\",\"description\":\"Module settings and integration parameters\"}]}}]",
  "creation": "2026-09-02 12:00:00.000000",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
  "hide_custom": 0,
- "icon": "package",
+ "icon": "layout-dashboard",
  "idx": 0,
  "indicator_color": "blue",
  "is_hidden": 0,
@@ -197,6 +197,59 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Project Analytics & Reports",
+   "link_count": 4,
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Aggregate Project Dispatch Report",
+   "link_count": 0,
+   "link_to": "Aggregate Project Dispatch Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Cement Project Lifting and Balance Report",
+   "link_count": 0,
+   "link_to": "Cement Project Lifting and Balance Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Medical Project Inventory Report",
+   "link_count": 0,
+   "link_to": "Medical Project Inventory Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project Financial Summary Report",
+   "link_count": 0,
+   "link_to": "Project Financial Summary Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Agreements & Settings",
    "link_count": 3,
    "link_type": "DocType",
@@ -253,6 +306,14 @@
    "color": "Blue",
    "doc_view": "",
    "format": "",
+   "label": "Executive Dashboard",
+   "link_to": "samaria_dashboard",
+   "type": "Page"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "",
+   "format": "",
    "label": "New Aggregate Dispatch",
    "link_to": "Aggregate Delivery",
    "type": "DocType"
@@ -266,7 +327,7 @@
    "type": "DocType"
   },
   {
-   "color": "Orange",
+   "color": "Red",
    "doc_view": "",
    "format": "",
    "label": "Medical Batches",
@@ -280,6 +341,14 @@
    "label": "Sales Agreements",
    "link_to": "Sales Agreement",
    "type": "DocType"
+  },
+  {
+   "color": "Cyan",
+   "doc_view": "",
+   "format": "",
+   "label": "Project Reports",
+   "link_to": "Aggregate Project Dispatch Report",
+   "type": "Report"
   }
  ],
  "title": "Samaria Operations"

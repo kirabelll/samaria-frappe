@@ -1,0 +1,427 @@
+{% extends "templates/web.html" %}
+
+{% block header %}
+<style>
+/* Samaria Enterprise Theme */
+:root {
+	--samaria-bg: #0b0f19;
+	--samaria-surface: #111827;
+	--samaria-surface-card: rgba(17, 24, 39, 0.75);
+	--samaria-border: rgba(255, 255, 255, 0.08);
+	--samaria-border-glow: rgba(16, 185, 129, 0.3);
+	--samaria-primary: #10b981;
+	--samaria-primary-hover: #059669;
+	--samaria-accent-cyan: #06b6d4;
+	--samaria-accent-orange: #f97316;
+	--samaria-accent-rose: #f43f5e;
+	--samaria-accent-purple: #8b5cf6;
+	--samaria-text: #f9fafb;
+	--samaria-text-muted: #9ca3af;
+}
+
+body {
+	background-color: var(--samaria-bg) !important;
+	color: var(--samaria-text) !important;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	overflow-x: hidden;
+}
+
+.samaria-hero-container {
+	position: relative;
+	padding: 5rem 1.5rem 3rem;
+	background: radial-gradient(circle at 50% -20%, rgba(16, 185, 129, 0.18), transparent 70%),
+	            radial-gradient(circle at 90% 20%, rgba(6, 182, 212, 0.12), transparent 50%),
+	            radial-gradient(circle at 10% 40%, rgba(139, 92, 246, 0.1), transparent 50%);
+}
+
+.samaria-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.35rem 1rem;
+	border-radius: 9999px;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	background: rgba(16, 185, 129, 0.12);
+	border: 1px solid rgba(16, 185, 129, 0.3);
+	color: #34d399;
+	margin-bottom: 1.5rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.samaria-pill-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #10b981;
+	box-shadow: 0 0 10px #10b981;
+	animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.samaria-hero-title {
+	font-size: 3.25rem;
+	font-weight: 800;
+	line-height: 1.15;
+	letter-spacing: -0.025em;
+	max-width: 900px;
+	margin: 0 auto 1.5rem;
+	background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 60%, #94a3b8 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	text-align: center;
+}
+
+.samaria-hero-subtitle {
+	font-size: 1.2rem;
+	line-height: 1.6;
+	color: var(--samaria-text-muted);
+	max-width: 680px;
+	margin: 0 auto 2.5rem;
+	text-align: center;
+}
+
+.samaria-hero-actions {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	flex-wrap: wrap;
+	margin-bottom: 4rem;
+}
+
+.btn-samaria-primary {
+	background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+	color: #ffffff !important;
+	border: none;
+	padding: 0.85rem 1.85rem;
+	border-radius: 10px;
+	font-weight: 600;
+	font-size: 1rem;
+	box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+	transition: all 0.25s ease;
+	text-decoration: none !important;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.btn-samaria-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 25px rgba(16, 185, 129, 0.6);
+	color: #ffffff;
+}
+
+.btn-samaria-secondary {
+	background: rgba(255, 255, 255, 0.05);
+	color: #f1f5f9 !important;
+	border: 1px solid var(--samaria-border);
+	padding: 0.85rem 1.85rem;
+	border-radius: 10px;
+	font-weight: 600;
+	font-size: 1rem;
+	backdrop-filter: blur(10px);
+	transition: all 0.25s ease;
+	text-decoration: none !important;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.btn-samaria-secondary:hover {
+	background: rgba(255, 255, 255, 0.1);
+	border-color: rgba(255, 255, 255, 0.2);
+	transform: translateY(-2px);
+	color: #ffffff;
+}
+
+/* Metrics Banner */
+.samaria-metrics-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 1.25rem;
+	max-width: 1140px;
+	margin: 0 auto 4rem;
+}
+
+.metric-card {
+	background: var(--samaria-surface-card);
+	border: 1px solid var(--samaria-border);
+	border-radius: 16px;
+	padding: 1.5rem;
+	backdrop-filter: blur(16px);
+	transition: all 0.3s ease;
+	position: relative;
+	overflow: hidden;
+}
+
+.metric-card:hover {
+	border-color: var(--samaria-border-glow);
+	transform: translateY(-3px);
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.metric-card-val {
+	font-size: 2.25rem;
+	font-weight: 800;
+	color: #ffffff;
+	line-height: 1;
+	margin-bottom: 0.5rem;
+}
+
+.metric-card-label {
+	font-size: 0.875rem;
+	color: var(--samaria-text-muted);
+	font-weight: 500;
+}
+
+/* Division Cards */
+.samaria-section-header {
+	text-align: center;
+	max-width: 700px;
+	margin: 0 auto 3rem;
+}
+
+.samaria-section-header h2 {
+	font-size: 2.25rem;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 0.75rem;
+}
+
+.samaria-section-header p {
+	color: var(--samaria-text-muted);
+	font-size: 1.05rem;
+}
+
+.samaria-divisions-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+	gap: 1.5rem;
+	max-width: 1140px;
+	margin: 0 auto 4rem;
+}
+
+.division-card {
+	background: linear-gradient(180deg, rgba(26, 34, 52, 0.7) 0%, rgba(17, 24, 39, 0.9) 100%);
+	border: 1px solid var(--samaria-border);
+	border-radius: 18px;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+}
+
+.division-card:hover {
+	border-color: rgba(255, 255, 255, 0.2);
+	transform: translateY(-5px);
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.division-badge {
+	align-self: flex-start;
+	font-size: 0.75rem;
+	font-weight: 600;
+	padding: 0.25rem 0.65rem;
+	border-radius: 6px;
+	margin-bottom: 1.25rem;
+}
+
+.division-badge.orange { background: rgba(249, 115, 22, 0.15); color: #fb923c; border: 1px solid rgba(249, 115, 22, 0.3); }
+.division-badge.emerald { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.division-badge.rose { background: rgba(244, 63, 94, 0.15); color: #fb7185; border: 1px solid rgba(244, 63, 94, 0.3); }
+.division-badge.violet { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
+
+.division-card h3 {
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 0.75rem;
+}
+
+.division-card p {
+	font-size: 0.925rem;
+	color: #9ca3af;
+	line-height: 1.55;
+	flex-grow: 1;
+	margin-bottom: 1.5rem;
+}
+
+.division-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-weight: 600;
+	font-size: 0.9rem;
+	color: #10b981;
+	text-decoration: none;
+	transition: gap 0.2s ease;
+}
+
+.division-link:hover {
+	gap: 0.6rem;
+	color: #34d399;
+}
+
+/* Projects Banner */
+.samaria-projects-box {
+	background: var(--samaria-surface-card);
+	border: 1px solid var(--samaria-border);
+	border-radius: 18px;
+	max-width: 1140px;
+	margin: 0 auto 5rem;
+	padding: 2.5rem;
+}
+
+.projects-table-wrap {
+	overflow-x: auto;
+}
+
+.samaria-table {
+	width: 100%;
+	border-collapse: collapse;
+	color: #e5e7eb;
+}
+
+.samaria-table th {
+	text-align: left;
+	padding: 0.75rem 1rem;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: #9ca3af;
+	border-bottom: 1px solid var(--samaria-border);
+}
+
+.samaria-table td {
+	padding: 1rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+	font-size: 0.925rem;
+}
+
+/* Footer note */
+.samaria-footer {
+	text-align: center;
+	padding: 2.5rem 1rem;
+	border-top: 1px solid var(--samaria-border);
+	color: #6b7280;
+	font-size: 0.875rem;
+}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="samaria-hero-container">
+	<div class="text-center">
+		<div class="samaria-pill">
+			<span class="samaria-pill-dot"></span>
+			Frappe Version-16 Enterprise Platform
+		</div>
+		<h1 class="samaria-hero-title">
+			Unified Operations & Multi-Division Management
+		</h1>
+		<p class="samaria-hero-subtitle">
+			High-performance real-time orchestration for Aggregate Mining, Bulk Cement Distribution, Pharmaceutical Batches, and Transporter Logistics.
+		</p>
+		<div class="samaria-hero-actions">
+			<a href="/app" class="btn-samaria-primary">
+				<span>Launch Frappe Desk</span>
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+			</a>
+			<a href="/app/samaria-dashboard" class="btn-samaria-secondary">
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+				<span>Operations Dashboard</span>
+			</a>
+		</div>
+	</div>
+
+	<!-- Live Metrics Strip -->
+	<div class="samaria-metrics-grid">
+		<div class="metric-card">
+			<div class="metric-card-val">{{ metrics.aggregate_volume or "0" }} <small style="font-size: 1rem; font-weight: 500; color: #9ca3af;">m³</small></div>
+			<div class="metric-card-label">Aggregate Dispatched</div>
+		</div>
+		<div class="metric-card">
+			<div class="metric-card-val">{{ metrics.cement_tonnage or "0" }} <small style="font-size: 1rem; font-weight: 500; color: #9ca3af;">Tons</small></div>
+			<div class="metric-card-label">Cement Lifted & Delivered</div>
+		</div>
+		<div class="metric-card">
+			<div class="metric-card-val">{{ metrics.medical_batches or "0" }}</div>
+			<div class="metric-card-label">Active Medical Batches</div>
+		</div>
+		<div class="metric-card">
+			<div class="metric-card-val">{{ metrics.active_agreements or "0" }}</div>
+			<div class="metric-card-label">Active Commercial Agreements</div>
+		</div>
+	</div>
+
+	<!-- Core Divisions -->
+	<div class="samaria-section-header">
+		<h2>Enterprise Operational Divisions</h2>
+		<p>Integrated workflow modules purpose-built for high-volume trade, strict compliance, and automated financial settlements.</p>
+	</div>
+
+	<div class="samaria-divisions-grid">
+		{% for div in divisions %}
+		<div class="division-card">
+			<span class="division-badge {{ div.color }}">{{ div.badge }}</span>
+			<h3>{{ div.name }}</h3>
+			<p>{{ div.description }}</p>
+			<a href="{{ div.desk_link }}" class="division-link">
+				<span>Open Workspace</span>
+				<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+
+	<!-- Active Projects Section -->
+	{% if active_projects %}
+	<div class="samaria-projects-box">
+		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+			<div>
+				<h3 style="color: #ffffff; margin: 0; font-size: 1.4rem; font-weight: 700;">Active Client Projects & Sites</h3>
+				<p style="color: #9ca3af; margin: 0.25rem 0 0; font-size: 0.9rem;">Live delivery contracts under execution across regional sites</p>
+			</div>
+			<a href="/app/samaria-project-reports" class="btn-samaria-secondary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+				<span>View Project Reports</span>
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+			</a>
+		</div>
+		<div class="projects-table-wrap">
+			<table class="samaria-table">
+				<thead>
+					<tr>
+						<th>Project / Destination</th>
+						<th>Customer Entity</th>
+						<th>Operational Division</th>
+						<th>Agreement Reference</th>
+						<th style="text-align: right;">Contract Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for proj in active_projects %}
+					<tr>
+						<td style="font-weight: 600; color: #ffffff;">{{ proj.title }}</td>
+						<td>{{ proj.customer }}</td>
+						<td><span class="division-badge emerald" style="margin: 0; padding: 0.15rem 0.5rem;">{{ proj.division }}</span></td>
+						<td style="font-family: monospace; color: #93c5fd;">{{ proj.agreement }}</td>
+						<td style="text-align: right; font-weight: 600; color: #10b981;">ETB {{ "{:,.2f}".format(proj.budget) }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{% endif %}
+
+	<div class="samaria-footer">
+		Samaria Enterprise Resource Planning &bull; Powered by Frappe Version-16 &bull; Secure Multi-Tenant Framework
+	</div>
+</div>
+{% endblock %}

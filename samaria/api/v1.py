@@ -25,3 +25,10 @@ def get_app_info():
 		"version": "0.0.1",
 		"modules": ["Samaria"]
 	}
+
+
+@frappe.whitelist()
+def get_dashboard_data(customer=None, from_date=None, to_date=None):
+	"""Proxy to samaria executive dashboard metrics."""
+	from samaria.samaria.page.samaria_dashboard.samaria_dashboard import get_dashboard_data as _get_data
+	return _get_data(customer=customer, from_date=from_date, to_date=to_date)

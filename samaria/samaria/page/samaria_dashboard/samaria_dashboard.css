@@ -1,0 +1,222 @@
+/* Samaria Executive Dashboard Desk Page CSS - Frappe v16 */
+
+.samaria-dashboard-container {
+	padding: 1.25rem;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Header & Controls */
+.samaria-dash-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.samaria-dash-filters {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+}
+
+.samaria-dash-filters select,
+.samaria-dash-filters input {
+	background: var(--control-bg);
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	padding: 0.4rem 0.75rem;
+	font-size: 0.85rem;
+	color: var(--text-color);
+	outline: none;
+	transition: border-color 0.2s;
+}
+
+.samaria-dash-filters select:focus,
+.samaria-dash-filters input:focus {
+	border-color: #10b981;
+}
+
+/* KPI Summary Cards Grid */
+.samaria-kpi-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 1.25rem;
+	margin-bottom: 1.75rem;
+}
+
+.samaria-kpi-card {
+	background: var(--card-bg, #ffffff);
+	border: 1px solid var(--border-color);
+	border-radius: 12px;
+	padding: 1.25rem 1.5rem;
+	position: relative;
+	overflow: hidden;
+	box-shadow: var(--card-shadow, 0 1px 3px rgba(0,0,0,0.05));
+	transition: transform 0.2s, box-shadow 0.2s;
+}
+
+[data-theme="dark"] .samaria-kpi-card {
+	background: #161e2e;
+	border-color: rgba(255, 255, 255, 0.08);
+}
+
+.samaria-kpi-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.samaria-kpi-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+}
+
+.samaria-kpi-card.orange::before { background: #f97316; }
+.samaria-kpi-card.emerald::before { background: #10b981; }
+.samaria-kpi-card.rose::before { background: #f43f5e; }
+.samaria-kpi-card.purple::before { background: #8b5cf6; }
+
+.samaria-kpi-title {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--text-muted);
+	margin-bottom: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.samaria-kpi-value {
+	font-size: 1.85rem;
+	font-weight: 700;
+	color: var(--text-color);
+	line-height: 1.1;
+	margin-bottom: 0.5rem;
+}
+
+.samaria-kpi-subtext {
+	font-size: 0.8rem;
+	color: var(--text-muted);
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+/* Charts Grid */
+.samaria-charts-grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: 1.25rem;
+	margin-bottom: 1.75rem;
+}
+
+@media (max-width: 992px) {
+	.samaria-charts-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.samaria-chart-card {
+	background: var(--card-bg, #ffffff);
+	border: 1px solid var(--border-color);
+	border-radius: 12px;
+	padding: 1.25rem;
+	box-shadow: var(--card-shadow, 0 1px 3px rgba(0,0,0,0.05));
+}
+
+[data-theme="dark"] .samaria-chart-card {
+	background: #161e2e;
+	border-color: rgba(255, 255, 255, 0.08);
+}
+
+.samaria-chart-card h4 {
+	font-size: 0.95rem;
+	font-weight: 600;
+	margin: 0 0 1rem;
+	color: var(--text-color);
+}
+
+/* Operational Tables Section */
+.samaria-tables-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.25rem;
+}
+
+@media (max-width: 992px) {
+	.samaria-tables-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.samaria-table-card {
+	background: var(--card-bg, #ffffff);
+	border: 1px solid var(--border-color);
+	border-radius: 12px;
+	padding: 1.25rem;
+	box-shadow: var(--card-shadow, 0 1px 3px rgba(0,0,0,0.05));
+}
+
+[data-theme="dark"] .samaria-table-card {
+	background: #161e2e;
+	border-color: rgba(255, 255, 255, 0.08);
+}
+
+.samaria-table-card h4 {
+	font-size: 0.95rem;
+	font-weight: 600;
+	margin: 0 0 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: var(--text-color);
+}
+
+.samaria-dash-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.825rem;
+}
+
+.samaria-dash-table th {
+	text-align: left;
+	padding: 0.5rem 0.75rem;
+	border-bottom: 1px solid var(--border-color);
+	color: var(--text-muted);
+	font-weight: 600;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+}
+
+.samaria-dash-table td {
+	padding: 0.65rem 0.75rem;
+	border-bottom: 1px solid var(--border-color);
+	color: var(--text-color);
+}
+
+.samaria-dash-table tr:last-child td {
+	border-bottom: none;
+}
+
+.samaria-badge-sm {
+	display: inline-block;
+	padding: 0.2rem 0.5rem;
+	border-radius: 9999px;
+	font-size: 0.7rem;
+	font-weight: 600;
+}
+
+.samaria-badge-sm.green { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.samaria-badge-sm.blue { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.samaria-badge-sm.yellow { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.samaria-badge-sm.red { background: rgba(239, 68, 68, 0.15); color: #ef4444; }

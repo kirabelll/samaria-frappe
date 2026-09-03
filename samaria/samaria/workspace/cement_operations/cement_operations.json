@@ -1,0 +1,150 @@
+{
+ "charts": [],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Cement Supply Chain & Lifting\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Monitor factory quotas, weighbridge lifting dispatches, physical coupon validation, supplier plant balances, and shortage penalties.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Cement Lifting\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Factory Balances\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cement Lifting Report\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Procurement & Lifting Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Purchase\",\"label\":\"Cement Purchases\",\"description\":\"Factory cement orders, quotas, and remaining balances\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Lifting\",\"label\":\"Cement Lifting\",\"description\":\"Weighbridge weigh-ins, shortage deductions, and customer dispatch\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Coupon\",\"label\":\"Cement Coupons\",\"description\":\"Physical coupon lifecycle & custody tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Factory\",\"label\":\"Cement Factories\",\"description\":\"Supplying plants, terms, and rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Balance\",\"label\":\"Factory Balances\",\"description\":\"Real-time plant balances\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Analytics & Project Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Cement Project Lifting and Balance Report\",\"label\":\"Cement Project Lifting Report\",\"description\":\"Plant lifting vs buyer weighbridge quantities & penalties\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Project Financial Summary\",\"description\":\"Financial performance across cement client projects\"}]}}]",
+ "creation": "2026-09-02 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "box",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Cement Operations",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Procurement & Lifting Operations",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Purchase",
+   "link_count": 0,
+   "link_to": "Cement Purchase",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Lifting",
+   "link_count": 0,
+   "link_to": "Cement Lifting",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Coupon",
+   "link_count": 0,
+   "link_to": "Cement Coupon",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Factory",
+   "link_count": 0,
+   "link_to": "Cement Factory",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Balance",
+   "link_count": 0,
+   "link_to": "Cement Balance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Analytics & Project Reports",
+   "link_count": 2,
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Cement Project Lifting and Balance Report",
+   "link_count": 0,
+   "link_to": "Cement Project Lifting and Balance Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project Financial Summary Report",
+   "link_count": 0,
+   "link_to": "Project Financial Summary Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Cement Operations",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 3.0,
+ "shortcuts": [
+  {
+   "color": "Green",
+   "doc_view": "",
+   "format": "",
+   "label": "New Cement Lifting",
+   "link_to": "Cement Lifting",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "format": "",
+   "label": "Factory Balances",
+   "link_to": "Cement Balance",
+   "type": "DocType"
+  },
+  {
+   "color": "Cyan",
+   "doc_view": "",
+   "format": "",
+   "label": "Cement Lifting Report",
+   "link_to": "Cement Project Lifting and Balance Report",
+   "type": "Report"
+  }
+ ],
+ "title": "Cement Supply Chain & Lifting"
+}
