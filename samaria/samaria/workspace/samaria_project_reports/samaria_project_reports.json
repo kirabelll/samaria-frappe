@@ -1,0 +1,116 @@
+{
+ "charts": [],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Project Analytics & Reports Hub\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Comprehensive script reports providing project-level visibility across aggregate dispatches, cement liftings, pharmaceutical batches, and commercial profitability.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Aggregate Dispatch Report\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cement Lifting Report\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Medical Inventory Report\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Project Financial Summary\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Operational Project Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Aggregate Project Dispatch Report\",\"label\":\"Aggregate Project Dispatch Report\",\"description\":\"Dispatch volumes, net margin, and shortage deductions per project\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Cement Project Lifting and Balance Report\",\"label\":\"Cement Project Lifting and Balance Report\",\"description\":\"Plant lifting vs buyer weighbridge quantities & penalties\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Medical Project Inventory Report\",\"label\":\"Medical Project Inventory Report\",\"description\":\"Lot-level pharmaceutical expiry tracking & valuations\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Project Financial Summary Report\",\"description\":\"Consolidated margin and commitments across client projects\"}]}}]",
+ "creation": "2026-09-02 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "bar-chart-2",
+ "idx": 0,
+ "indicator_color": "cyan",
+ "is_hidden": 0,
+ "label": "Project Reports",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Operational Project Reports",
+   "link_count": 4,
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Aggregate Project Dispatch Report",
+   "link_count": 0,
+   "link_to": "Aggregate Project Dispatch Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Cement Project Lifting and Balance Report",
+   "link_count": 0,
+   "link_to": "Cement Project Lifting and Balance Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Medical Project Inventory Report",
+   "link_count": 0,
+   "link_to": "Medical Project Inventory Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project Financial Summary Report",
+   "link_count": 0,
+   "link_to": "Project Financial Summary Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Samaria Project Reports",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 6.0,
+ "shortcuts": [
+  {
+   "color": "Orange",
+   "doc_view": "",
+   "format": "",
+   "label": "Aggregate Dispatch Report",
+   "link_to": "Aggregate Project Dispatch Report",
+   "type": "Report"
+  },
+  {
+   "color": "Green",
+   "doc_view": "",
+   "format": "",
+   "label": "Cement Lifting Report",
+   "link_to": "Cement Project Lifting and Balance Report",
+   "type": "Report"
+  },
+  {
+   "color": "Red",
+   "doc_view": "",
+   "format": "",
+   "label": "Medical Inventory Report",
+   "link_to": "Medical Project Inventory Report",
+   "type": "Report"
+  },
+  {
+   "color": "Purple",
+   "doc_view": "",
+   "format": "",
+   "label": "Project Financial Summary",
+   "link_to": "Project Financial Summary Report",
+   "type": "Report"
+  }
+ ],
+ "title": "Project Analytics & Operations Reports"
+}

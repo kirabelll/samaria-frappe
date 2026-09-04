@@ -1,13 +1,19 @@
 /**
  * Samaria Frappe v16 Desk Bundle CSS
+ * Modern Enterprise Theme & Sidebar Enhancements
  */
 
 :root {
 	--samaria-brand-primary: #10b981;
 	--samaria-brand-dark: #064e3b;
 	--samaria-brand-light: #d1fae5;
+	--samaria-orange: #f97316;
+	--samaria-cyan: #06b6d4;
+	--samaria-rose: #f43f5e;
+	--samaria-purple: #8b5cf6;
 }
 
+/* Badge styling */
 .samaria-badge {
 	display: inline-flex;
 	align-items: center;
@@ -18,3 +24,64 @@
 	background-color: var(--samaria-brand-light);
 	color: var(--samaria-brand-dark);
 }
+
+/* Frappe v16 Desk Sidebar Customizations */
+.desk-sidebar .standard-sidebar-item {
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	border-radius: 8px;
+	margin: 2px 8px;
+}
+
+.desk-sidebar .standard-sidebar-item:hover {
+	background-color: var(--bg-light-gray, rgba(0, 0, 0, 0.04));
+	transform: translateX(2px);
+}
+
+[data-theme="dark"] .desk-sidebar .standard-sidebar-item:hover {
+	background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Custom indicator dot pulsing for Samaria workspaces */
+.desk-sidebar .sidebar-item-icon svg {
+	transition: transform 0.2s ease;
+}
+
+.desk-sidebar .standard-sidebar-item:hover .sidebar-item-icon svg {
+	transform: scale(1.1);
+}
+
+/* Workspace Specific Accent Border on Active */
+.desk-sidebar .standard-sidebar-item.selected {
+	font-weight: 600;
+	position: relative;
+}
+
+.desk-sidebar .standard-sidebar-item.selected::before {
+	content: "";
+	position: absolute;
+	left: -8px;
+	top: 15%;
+	bottom: 15%;
+	width: 3.5px;
+	border-radius: 0 4px 4px 0;
+	background-color: var(--samaria-brand-primary);
+	box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+}
+
+/* Quick access badge in sidebar */
+.samaria-sidebar-tag {
+	margin-left: auto;
+	font-size: 0.6875rem;
+	font-weight: 700;
+	padding: 0.1rem 0.45rem;
+	border-radius: 6px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.samaria-sidebar-tag.hub { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.samaria-sidebar-tag.aggregate { background: rgba(249, 115, 22, 0.15); color: #f97316; }
+.samaria-sidebar-tag.cement { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+.samaria-sidebar-tag.medical { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
+.samaria-sidebar-tag.commercial { background: rgba(139, 92, 246, 0.15); color: #8b5cf6; }
+.samaria-sidebar-tag.reports { background: rgba(6, 182, 212, 0.15); color: #06b6d4; }

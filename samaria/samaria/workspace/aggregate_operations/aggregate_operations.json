@@ -1,0 +1,150 @@
+{
+ "charts": [],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Aggregate & Quarry Operations\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Manage stone crushing dispatches, weighbridge tracking, truck fleet capacities, transporter agreements, and batch settlements.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Aggregate Dispatch\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trucks Fleet\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dispatch Report\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Dispatch & Fleet Logistics\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Aggregate Delivery\",\"label\":\"Aggregate Delivery\",\"description\":\"Stone & aggregate delivery tickets and net margins\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Truck\",\"label\":\"Trucks Fleet\",\"description\":\"Registered fleet vehicles and volume capacity\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transporter Agreement\",\"label\":\"Transporter Agreements\",\"description\":\"Quarry and transporter agreement contracts\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Transport Association\",\"label\":\"Transport Associations\",\"description\":\"Transporter unions & association fee tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Aggregate Settlement\",\"label\":\"Batch Settlements\",\"description\":\"Transporter payment sheets & bulk settlements\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Analytics & Project Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Aggregate Project Dispatch Report\",\"label\":\"Aggregate Project Dispatch Report\",\"description\":\"Dispatch volumes, net margin, and shortage deductions per project\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Project Financial Summary\",\"description\":\"Financial performance across aggregate client projects\"}]}}]",
+ "creation": "2026-09-02 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "truck",
+ "idx": 0,
+ "indicator_color": "orange",
+ "is_hidden": 0,
+ "label": "Aggregate Operations",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Dispatch & Fleet Logistics",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Aggregate Delivery",
+   "link_count": 0,
+   "link_to": "Aggregate Delivery",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Truck",
+   "link_count": 0,
+   "link_to": "Truck",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transporter Agreement",
+   "link_count": 0,
+   "link_to": "Transporter Agreement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transport Association",
+   "link_count": 0,
+   "link_to": "Transport Association",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Aggregate Settlement",
+   "link_count": 0,
+   "link_to": "Aggregate Settlement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Analytics & Project Reports",
+   "link_count": 2,
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Card Break"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Aggregate Project Dispatch Report",
+   "link_count": 0,
+   "link_to": "Aggregate Project Dispatch Report",
+   "link_type": "Report",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Project Financial Summary Report",
+   "link_count": 0,
+   "link_to": "Project Financial Summary Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Aggregate Operations",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 2.0,
+ "shortcuts": [
+  {
+   "color": "Orange",
+   "doc_view": "",
+   "format": "",
+   "label": "New Aggregate Dispatch",
+   "link_to": "Aggregate Delivery",
+   "type": "DocType"
+  },
+  {
+   "color": "Blue",
+   "doc_view": "",
+   "format": "",
+   "label": "Trucks Fleet",
+   "link_to": "Truck",
+   "type": "DocType"
+  },
+  {
+   "color": "Cyan",
+   "doc_view": "",
+   "format": "",
+   "label": "Dispatch Report",
+   "link_to": "Aggregate Project Dispatch Report",
+   "type": "Report"
+  }
+ ],
+ "title": "Aggregate & Quarry Operations"
+}
