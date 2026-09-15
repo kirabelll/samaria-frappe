@@ -1,7 +1,7 @@
 app_name = "samaria"
 app_title = "Samaria"
 app_publisher = "Samaria Team"
-app_description = "Samaria custom Frappe Module & App for version-16"
+app_description = "Samaria custom Frappe Module & App for version-15"
 app_email = "admin@samaria.local"
 app_license = "mit"
 required_apps = []

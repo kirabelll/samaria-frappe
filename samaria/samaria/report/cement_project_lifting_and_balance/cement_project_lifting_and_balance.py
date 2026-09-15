@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Cement Project Lifting and Balance Report
-Tracks factory purchases, liftings allocated to client projects, weighbridge variances, and penalties.
-Frappe Framework Version-16
+Plant quotas, weighbridge liftings, driver penalties, and remaining project balances.
+Frappe Framework Version-15
 """
 import frappe
 from frappe import _

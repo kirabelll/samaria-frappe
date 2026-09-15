@@ -2,7 +2,7 @@
 """
 Project Financial Summary Report
 Cross-division executive profitability and operational commitment analysis by project.
-Frappe Framework Version-16
+Frappe Framework Version-15
 """
 import frappe
 from frappe import _

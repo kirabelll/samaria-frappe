@@ -7,12 +7,12 @@ name = "samaria"
 authors = [
     { name = "Samaria Team", email = "admin@samaria.local" }
 ]
-description = "Samaria custom Frappe Module & App for version-16"
+description = "Samaria custom Frappe Module & App for version-15"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
 dependencies = [
-    # "frappe~=16.0.0" # Installed in bench environment
+    # "frappe~=15.0.0" # Installed in bench environment
 ]
 
 [project.urls]

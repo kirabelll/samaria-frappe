@@ -2,7 +2,7 @@
 """
 Medical Project Inventory Report
 Tracks pharmaceutical batches across warehouse lots, shelf-life, expiry countdown, and valuation.
-Frappe Framework Version-16
+Frappe Framework Version-15
 """
 import frappe
 from frappe import _

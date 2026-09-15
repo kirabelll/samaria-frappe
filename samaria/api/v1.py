@@ -7,11 +7,11 @@ from frappe import _
 
 @frappe.whitelist(allow_guest=False)
 def ping():
-	"""Simple ping endpoint to verify Frappe v16 App API availability."""
+	"""Simple ping endpoint to verify Frappe v15 App API availability."""
 	return {
 		"status": "success",
-		"message": _("Samaria Frappe v16 App is running"),
-		"version": "16.0.0-compat",
+		"message": _("Samaria Frappe v15 App is running"),
+		"version": "15.0.0-compat",
 		"user": frappe.session.user
 	}
 

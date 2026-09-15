@@ -1,5 +1,5 @@
 """
-Samaria Setting Controller (Frappe v16)
+Samaria Setting Controller (Frappe v15)
 """
 import frappe
 from frappe import _

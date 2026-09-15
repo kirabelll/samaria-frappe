@@ -1,6 +1,6 @@
 /**
- * Samaria Executive Dashboard Page Controller
- * Frappe Framework Version-16
+ * Samaria Executive Dashboard Desk Page Controller
+ * Frappe Framework Version-15
  */
 
 frappe.pages['samaria_dashboard'].on_page_load = function(wrapper) {

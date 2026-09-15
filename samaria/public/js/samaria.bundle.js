@@ -1,20 +1,20 @@
 /**
- * Samaria Frappe v16 Desk Bundle JS
+ * Samaria Frappe v15 Desk Bundle JS
  * Modern Enterprise Theme & Sidebar Enhancements
  */
 
 frappe.provide("samaria");
 
 samaria = {
-	version: "16.0.0",
+	version: "15.0.0",
 	init: function() {
-		console.info("[Samaria] Frappe Module v16 initialized.");
+		console.info("[Samaria] Frappe Module v15 initialized.");
 		this.setup_sidebar_badges();
 		this.bind_route_listener();
 	},
 
 	setup_sidebar_badges: function() {
-		// Adds distinctive division indicators to Frappe v16 Desk sidebar
+		// Adds distinctive division indicators to Frappe v15 Desk sidebar
 		const tag_map = {
 			"samaria": { tag: "Hub", cls: "hub" },
 			"aggregate-operations": { tag: "Quarry", cls: "aggregate" },

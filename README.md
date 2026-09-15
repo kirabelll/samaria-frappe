@@ -1,6 +1,6 @@
-# Samaria Frappe App (Version-16)
+# Samaria Frappe App (Version-15)
 
-Modern custom Frappe App and Module setup built for **Frappe Framework Version-16**.
+Modern custom Frappe App and Module setup built for **Frappe Framework Version-15**.
 
 ---
 
@@ -10,11 +10,11 @@ Modern custom Frappe App and Module setup built for **Frappe Framework Version-1
 samaria/
 ├── .gitignore
 ├── license.txt
-├── pyproject.toml              # Modern PEP 621 packaging (Frappe v15/v16 standard)
+├── pyproject.toml              # Modern PEP 621 packaging (Frappe v15 standard)
 ├── README.md
 └── samaria/                    # App Python package
     ├── __init__.py             # Version metadata
-    ├── hooks.py                # Frappe v16 hooks & event registry
+    ├── hooks.py                # Frappe v15 hooks & event registry
     ├── modules.txt             # Registered modules (Samaria)
     ├── patches.txt             # Schema migration patches
     ├── api/                    # Whitelisted REST endpoints
@@ -86,9 +86,9 @@ bench start
 
 ## 🛠 Features Included in this Setup
 
-1. **PEP 621 Build System**: Uses `pyproject.toml` with `flit_core` compatible with modern pip & Frappe v16.
+1. **PEP 621 Build System**: Uses `pyproject.toml` with `flit_core` compatible with modern pip & Frappe v15.
 2. **Standard Single DocType**: `Samaria Setting` with validation logic and interactive Desk action button.
-3. **Desk Workspace**: Ready-to-use modern Frappe v16 workspace definition (`Samaria`).
+3. **Desk Workspace**: Ready-to-use modern Frappe v15 workspace definition (`Samaria`).
 4. **Hooks Configuration**: Pre-configured for document events, scheduler cron jobs (`hourly`, `daily`), asset bundling, and APIs.
 5. **Background Workers**: Modular background cron runners under `samaria.tasks.cron`.
 6. **Whitelisted REST API**: Clean endpoint structure in `samaria.api.v1`.

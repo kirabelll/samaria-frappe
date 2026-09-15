@@ -2,7 +2,7 @@
 """
 Aggregate Project Dispatch Report
 Tracks stone & aggregate dispatches, weighbridge variances, transport settlements, and margins by client project.
-Frappe Framework Version-16
+Frappe Framework Version-15
 """
 import frappe
 from frappe import _
