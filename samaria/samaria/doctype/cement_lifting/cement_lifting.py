@@ -1,11 +1,42 @@
 import frappe
+from frappe import _
 from frappe.model.document import Document
+from frappe.utils import flt
 
 class CementLifting(Document):
 	def validate(self):
-		factory_wt = float(self.factory_weight or 0)
-		buyer_wt = float(self.buyer_weighbridge_qty) if self.buyer_weighbridge_qty is not None else factory_wt
-		
+		self.validate_purchase_status()
+		self.validate_customer_agreement()
+		self.calculate_shortages()
+
+	def validate_purchase_status(self):
+		if self.purchase:
+			purchase = frappe.get_doc("Cement Purchase", self.purchase)
+			if purchase.status not in ["Active", "Exhausted"]:
+				frappe.throw(_("Cannot create lifting: Cement Purchase {0} must be Active and Paid first (Current status: {1}).").format(purchase.name, purchase.status))
+
+			# Check if factory weight exceeds remaining balance
+			if self.is_new() and flt(self.factory_weight) > flt(purchase.balance_remaining):
+				frappe.msgprint(_("Warning: Lifting weight ({0} Tons) exceeds current purchase remaining balance ({1} Tons).").format(self.factory_weight, purchase.balance_remaining))
+
+	def validate_customer_agreement(self):
+		if self.customer:
+			active_agreements = frappe.get_all(
+				"Sales Agreement",
+				filters={
+					"customer": self.customer,
+					"status": "Active"
+				},
+				limit=1
+			)
+			if not active_agreements:
+				# Log notice
+				pass
+
+	def calculate_shortages(self):
+		factory_wt = flt(self.factory_weight)
+		buyer_wt = flt(self.buyer_weighbridge_qty) if self.buyer_weighbridge_qty is not None else factory_wt
+
 		if self.buyer_weighbridge_qty is not None:
 			self.shortage_qty = max(0.0, factory_wt - buyer_wt)
 		else:
@@ -17,12 +48,13 @@ class CementLifting(Document):
 
 	def on_cancel(self):
 		self.reverse_purchase_balance()
+		self.reset_coupon_status()
 
 	def update_purchase_balance(self):
 		if self.purchase and self.factory_weight:
 			purchase_doc = frappe.get_doc("Cement Purchase", self.purchase)
-			current_bal = float(purchase_doc.balance_remaining or 0)
-			lifted_wt = float(self.factory_weight or 0)
+			current_bal = flt(purchase_doc.balance_remaining)
+			lifted_wt = flt(self.factory_weight)
 			new_bal = max(0.0, current_bal - lifted_wt)
 			purchase_doc.balance_remaining = new_bal
 			if new_bal <= 0:
@@ -32,8 +64,8 @@ class CementLifting(Document):
 	def reverse_purchase_balance(self):
 		if self.purchase and self.factory_weight:
 			purchase_doc = frappe.get_doc("Cement Purchase", self.purchase)
-			current_bal = float(purchase_doc.balance_remaining or 0)
-			lifted_wt = float(self.factory_weight or 0)
+			current_bal = flt(purchase_doc.balance_remaining)
+			lifted_wt = flt(self.factory_weight)
 			purchase_doc.balance_remaining = current_bal + lifted_wt
 			if purchase_doc.status == "Exhausted" and purchase_doc.balance_remaining > 0:
 				purchase_doc.status = "Active"
@@ -44,4 +76,11 @@ class CementLifting(Document):
 			frappe.db.set_value("Cement Coupon", self.coupon, {
 				"status": "Used",
 				"used_date": self.lifting_date
+			})
+
+	def reset_coupon_status(self):
+		if self.coupon:
+			frappe.db.set_value("Cement Coupon", self.coupon, {
+				"status": "In Custody",
+				"used_date": None
 			})

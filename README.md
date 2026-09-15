@@ -65,6 +65,9 @@ bench get-app samaria /d/projects/samaria
 ### 2. Install App to your Site
 ```bash
 bench --site [your-site-name] install-app samaria
+
+# If reinstalling or resolving existing module conflicts:
+# bench --site [your-site-name] install-app samaria --force
 ```
 
 ### 3. Run Migrations & Build Assets

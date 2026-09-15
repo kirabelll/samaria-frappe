@@ -17,10 +17,12 @@ samaria = {
 		// Adds distinctive division indicators to Frappe v15 Desk sidebar
 		const tag_map = {
 			"samaria": { tag: "Hub", cls: "hub" },
+			"samaria-operations": { tag: "Hub", cls: "hub" },
 			"aggregate-operations": { tag: "Quarry", cls: "aggregate" },
 			"cement-operations": { tag: "Plant", cls: "cement" },
 			"medical-division": { tag: "Pharma", cls: "medical" },
 			"agreements-and-commercial": { tag: "B2B", cls: "commercial" },
+			"agreements-&-commercial": { tag: "B2B", cls: "commercial" },
 			"samaria-project-reports": { tag: "Reports", cls: "reports" }
 		};
 

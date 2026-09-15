@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Cement Supply Chain & Lifting\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Monitor factory quotas, weighbridge lifting dispatches, physical coupon validation, supplier plant balances, and shortage penalties.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Cement Lifting\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Factory Balances\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Cement Lifting Report\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Procurement & Lifting Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Purchase\",\"label\":\"Cement Purchases\",\"description\":\"Factory cement orders, quotas, and remaining balances\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Lifting\",\"label\":\"Cement Lifting\",\"description\":\"Weighbridge weigh-ins, shortage deductions, and customer dispatch\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Coupon\",\"label\":\"Cement Coupons\",\"description\":\"Physical coupon lifecycle & custody tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Factory\",\"label\":\"Cement Factories\",\"description\":\"Supplying plants, terms, and rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Balance\",\"label\":\"Factory Balances\",\"description\":\"Real-time plant balances\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Analytics & Project Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Cement Project Lifting and Balance Report\",\"label\":\"Cement Project Lifting Report\",\"description\":\"Plant lifting vs buyer weighbridge quantities & penalties\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Project Financial Summary\",\"description\":\"Financial performance across cement client projects\"}]}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Cement Supply Chain & Lifting\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Monitor factory quotas, weighbridge lifting dispatches, physical coupon validation, supplier plant balances, and shortage penalties.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Cement Lifting\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Weighbridge Records\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Factory Balances\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Procurement & Lifting Operations\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Purchase\",\"label\":\"Cement Purchases\",\"description\":\"Factory cement orders, quotas, and remaining balances\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Lifting\",\"label\":\"Cement Lifting\",\"description\":\"Weighbridge weigh-ins, shortage deductions, and customer dispatch\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Weighbridge\",\"label\":\"Weighbridge Tickets\",\"description\":\"Factory & Buyer weighbridge records and scale tickets\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Coupon\",\"label\":\"Cement Coupons\",\"description\":\"Physical coupon lifecycle & custody tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Penalty\",\"label\":\"Shortage Penalties\",\"description\":\"Weighbridge shortage & delay penalty tracking\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Factory\",\"label\":\"Cement Factories\",\"description\":\"Supplying plants, terms, and rules\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Cement Balance\",\"label\":\"Factory Balances\",\"description\":\"Real-time plant balances\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Analytics & Project Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Cement Project Lifting and Balance Report\",\"label\":\"Cement Project Lifting Report\",\"description\":\"Plant lifting vs buyer weighbridge quantities & penalties\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Project Financial Summary\",\"description\":\"Financial performance across cement client projects\"}]}}]",
  "creation": "2026-09-02 12:00:00.000000",
  "custom_blocks": [],
  "docstatus": 0,
@@ -17,7 +17,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Procurement & Lifting Operations",
-   "link_count": 5,
+   "link_count": 7,
    "link_type": "DocType",
    "onboard": 1,
    "type": "Card Break"
@@ -48,9 +48,31 @@
    "dependencies": "",
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Cement Weighbridge",
+   "link_count": 0,
+   "link_to": "Cement Weighbridge",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
    "label": "Cement Coupon",
    "link_count": 0,
    "link_to": "Cement Coupon",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Penalty",
+   "link_count": 0,
+   "link_to": "Cement Penalty",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -109,13 +131,13 @@
    "type": "Link"
   }
  ],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Cement Operations",
  "number_cards": [],
  "owner": "Administrator",
- "parent_page": "",
+ "parent_page": "Samaria",
  "public": 1,
  "quick_lists": [],
  "roles": [],
@@ -130,20 +152,20 @@
    "type": "DocType"
   },
   {
+   "color": "Purple",
+   "doc_view": "",
+   "format": "",
+   "label": "Weighbridge Records",
+   "link_to": "Cement Weighbridge",
+   "type": "DocType"
+  },
+  {
    "color": "Blue",
    "doc_view": "",
    "format": "",
    "label": "Factory Balances",
    "link_to": "Cement Balance",
    "type": "DocType"
-  },
-  {
-   "color": "Cyan",
-   "doc_view": "",
-   "format": "",
-   "label": "Cement Lifting Report",
-   "link_to": "Cement Project Lifting and Balance Report",
-   "type": "Report"
   }
  ],
  "title": "Cement Supply Chain & Lifting"

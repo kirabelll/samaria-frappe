@@ -16,16 +16,26 @@
   "column_break_1",
   "status",
   "lifting_date",
-  "truck",
   "coupon",
   "delivery_note_no",
+  "pod_number",
+  "pad_number",
+  "section_transport",
+  "self_transport",
+  "truck",
+  "column_break_tr",
+  "self_plate_no",
+  "self_driver_name",
   "section_weighbridge",
   "factory_weighbridge_ref",
   "factory_weight",
   "buyer_weighbridge_qty",
   "column_break_2",
   "shortage_qty",
-  "shortage_penalty"
+  "shortage_penalty",
+  "section_notes",
+  "registered_by",
+  "notes"
  ],
  "fields": [
   {
@@ -96,14 +106,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "truck",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Truck Plate No",
-   "options": "Truck",
-   "reqd": 1
-  },
-  {
    "fieldname": "coupon",
    "fieldtype": "Link",
    "label": "Coupon Used",
@@ -112,7 +114,52 @@
   {
    "fieldname": "delivery_note_no",
    "fieldtype": "Data",
-   "label": "Delivery Note / Pad No"
+   "label": "Delivery Note No"
+  },
+  {
+   "fieldname": "pod_number",
+   "fieldtype": "Data",
+   "label": "POD Number"
+  },
+  {
+   "fieldname": "pad_number",
+   "fieldtype": "Data",
+   "label": "Pad Number"
+  },
+  {
+   "fieldname": "section_transport",
+   "fieldtype": "Section Break",
+   "label": "Transport Method"
+  },
+  {
+   "default": "0",
+   "fieldname": "self_transport",
+   "fieldtype": "Check",
+   "label": "Customer Self-Transport"
+  },
+  {
+   "depends_on": "eval:!doc.self_transport",
+   "fieldname": "truck",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Truck Plate No",
+   "options": "Truck"
+  },
+  {
+   "fieldname": "column_break_tr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "self_transport",
+   "fieldname": "self_plate_no",
+   "fieldtype": "Data",
+   "label": "Self Plate No"
+  },
+  {
+   "depends_on": "self_transport",
+   "fieldname": "self_driver_name",
+   "fieldtype": "Data",
+   "label": "Self Driver Name"
   },
   {
    "fieldname": "section_weighbridge",
@@ -153,11 +200,26 @@
    "fieldname": "shortage_penalty",
    "fieldtype": "Currency",
    "label": "Shortage Penalty (ETB)"
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Audit & Notes"
+  },
+  {
+   "fieldname": "registered_by",
+   "fieldtype": "Data",
+   "label": "Registered By"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Cement Lifting",

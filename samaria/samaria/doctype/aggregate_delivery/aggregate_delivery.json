@@ -9,65 +9,63 @@
  "field_order": [
   "section_general",
   "naming_series",
-  "dispatch_date",
   "customer",
   "customer_name",
   "supplier",
   "supplier_name",
   "column_break_1",
   "status",
+  "dispatch_date",
   "delivery_date",
   "pad_number",
-  "section_logistics",
+  "section_transporter",
   "transporter",
   "transporter_name",
   "truck",
   "truck_capacity",
-  "column_break_2",
-  "driver_name",
-  "item_code",
+  "item",
   "item_name",
-  "section_volumes",
+  "column_break_2",
+  "agreement",
+  "loading_site",
+  "offloading_site",
+  "section_volume",
   "loaded_volume",
   "delivered_volume",
   "shortage_volume",
-  "column_break_3",
+  "billable_volume",
+  "section_financials",
   "transport_rate",
   "aggregate_value",
   "customer_price",
-  "section_financials",
+  "column_break_3",
   "gross_truck_fee",
   "shortage_deduction",
   "net_truck_payment",
-  "column_break_4",
   "customer_receivable",
   "supplier_payable",
   "net_profit_amount",
-  "section_attachments",
+  "section_proofs",
   "telegram_proof",
-  "column_break_5",
-  "signed_invoice"
+  "signed_invoice",
+  "proofs",
+  "section_notes",
+  "verified_by",
+  "registered_by",
+  "notes"
  ],
  "fields": [
   {
    "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Dispatch Overview"
+   "label": "Dispatch & Parties"
   },
   {
-   "default": "DISP-.#####",
+   "default": "ADISP-.YYYY.-.#####",
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
-   "options": "DISP-.#####",
-   "reqd": 1
-  },
-  {
-   "default": "Today",
-   "fieldname": "dispatch_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Dispatch Date",
+   "options": "ADISP-.YYYY.-.#####",
    "reqd": 1
   },
   {
@@ -91,7 +89,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Supplier / Quarry",
+   "label": "Supplier Quarry / Site",
    "options": "Supplier",
    "reqd": 1
   },
@@ -113,7 +111,14 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Dispatched\nDelivered\nVerified\nSettled\nCancelled",
+   "options": "Dispatched\nDelivered\nVerified\nSettled\nCancelled"
+  },
+  {
+   "default": "Today",
+   "fieldname": "dispatch_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Dispatch Date",
    "reqd": 1
   },
   {
@@ -125,13 +130,12 @@
    "fieldname": "pad_number",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Delivery Pad / Receipt No",
-   "reqd": 1
+   "label": "Pad / Delivery Note No"
   },
   {
-   "fieldname": "section_logistics",
+   "fieldname": "section_transporter",
    "fieldtype": "Section Break",
-   "label": "Transport & Vehicle Details"
+   "label": "Transporter & Material"
   },
   {
    "fieldname": "transporter",
@@ -161,7 +165,21 @@
    "fetch_from": "truck.capacity",
    "fieldname": "truck_capacity",
    "fieldtype": "Float",
-   "label": "Truck Capacity (m³)",
+   "label": "Truck Capacity (m³)"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Aggregate Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "item.item_name",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item Name",
    "read_only": 1
   },
   {
@@ -169,32 +187,25 @@
    "fieldtype": "Column Break"
   },
   {
-   "fetch_from": "truck.driver_name",
-   "fieldname": "driver_name",
-   "fieldtype": "Data",
-   "label": "Driver Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "item_code",
+   "fieldname": "agreement",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Material / Item",
-   "options": "Item",
-   "reqd": 1
+   "label": "Transporter Agreement",
+   "options": "Transporter Agreement"
   },
   {
-   "fetch_from": "item_code.item_name",
-   "fieldname": "item_name",
+   "fieldname": "loading_site",
    "fieldtype": "Data",
-   "label": "Item Name",
-   "read_only": 1
+   "label": "Loading Quarry / Site"
   },
   {
-   "fieldname": "section_volumes",
+   "fieldname": "offloading_site",
+   "fieldtype": "Data",
+   "label": "Offloading / Project Site"
+  },
+  {
+   "fieldname": "section_volume",
    "fieldtype": "Section Break",
-   "label": "Volumes & Rates"
+   "label": "Volume & Quantities (m³)"
   },
   {
    "fieldname": "loaded_volume",
@@ -216,30 +227,37 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_3",
-   "fieldtype": "Column Break"
+   "fieldname": "billable_volume",
+   "fieldtype": "Float",
+   "label": "Billable Truck Volume (m³)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_financials",
+   "fieldtype": "Section Break",
+   "label": "Financial Calculation & Pricing (ETB)"
   },
   {
    "fieldname": "transport_rate",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Transport Rate (ETB/m³)",
    "reqd": 1
   },
   {
    "fieldname": "aggregate_value",
    "fieldtype": "Currency",
-   "label": "Supplier Rate (ETB/m³)",
+   "label": "Supplier Aggregate Rate (ETB/m³)",
    "reqd": 1
   },
   {
    "fieldname": "customer_price",
    "fieldtype": "Currency",
-   "label": "Customer Price (ETB/m³)"
+   "label": "Customer Selling Price (ETB/m³)"
   },
   {
-   "fieldname": "section_financials",
-   "fieldtype": "Section Break",
-   "label": "Calculated Financials"
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "gross_truck_fee",
@@ -261,10 +279,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_4",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "customer_receivable",
    "fieldtype": "Currency",
    "label": "Customer Receivable",
@@ -279,32 +293,55 @@
   {
    "fieldname": "net_profit_amount",
    "fieldtype": "Currency",
-   "label": "Net Margin",
+   "label": "Estimated Net Profit",
    "read_only": 1
   },
   {
-   "fieldname": "section_attachments",
+   "fieldname": "section_proofs",
    "fieldtype": "Section Break",
-   "label": "Proof & Invoices"
+   "label": "Document Proofs & Evidence"
   },
   {
    "fieldname": "telegram_proof",
    "fieldtype": "Attach",
-   "label": "Telegram / Photo Proof"
-  },
-  {
-   "fieldname": "column_break_5",
-   "fieldtype": "Column Break"
+   "label": "Telegram Dispatch Confirmation"
   },
   {
    "fieldname": "signed_invoice",
    "fieldtype": "Attach",
-   "label": "Signed Delivery Invoice"
+   "label": "Signed Delivery Pad / Invoice"
+  },
+  {
+   "fieldname": "proofs",
+   "fieldtype": "Table",
+   "label": "Supporting Documents",
+   "options": "Aggregate Proof"
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Audit & Notes"
+  },
+  {
+   "fieldname": "verified_by",
+   "fieldtype": "Link",
+   "label": "Verified By",
+   "options": "User"
+  },
+  {
+   "fieldname": "registered_by",
+   "fieldtype": "Data",
+   "label": "Registered By"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes / Remarks"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Aggregate Delivery",

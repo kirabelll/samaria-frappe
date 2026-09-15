@@ -24,7 +24,11 @@
   "column_break_2",
   "paid_amount",
   "balance_remaining",
-  "payment_ref"
+  "payment_ref",
+  "payment_date",
+  "section_notes",
+  "created_by_user",
+  "notes"
  ],
  "fields": [
   {
@@ -76,13 +80,13 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Active",
+   "default": "Pending",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Pending\nActive\nExhausted\nCancelled"
+   "options": "Pending\nChecked\nActive\nExhausted\nCancelled"
   },
   {
    "default": "Unpaid",
@@ -101,7 +105,7 @@
   {
    "fieldname": "section_financials",
    "fieldtype": "Section Break",
-   "label": "Financials & Payments"
+   "label": "Financials & Payments (ETB)"
   },
   {
    "fieldname": "total_amount",
@@ -142,12 +146,33 @@
   {
    "fieldname": "payment_ref",
    "fieldtype": "Data",
-   "label": "Payment Reference / Slip No"
+   "label": "Bank Slip / Payment Ref"
+  },
+  {
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "label": "Payment Date"
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Audit & Notes"
+  },
+  {
+   "fieldname": "created_by_user",
+   "fieldtype": "Link",
+   "label": "Created By",
+   "options": "User"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Cement Purchase",

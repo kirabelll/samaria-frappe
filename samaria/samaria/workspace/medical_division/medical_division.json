@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Medical & Pharmaceutical Operations\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Maintain strict lot/batch traceability, expiry thresholds, cold-chain quarantine compliance, landed pricing, and medical requisition fulfillment.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Medical Batches\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Medical Requests\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Medical Inventory Report\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Pharmaceutical Records & Batches\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch\",\"label\":\"Medical Batches\",\"description\":\"Batch inventory, lot numbers, expiry tracking, and quarantine\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Request\",\"label\":\"Medical Requests\",\"description\":\"Medicine orders, health center quotes, and fulfillment\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Pricing\",\"label\":\"Medical Pricing\",\"description\":\"Landed cost build-up and margin calculation\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch Adjustment\",\"label\":\"Batch Adjustments\",\"description\":\"Reconciliations, expiry write-offs, and damage logs\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Analytics & Compliance Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Medical Project Inventory Report\",\"label\":\"Medical Project Inventory Report\",\"description\":\"Lot-level pharmaceutical expiry tracking & valuations\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Project Financial Summary\",\"description\":\"Financial commitments across institutional medical accounts\"}]}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"Medical & Pharmaceutical Operations\",\"level\":3}},{\"type\":\"paragraph\",\"data\":{\"text\":\"Maintain strict lot/batch traceability, expiry thresholds, cold-chain quarantine compliance, landed pricing, and medical requisition fulfillment.\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Medical Requests\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Store Issues\"}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Medical Batches\"}},{\"type\":\"card\",\"data\":{\"card_name\":\"Pharmaceutical Records & Batches\",\"links\":[{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Request\",\"label\":\"Medical Requests\",\"description\":\"Medicine orders, health center quotes, and fulfillment\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Store Issue\",\"label\":\"Medical Store Issues\",\"description\":\"Dispensing, store issue delivery, and batch deduction\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch\",\"label\":\"Medical Batches\",\"description\":\"Batch inventory, lot numbers, expiry tracking, and quarantine\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Pricing\",\"label\":\"Medical Pricing\",\"description\":\"Landed cost build-up and margin calculation\"},{\"type\":\"Link\",\"link_type\":\"DocType\",\"link_to\":\"Medical Batch Adjustment\",\"label\":\"Batch Adjustments\",\"description\":\"Reconciliations, expiry write-offs, and damage logs\"}]}},{\"type\":\"card\",\"data\":{\"card_name\":\"Analytics & Compliance Reports\",\"links\":[{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Medical Project Inventory Report\",\"label\":\"Medical Project Inventory Report\",\"description\":\"Lot-level pharmaceutical expiry tracking & valuations\"},{\"type\":\"Link\",\"link_type\":\"Report\",\"link_to\":\"Project Financial Summary Report\",\"label\":\"Project Financial Summary\",\"description\":\"Financial commitments across institutional medical accounts\"}]}}]",
  "creation": "2026-09-02 12:00:00.000000",
  "custom_blocks": [],
  "docstatus": 0,
@@ -17,7 +17,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Pharmaceutical Records & Batches",
-   "link_count": 4,
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 1,
    "type": "Card Break"
@@ -26,9 +26,9 @@
    "dependencies": "",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Medical Batch",
+   "label": "Medical Request",
    "link_count": 0,
-   "link_to": "Medical Batch",
+   "link_to": "Medical Request",
    "link_type": "DocType",
    "onboard": 1,
    "type": "Link"
@@ -37,9 +37,20 @@
    "dependencies": "",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Medical Request",
+   "label": "Medical Store Issue",
    "link_count": 0,
-   "link_to": "Medical Request",
+   "link_to": "Medical Store Issue",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "dependencies": "",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Batch",
+   "link_count": 0,
+   "link_to": "Medical Batch",
    "link_type": "DocType",
    "onboard": 1,
    "type": "Link"
@@ -98,26 +109,18 @@
    "type": "Link"
   }
  ],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Medical Division",
  "number_cards": [],
  "owner": "Administrator",
- "parent_page": "",
+ "parent_page": "Samaria",
  "public": 1,
  "quick_lists": [],
  "roles": [],
  "sequence_id": 4.0,
  "shortcuts": [
-  {
-   "color": "Red",
-   "doc_view": "",
-   "format": "",
-   "label": "Medical Batches",
-   "link_to": "Medical Batch",
-   "type": "DocType"
-  },
   {
    "color": "Blue",
    "doc_view": "",
@@ -127,12 +130,20 @@
    "type": "DocType"
   },
   {
-   "color": "Cyan",
+   "color": "Green",
    "doc_view": "",
    "format": "",
-   "label": "Medical Inventory Report",
-   "link_to": "Medical Project Inventory Report",
-   "type": "Report"
+   "label": "Store Issues",
+   "link_to": "Medical Store Issue",
+   "type": "DocType"
+  },
+  {
+   "color": "Red",
+   "doc_view": "",
+   "format": "",
+   "label": "Medical Batches",
+   "link_to": "Medical Batch",
+   "type": "DocType"
   }
  ],
  "title": "Medical & Pharmaceutical Operations"

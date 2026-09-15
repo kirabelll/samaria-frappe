@@ -175,13 +175,13 @@ def get_dashboard_data(customer=None, from_date=None, to_date=None):
 
 	# 3. Medical Batches & Requests
 	if frappe.db.table_exists("Medical Batch"):
-		data["metrics"]["medical"]["active_batches"] = frappe.db.count("Medical Batch", {"is_quarantined": 0})
-		data["metrics"]["medical"]["quarantined_batches"] = frappe.db.count("Medical Batch", {"is_quarantined": 1})
+		data["metrics"]["medical"]["active_batches"] = frappe.db.count("Medical Batch", {"status": "Available"})
+		data["metrics"]["medical"]["quarantined_batches"] = frappe.db.count("Medical Batch", {"status": "Quarantine"})
 
 		ninety_days = add_days(nowdate(), 90)
 		data["metrics"]["medical"]["near_expiry_batches"] = frappe.db.count(
 			"Medical Batch",
-			{"expiry_date": ["between", [nowdate(), ninety_days]]}
+			{"status": "Available", "expiry_date": ["between", [nowdate(), ninety_days]]}
 		)
 
 	if frappe.db.table_exists("Medical Request"):
@@ -221,11 +221,11 @@ def get_dashboard_data(customer=None, from_date=None, to_date=None):
 
 @frappe.whitelist()
 def get_project_filters():
-	"""Fetches list of customers and offloading sites for dashboard filter dropdown."""
+	"""Fetches list of customers for dashboard filter dropdown."""
 	customers = []
 	try:
 		if frappe.db.table_exists("Customer"):
-			customers = frappe.get_all("Customer", fields=["name", "customer_name"], order_by="customer_name asc", limit=50)
+			customers = frappe.get_all("Customer", fields=["name", "customer_name"], order_by="customer_name asc", limit=100)
 	except Exception:
 		pass
 	return customers

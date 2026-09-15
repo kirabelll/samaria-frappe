@@ -11,12 +11,18 @@
   "naming_series",
   "customer",
   "customer_name",
+  "license_no",
+  "license_expiry",
+  "license_type",
   "column_break_1",
   "status",
   "priority",
   "request_date",
   "section_items",
   "items",
+  "section_totals",
+  "total_items_count",
+  "total_amount",
   "section_notes",
   "notes"
  ],
@@ -24,7 +30,7 @@
   {
    "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Request Details"
+   "label": "Request Details & Healthcare Center"
   },
   {
    "default": "MREQ-.YYYY.-.#####",
@@ -39,7 +45,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Customer / Health Center",
+   "label": "Customer / Health Institution",
    "options": "Customer",
    "reqd": 1
   },
@@ -48,6 +54,27 @@
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.license_no",
+   "fieldname": "license_no",
+   "fieldtype": "Data",
+   "label": "Medical License No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.license_expiry",
+   "fieldname": "license_expiry",
+   "fieldtype": "Date",
+   "label": "License Expiry Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "customer.license_type",
+   "fieldname": "license_type",
+   "fieldtype": "Data",
+   "label": "License Type",
    "read_only": 1
   },
   {
@@ -90,6 +117,24 @@
    "reqd": 1
   },
   {
+   "fieldname": "section_totals",
+   "fieldtype": "Section Break",
+   "label": "Financials & Totals"
+  },
+  {
+   "fieldname": "total_items_count",
+   "fieldtype": "Int",
+   "label": "Total Line Items",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Quote Amount (ETB)",
+   "read_only": 1
+  },
+  {
    "fieldname": "section_notes",
    "fieldtype": "Section Break",
    "label": "Notes & Instructions"
@@ -102,7 +147,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Medical Request",
