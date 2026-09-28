@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "truck_category",
+  "holding_capacity",
+  "capacity_unit",
+  "unit_price",
+  "total_price"
+ ],
+ "fields": [
+  {
+   "fieldname": "truck_category",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Truck Category",
+   "options": "Dump Truck\nSinotruk\nTrailer\nIsuzu\nPickup\nFlatbed",
+   "reqd": 1
+  },
+  {
+   "fieldname": "holding_capacity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Holding Capacity",
+   "reqd": 1
+  },
+  {
+   "default": "m3",
+   "fieldname": "capacity_unit",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Capacity Unit",
+   "options": "m3\nTon\nQuintal\nTrip"
+  },
+  {
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Unit Price (ETB)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Price (Capacity × Unit Price)",
+   "read_only": 1
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Transporter",
+ "name": "Transporter Pricing",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}

@@ -1,0 +1,201 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:MPR-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "effective_date",
+  "approved_by",
+  "sb_cost_buildup",
+  "manufacturer_price",
+  "freight",
+  "insurance",
+  "customs",
+  "inland_transport",
+  "cb_cost_buildup",
+  "bank_cost",
+  "warehouse_cost",
+  "handling_cost",
+  "wastage_allowance",
+  "other_costs",
+  "sb_pricing_result",
+  "total_cost",
+  "margin_percent",
+  "recommended_price",
+  "approved_price"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Medicine / Item Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Medicine Name / Strength",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "effective_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Effective Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Data",
+   "label": "Approved By"
+  },
+  {
+   "fieldname": "sb_cost_buildup",
+   "fieldtype": "Section Break",
+   "label": "Direct Costs Buildup (ETB / Unit)"
+  },
+  {
+   "default": "0",
+   "fieldname": "manufacturer_price",
+   "fieldtype": "Currency",
+   "label": "Manufacturer / FOB Price",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "freight",
+   "fieldtype": "Currency",
+   "label": "International Freight"
+  },
+  {
+   "default": "0",
+   "fieldname": "insurance",
+   "fieldtype": "Currency",
+   "label": "Marine / Transit Insurance"
+  },
+  {
+   "default": "0",
+   "fieldname": "customs",
+   "fieldtype": "Currency",
+   "label": "Customs Duty & Taxes"
+  },
+  {
+   "default": "0",
+   "fieldname": "inland_transport",
+   "fieldtype": "Currency",
+   "label": "Inland Transport & Port Clearance"
+  },
+  {
+   "fieldname": "cb_cost_buildup",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "bank_cost",
+   "fieldtype": "Currency",
+   "label": "Bank / LC Charges"
+  },
+  {
+   "default": "0",
+   "fieldname": "warehouse_cost",
+   "fieldtype": "Currency",
+   "label": "Storage & Cold Chain Cost"
+  },
+  {
+   "default": "0",
+   "fieldname": "handling_cost",
+   "fieldtype": "Currency",
+   "label": "Handling & QC Inspection"
+  },
+  {
+   "default": "0",
+   "fieldname": "wastage_allowance",
+   "fieldtype": "Currency",
+   "label": "Wastage / Expiry Allowance"
+  },
+  {
+   "default": "0",
+   "fieldname": "other_costs",
+   "fieldtype": "Currency",
+   "label": "Other Overhead Costs"
+  },
+  {
+   "fieldname": "sb_pricing_result",
+   "fieldtype": "Section Break",
+   "label": "Pricing Calculation"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Landed Cost (ETB)",
+   "read_only": 1
+  },
+  {
+   "default": "25",
+   "fieldname": "margin_percent",
+   "fieldtype": "Percent",
+   "label": "Target Margin (%)",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "recommended_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Recommended Selling Price (ETB)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "approved_price",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Final Approved Selling Price (ETB)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Medical",
+ "name": "Medical Pricing",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Medical Pharmacist",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,133 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:FAC-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "factory_name",
+  "factory_code",
+  "factory_type",
+  "status",
+  "cb_ops",
+  "use_coupons",
+  "weighbridge_req",
+  "phone",
+  "contact_person",
+  "location",
+  "sb_terms",
+  "terms"
+ ],
+ "fields": [
+  {
+   "fieldname": "factory_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Factory Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "factory_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Code",
+   "unique": 1
+  },
+  {
+   "default": "Cement",
+   "fieldname": "factory_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Factory Type",
+   "options": "Cement\nAggregate\nSand\nMixed"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nInactive"
+  },
+  {
+   "fieldname": "cb_ops",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1",
+   "fieldname": "use_coupons",
+   "fieldtype": "Check",
+   "label": "Coupon System Required"
+  },
+  {
+   "default": "1",
+   "fieldname": "weighbridge_req",
+   "fieldtype": "Check",
+   "label": "Weighbridge Measurement Required"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Phone",
+   "label": "Contact Phone"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Location / Plant Site"
+  },
+  {
+   "fieldname": "sb_terms",
+   "fieldtype": "Section Break",
+   "label": "Factory Terms"
+  },
+  {
+   "fieldname": "terms",
+   "fieldtype": "Small Text",
+   "label": "Procurement / Lifting Terms"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cement",
+ "name": "Factory",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

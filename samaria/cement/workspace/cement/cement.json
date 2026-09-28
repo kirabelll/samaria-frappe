@@ -1,0 +1,116 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"_f4j1\",\"type\":\"header\",\"data\":{\"text\":\"Cement Operations\",\"level\":3}},{\"id\":\"_g7k2\",\"type\":\"card\",\"data\":{\"card_name\":\"Cement Operations\"}}]",
+ "creation": "2026-09-28 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "building",
+ "idx": 2,
+ "indicator_color": "blue",
+ "is_hidden": 0,
+ "label": "Cement",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Factory",
+   "link_count": 0,
+   "link_to": "Factory",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Purchase",
+   "link_count": 0,
+   "link_to": "Cement Purchase",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Coupon",
+   "link_count": 0,
+   "link_to": "Cement Coupon",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Lifting",
+   "link_count": 0,
+   "link_to": "Cement Lifting",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Weighbridge",
+   "link_count": 0,
+   "link_to": "Cement Weighbridge",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cement Penalty",
+   "link_count": 0,
+   "link_to": "Cement Penalty",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cement",
+ "name": "Cement",
+ "owner": "Administrator",
+ "public": 1,
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Cement Manager"
+  }
+ ],
+ "sequence_id": 2.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Purchases",
+   "link_to": "Cement Purchase",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Coupons",
+   "link_to": "Cement Coupon",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Liftings",
+   "link_to": "Cement Lifting",
+   "type": "DocType"
+  }
+ ],
+ "title": "Cement"
+}

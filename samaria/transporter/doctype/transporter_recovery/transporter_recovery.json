@@ -1,0 +1,127 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:REC-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transporter",
+  "source_module",
+  "source_reference",
+  "status",
+  "cb_amounts",
+  "original_amount",
+  "recovered_amount",
+  "pending_amount",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transporter",
+   "options": "Transporter",
+   "reqd": 1
+  },
+  {
+   "default": "Aggregate",
+   "fieldname": "source_module",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Source Module",
+   "options": "Aggregate\nCement\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_reference",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Source Reference (Doc No)"
+  },
+  {
+   "default": "Open",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Recovery Status",
+   "options": "Open\nPartially Recovered\nFully Recovered\nWaived"
+  },
+  {
+   "fieldname": "cb_amounts",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "original_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Original Claim Amount (ETB)",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "recovered_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Recovered Amount (ETB)"
+  },
+  {
+   "fieldname": "pending_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Pending Amount (ETB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes / Reason"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Transporter",
+ "name": "Transporter Recovery",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transporter Coordinator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

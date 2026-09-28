@@ -1,0 +1,206 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:CL-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "cement_purchase",
+  "factory",
+  "truck",
+  "customer",
+  "coupon",
+  "status",
+  "cb_dates",
+  "lifting_date",
+  "delivery_note_no",
+  "pod_number",
+  "pad_number",
+  "sb_weights",
+  "factory_weighbridge_ref",
+  "factory_weight",
+  "buyer_weighbridge_qty",
+  "shortage_qty",
+  "cb_penalty",
+  "penalty_rate_per_ton",
+  "shortage_penalty",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "cement_purchase",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Cement Purchase Order",
+   "options": "Cement Purchase",
+   "reqd": 1
+  },
+  {
+   "fieldname": "factory",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Factory",
+   "options": "Factory",
+   "reqd": 1
+  },
+  {
+   "fieldname": "truck",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Truck Plate",
+   "options": "Truck",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer / Destination",
+   "reqd": 1
+  },
+  {
+   "fieldname": "coupon",
+   "fieldtype": "Link",
+   "label": "Cement Coupon",
+   "options": "Cement Coupon"
+  },
+  {
+   "default": "Lifted",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Lifting Status",
+   "options": "Lifted\nDelivered\nVerified\nSettled"
+  },
+  {
+   "fieldname": "cb_dates",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "lifting_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Lifting Date & Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_note_no",
+   "fieldtype": "Data",
+   "label": "Delivery Note Number"
+  },
+  {
+   "fieldname": "pod_number",
+   "fieldtype": "Data",
+   "label": "POD Number (Proof of Delivery)"
+  },
+  {
+   "fieldname": "pad_number",
+   "fieldtype": "Data",
+   "label": "Pad / Waybill Number"
+  },
+  {
+   "fieldname": "sb_weights",
+   "fieldtype": "Section Break",
+   "label": "Weighbridge & Shortage Measurements"
+  },
+  {
+   "fieldname": "factory_weighbridge_ref",
+   "fieldtype": "Data",
+   "label": "Factory Weighbridge Ticket No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "factory_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Factory Weight (Tons)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "buyer_weighbridge_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Buyer / Offloading Weight (Tons)"
+  },
+  {
+   "fieldname": "shortage_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Shortage (Tons)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_penalty",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "penalty_rate_per_ton",
+   "fieldtype": "Currency",
+   "label": "Shortage Penalty Rate (ETB / Ton)"
+  },
+  {
+   "default": "0",
+   "fieldname": "shortage_penalty",
+   "fieldtype": "Currency",
+   "label": "Shortage Penalty Amount (ETB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cement",
+ "name": "Cement Lifting",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

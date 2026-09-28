@@ -1,0 +1,172 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:TRP-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transporter_name",
+  "transporter_type",
+  "code",
+  "association",
+  "status",
+  "cb_contact",
+  "contact_person",
+  "phone",
+  "email",
+  "driver_name",
+  "location",
+  "sb_tax_bank",
+  "tin",
+  "withholding",
+  "withhold_rate",
+  "cb_bank",
+  "bank_name",
+  "bank_account_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "transporter_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Transporter Name",
+   "reqd": 1
+  },
+  {
+   "default": "Company",
+   "fieldname": "transporter_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Transporter Type",
+   "options": "Company\nIndividual",
+   "reqd": 1
+  },
+  {
+   "fieldname": "code",
+   "fieldtype": "Data",
+   "label": "Code",
+   "unique": 1
+  },
+  {
+   "fieldname": "association",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transport Association",
+   "options": "Transport Association"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nInactive\nSuspended"
+  },
+  {
+   "fieldname": "cb_contact",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact_person",
+   "fieldtype": "Data",
+   "label": "Contact Person"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Phone",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Default Driver Name"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "Base Location / City"
+  },
+  {
+   "fieldname": "sb_tax_bank",
+   "fieldtype": "Section Break",
+   "label": "Tax & Financial Details"
+  },
+  {
+   "fieldname": "tin",
+   "fieldtype": "Data",
+   "label": "TIN Number"
+  },
+  {
+   "default": "0",
+   "fieldname": "withholding",
+   "fieldtype": "Check",
+   "label": "Apply Withholding Tax"
+  },
+  {
+   "default": "2.0",
+   "depends_on": "eval:doc.withholding==1",
+   "fieldname": "withhold_rate",
+   "fieldtype": "Percent",
+   "label": "Withholding Rate (%)"
+  },
+  {
+   "fieldname": "cb_bank",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "bank_account_no",
+   "fieldtype": "Data",
+   "label": "Bank Account Number"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Transporter",
+ "name": "Transporter",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transporter Coordinator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

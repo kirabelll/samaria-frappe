@@ -1,0 +1,260 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:ADIS-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "supplier",
+  "transporter",
+  "truck",
+  "driver_name",
+  "pad_number",
+  "cb_dispatch",
+  "dispatch_date",
+  "delivery_date",
+  "status",
+  "agreement",
+  "sb_material",
+  "item_name",
+  "loaded_volume",
+  "delivered_volume",
+  "shortage_volume",
+  "cb_pricing",
+  "transport_rate",
+  "aggregate_value",
+  "gross_truck_fee",
+  "shortage_deduction",
+  "net_truck_payment",
+  "sb_proofs",
+  "telegram_proof",
+  "signed_invoice",
+  "proof_verified",
+  "verified_by",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer / Buyer Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Supplier / Quarry Source",
+   "reqd": 1
+  },
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transporter",
+   "options": "Transporter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "truck",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Truck Plate",
+   "options": "Truck",
+   "reqd": 1
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "label": "Driver Name"
+  },
+  {
+   "fieldname": "pad_number",
+   "fieldtype": "Data",
+   "label": "Pad / Waybill Number"
+  },
+  {
+   "fieldname": "cb_dispatch",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "dispatch_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Dispatch Date & Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Datetime",
+   "label": "Delivery Date & Time"
+  },
+  {
+   "default": "Dispatched",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Delivery Status",
+   "options": "Dispatched\nDelivered\nVerified\nSettled\nCancelled"
+  },
+  {
+   "fieldname": "agreement",
+   "fieldtype": "Link",
+   "label": "Transporter Agreement",
+   "options": "Transporter Agreement"
+  },
+  {
+   "fieldname": "sb_material",
+   "fieldtype": "Section Break",
+   "label": "Material & Volume Calculations"
+  },
+  {
+   "default": "Aggregate 01 (Fine)",
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Material / Item Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "loaded_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Loaded Volume (m³)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivered_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Delivered Volume (m³)"
+  },
+  {
+   "fieldname": "shortage_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Shortage Volume (m³)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_pricing",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transport_rate",
+   "fieldtype": "Currency",
+   "label": "Transport Rate (ETB / m³)",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "aggregate_value",
+   "fieldtype": "Currency",
+   "label": "Material Shortage Rate (ETB / m³)"
+  },
+  {
+   "fieldname": "gross_truck_fee",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Gross Truck Fee (ETB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "shortage_deduction",
+   "fieldtype": "Currency",
+   "label": "Shortage Deduction (ETB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_truck_payment",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Net Truck Payment (ETB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_proofs",
+   "fieldtype": "Section Break",
+   "label": "Evidence & Verification"
+  },
+  {
+   "fieldname": "telegram_proof",
+   "fieldtype": "Attach Image",
+   "label": "Telegram / Photo Proof"
+  },
+  {
+   "fieldname": "signed_invoice",
+   "fieldtype": "Attach Image",
+   "label": "Signed Receipt / Waybill"
+  },
+  {
+   "default": "0",
+   "fieldname": "proof_verified",
+   "fieldtype": "Check",
+   "label": "Proof Documents Verified"
+  },
+  {
+   "fieldname": "verified_by",
+   "fieldtype": "Data",
+   "label": "Verified By"
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Aggregate",
+ "name": "Aggregate Delivery",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Aggregate Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

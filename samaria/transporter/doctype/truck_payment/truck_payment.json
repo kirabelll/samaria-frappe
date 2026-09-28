@@ -1,0 +1,175 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:TPS-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transporter",
+  "period_from",
+  "period_to",
+  "status",
+  "cb_summary",
+  "total_gross_fee",
+  "total_shortage_deduction",
+  "total_net_payment",
+  "association_deduction",
+  "recovery_deduction",
+  "final_payable",
+  "sb_payment",
+  "payment_method",
+  "bank_name",
+  "reference_no",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transporter",
+   "options": "Transporter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "period_from",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Period From",
+   "reqd": 1
+  },
+  {
+   "fieldname": "period_to",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Period To",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nApproved\nPaid\nCancelled"
+  },
+  {
+   "fieldname": "cb_summary",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_gross_fee",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Gross Transport Fee"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_shortage_deduction",
+   "fieldtype": "Currency",
+   "label": "Total Shortage Deduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_net_payment",
+   "fieldtype": "Currency",
+   "label": "Net Transport Fee"
+  },
+  {
+   "default": "0",
+   "fieldname": "association_deduction",
+   "fieldtype": "Currency",
+   "label": "Association Service Charge"
+  },
+  {
+   "default": "0",
+   "fieldname": "recovery_deduction",
+   "fieldtype": "Currency",
+   "label": "Recovery / Claim Deduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "final_payable",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Final Net Payable (ETB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_payment",
+   "fieldtype": "Section Break",
+   "label": "Disbursement Details"
+  },
+  {
+   "default": "Bank Transfer",
+   "fieldname": "payment_method",
+   "fieldtype": "Select",
+   "label": "Payment Method",
+   "options": "Bank Transfer\nCash\nCheck"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "Transaction / Check Reference"
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes / Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Transporter",
+ "name": "Truck Payment",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transporter Coordinator",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

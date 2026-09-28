@@ -1,0 +1,139 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:CPEN-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "lifting",
+  "transporter",
+  "truck_plate_no",
+  "penalty_type",
+  "recovery_status",
+  "cb_amounts",
+  "shortage_qty",
+  "penalty_rate",
+  "penalty_amount",
+  "recovered_amount",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "lifting",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Cement Lifting",
+   "options": "Cement Lifting"
+  },
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transporter",
+   "options": "Transporter"
+  },
+  {
+   "fieldname": "truck_plate_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Truck Plate"
+  },
+  {
+   "default": "Shortage",
+   "fieldname": "penalty_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Penalty Type",
+   "options": "Shortage\nDamage\nDelay\nOther"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "recovery_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Recovery Status",
+   "options": "Pending\nDeducted\nRecovered\nWaived"
+  },
+  {
+   "fieldname": "cb_amounts",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "shortage_qty",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Shortage / Damaged Qty (Tons)"
+  },
+  {
+   "default": "0",
+   "fieldname": "penalty_rate",
+   "fieldtype": "Currency",
+   "label": "Penalty Rate per Ton (ETB)"
+  },
+  {
+   "default": "0",
+   "fieldname": "penalty_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Penalty Amount (ETB)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "recovered_amount",
+   "fieldtype": "Currency",
+   "label": "Recovered Amount (ETB)"
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cement",
+ "name": "Cement Penalty",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

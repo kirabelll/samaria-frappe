@@ -1,0 +1,165 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:MSI-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "medical_request",
+  "status",
+  "cb_dispatch",
+  "issued_date",
+  "delivery_method",
+  "sb_recipient",
+  "receiver_name",
+  "receiver_phone",
+  "signed_proof",
+  "sb_items",
+  "items",
+  "sb_totals",
+  "total_amount",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Customer / Pharmacy",
+   "reqd": 1
+  },
+  {
+   "fieldname": "medical_request",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Medical Request Ref",
+   "options": "Medical Request"
+  },
+  {
+   "default": "Issued",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Issue Status",
+   "options": "Issued\nDelivered\nReturned"
+  },
+  {
+   "fieldname": "cb_dispatch",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "issued_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Issued Date & Time",
+   "reqd": 1
+  },
+  {
+   "default": "Warehouse Pickup",
+   "fieldname": "delivery_method",
+   "fieldtype": "Select",
+   "label": "Delivery Method",
+   "options": "Warehouse Pickup\nDirect Delivery\nCourier"
+  },
+  {
+   "fieldname": "sb_recipient",
+   "fieldtype": "Section Break",
+   "label": "Receiver & Delivery Proof"
+  },
+  {
+   "fieldname": "receiver_name",
+   "fieldtype": "Data",
+   "label": "Receiver Full Name"
+  },
+  {
+   "fieldname": "receiver_phone",
+   "fieldtype": "Phone",
+   "label": "Receiver Phone"
+  },
+  {
+   "fieldname": "signed_proof",
+   "fieldtype": "Attach Image",
+   "label": "Signed Delivery / Gate Pass Proof"
+  },
+  {
+   "fieldname": "sb_items",
+   "fieldtype": "Section Break",
+   "label": "Issued Medicine Batches"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Medical Store Issue Item"
+  },
+  {
+   "fieldname": "sb_totals",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Total Issue Value (ETB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Pharmacist / Dispensing Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Medical",
+ "name": "Medical Store Issue",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Medical Pharmacist",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

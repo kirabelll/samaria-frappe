@@ -1,0 +1,99 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"_f4j1\",\"type\":\"header\",\"data\":{\"text\":\"Medical Operations\",\"level\":3}},{\"id\":\"_g7k2\",\"type\":\"card\",\"data\":{\"card_name\":\"Medical Store & Batch Management\"}}]",
+ "creation": "2026-09-28 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "heart",
+ "idx": 3,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Medical",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Batch",
+   "link_count": 0,
+   "link_to": "Medical Batch",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Request",
+   "link_count": 0,
+   "link_to": "Medical Request",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Store Issue",
+   "link_count": 0,
+   "link_to": "Medical Store Issue",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Medical Pricing",
+   "link_count": 0,
+   "link_to": "Medical Pricing",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Medical",
+ "name": "Medical",
+ "owner": "Administrator",
+ "public": 1,
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Medical Pharmacist"
+  },
+  {
+   "role": "Medical Druggist"
+  }
+ ],
+ "sequence_id": 3.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Medicine Batches",
+   "link_to": "Medical Batch",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Store Issues",
+   "link_to": "Medical Store Issue",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Pricing Formulas",
+   "link_to": "Medical Pricing",
+   "type": "DocType"
+  }
+ ],
+ "title": "Medical"
+}

@@ -1,0 +1,69 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"_f4j1\",\"type\":\"header\",\"data\":{\"text\":\"Aggregate Operations\",\"level\":3}},{\"id\":\"_g7k2\",\"type\":\"card\",\"data\":{\"card_name\":\"Aggregate Management\"}}]",
+ "creation": "2026-09-28 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "truck",
+ "idx": 1,
+ "indicator_color": "yellow",
+ "is_hidden": 0,
+ "label": "Aggregate",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Aggregate Delivery",
+   "link_count": 0,
+   "link_to": "Aggregate Delivery",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Aggregate Settlement",
+   "link_count": 0,
+   "link_to": "Aggregate Settlement",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Aggregate",
+ "name": "Aggregate",
+ "owner": "Administrator",
+ "public": 1,
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Aggregate Manager"
+  }
+ ],
+ "sequence_id": 1.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "New Dispatch",
+   "link_to": "Aggregate Delivery",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Settlements",
+   "link_to": "Aggregate Settlement",
+   "type": "DocType"
+  }
+ ],
+ "title": "Aggregate"
+}

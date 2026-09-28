@@ -1,0 +1,155 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:coupon_no",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "coupon_no",
+  "factory",
+  "cement_purchase",
+  "tonnage",
+  "status",
+  "cb_lifecycle",
+  "collected_by",
+  "collected_date",
+  "handed_over_to",
+  "handover_date",
+  "handover_proof",
+  "used_date",
+  "return_date",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "coupon_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Coupon Number / Serial",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "factory",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Factory",
+   "options": "Factory",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cement_purchase",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Cement Purchase Order",
+   "options": "Cement Purchase",
+   "reqd": 1
+  },
+  {
+   "default": "40",
+   "fieldname": "tonnage",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Tonnage / Quota (Tons)",
+   "reqd": 1
+  },
+  {
+   "default": "Collected",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Coupon Status",
+   "options": "Collected\nIn Custody\nHanded Over\nUsed\nReturned\nCancelled\nExpired\nLost"
+  },
+  {
+   "fieldname": "cb_lifecycle",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "collected_by",
+   "fieldtype": "Data",
+   "label": "Collected By (Staff)"
+  },
+  {
+   "fieldname": "collected_date",
+   "fieldtype": "Date",
+   "label": "Collected Date"
+  },
+  {
+   "fieldname": "handed_over_to",
+   "fieldtype": "Data",
+   "label": "Handed Over To (Driver/Agent)"
+  },
+  {
+   "fieldname": "handover_date",
+   "fieldtype": "Date",
+   "label": "Handover Date"
+  },
+  {
+   "fieldname": "handover_proof",
+   "fieldtype": "Attach Image",
+   "label": "Handover Signature / Proof"
+  },
+  {
+   "fieldname": "used_date",
+   "fieldtype": "Date",
+   "label": "Date Used at Factory"
+  },
+  {
+   "fieldname": "return_date",
+   "fieldtype": "Date",
+   "label": "Return Date (If unfulfilled)"
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cement",
+ "name": "Cement Coupon",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

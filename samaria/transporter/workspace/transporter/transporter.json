@@ -1,0 +1,123 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"_f4j1\",\"type\":\"header\",\"data\":{\"text\":\"Transporter & Fleet Operations\",\"level\":3}},{\"id\":\"_g7k2\",\"type\":\"card\",\"data\":{\"card_name\":\"Transporter Operations\"}}]",
+ "creation": "2026-09-28 12:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "package",
+ "idx": 4,
+ "indicator_color": "purple",
+ "is_hidden": 0,
+ "label": "Transporter",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transport Association",
+   "link_count": 0,
+   "link_to": "Transport Association",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transporter",
+   "link_count": 0,
+   "link_to": "Transporter",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Truck",
+   "link_count": 0,
+   "link_to": "Truck",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transporter Agreement",
+   "link_count": 0,
+   "link_to": "Transporter Agreement",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Transporter Recovery",
+   "link_count": 0,
+   "link_to": "Transporter Recovery",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Truck Payment",
+   "link_count": 0,
+   "link_to": "Truck Payment",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link"
+  }
+ ],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Transporter",
+ "name": "Transporter",
+ "owner": "Administrator",
+ "public": 1,
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Transporter Coordinator"
+  }
+ ],
+ "sequence_id": 4.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Transporters",
+   "link_to": "Transporter",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Trucks",
+   "link_to": "Truck",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Rate Agreements",
+   "link_to": "Transporter Agreement",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Payment Sheets",
+   "link_to": "Truck Payment",
+   "type": "DocType"
+  }
+ ],
+ "title": "Transporter"
+}

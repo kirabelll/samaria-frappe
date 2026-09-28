@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:WB-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "lifting",
+  "weighbridge_type",
+  "truck_plate_no",
+  "weighbridge_date",
+  "cb_weights",
+  "gross_weight",
+  "tare_weight",
+  "net_weight",
+  "sb_proof",
+  "operator_name",
+  "proof_image",
+  "verified"
+ ],
+ "fields": [
+  {
+   "fieldname": "lifting",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Cement Lifting",
+   "options": "Cement Lifting"
+  },
+  {
+   "default": "Factory",
+   "fieldname": "weighbridge_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Weighbridge Type",
+   "options": "Factory\nBuyer\nThird Party",
+   "reqd": 1
+  },
+  {
+   "fieldname": "truck_plate_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Truck Plate No",
+   "reqd": 1
+  },
+  {
+   "default": "Today",
+   "fieldname": "weighbridge_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Weighbridge Date & Time"
+  },
+  {
+   "fieldname": "cb_weights",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gross_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gross Weight (Tons / Kg)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tare_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Tare Weight (Tons / Kg)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "net_weight",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Net Weight (Tons / Kg)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_proof",
+   "fieldtype": "Section Break",
+   "label": "Verification & Evidence"
+  },
+  {
+   "fieldname": "operator_name",
+   "fieldtype": "Data",
+   "label": "Scale Operator Name"
+  },
+  {
+   "fieldname": "proof_image",
+   "fieldtype": "Attach Image",
+   "label": "Scale Ticket / Photo"
+  },
+  {
+   "default": "0",
+   "fieldname": "verified",
+   "fieldtype": "Check",
+   "label": "Ticket Verified"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cement",
+ "name": "Cement Weighbridge",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Weighbridge Operator",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

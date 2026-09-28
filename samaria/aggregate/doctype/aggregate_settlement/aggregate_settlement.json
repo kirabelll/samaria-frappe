@@ -1,0 +1,203 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:AGS-{YYYY}-{####}",
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "transporter",
+  "period_from",
+  "period_to",
+  "status",
+  "cb_summary",
+  "total_dispatches",
+  "total_loaded_volume",
+  "total_delivered_volume",
+  "total_shortage",
+  "sb_financial",
+  "total_gross_fee",
+  "total_shortage_deduction",
+  "total_net_payment",
+  "cb_deductions",
+  "association_rate",
+  "association_amount",
+  "recovery_deduction",
+  "final_payable",
+  "sb_deliveries",
+  "deliveries"
+ ],
+ "fields": [
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transporter",
+   "options": "Transporter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "period_from",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Period From",
+   "reqd": 1
+  },
+  {
+   "fieldname": "period_to",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Period To",
+   "reqd": 1
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nVerified\nApproved\nSettled\nPaid"
+  },
+  {
+   "fieldname": "cb_summary",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_dispatches",
+   "fieldtype": "Int",
+   "label": "Total Dispatches",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_loaded_volume",
+   "fieldtype": "Float",
+   "label": "Total Loaded Volume (m³)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_delivered_volume",
+   "fieldtype": "Float",
+   "label": "Total Delivered Volume (m³)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_shortage",
+   "fieldtype": "Float",
+   "label": "Total Shortage (m³)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_financial",
+   "fieldtype": "Section Break",
+   "label": "Financial Totals & Calculations"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_gross_fee",
+   "fieldtype": "Currency",
+   "label": "Total Gross Transport Fee",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_shortage_deduction",
+   "fieldtype": "Currency",
+   "label": "Total Shortage Deduction",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "total_net_payment",
+   "fieldtype": "Currency",
+   "label": "Net Transport Fee",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_deductions",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "association_rate",
+   "fieldtype": "Percent",
+   "label": "Association Fee (%)"
+  },
+  {
+   "default": "0",
+   "fieldname": "association_amount",
+   "fieldtype": "Currency",
+   "label": "Association Deduction (ETB)",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "recovery_deduction",
+   "fieldtype": "Currency",
+   "label": "Transporter Claim / Recovery Deduction (ETB)"
+  },
+  {
+   "default": "0",
+   "fieldname": "final_payable",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Final Net Payable (ETB)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb_deliveries",
+   "fieldtype": "Section Break",
+   "label": "Dispatched Deliveries Included"
+  },
+  {
+   "fieldname": "deliveries",
+   "fieldtype": "Table",
+   "label": "Deliveries",
+   "options": "Aggregate Settlement Item"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Aggregate",
+ "name": "Aggregate Settlement",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Aggregate Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,55 @@
+{
+ "actions": [],
+ "creation": "2026-09-28 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "transport_rate",
+  "aggregate_value",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item / Material Code",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "transport_rate",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Transport Rate (ETB / m³ or Ton)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "aggregate_value",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Material Value for Shortage (ETB / Unit)"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description / Specification"
+  }
+ ],
+ "istable": 1,
+ "modified": "2026-09-28 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Transporter",
+ "name": "Transporter Agreement Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC"
+}
