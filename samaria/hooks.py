@@ -4,13 +4,20 @@ app_publisher = "Samaria ERP Team"
 app_description = "Specialized Frappe v15 app for Aggregate, Cement, Medical, and Transporter operations"
 app_email = "info@samariaerp.com"
 app_license = "mit"
+required_apps = []
 
 # Includes in <head>
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/samaria/css/samaria.css"
-# app_include_js = "/assets/samaria/js/samaria.js"
+# app_include_css = "/assets/samaria/css/samaria.bundle.css"
+# app_include_js = "/assets/samaria/js/samaria.bundle.js"
+
+# Home Pages
+# ----------
+
+# application home page (will override Website Settings)
+home_page = "index"
 
 # Document Events
 # ---------------
@@ -38,12 +45,14 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"daily": [
-# 		"samaria.cement.doctype.cement_balance.cement_balance.sync_balances",
-# 		"samaria.medical.doctype.medical_batch.medical_batch.check_expiries"
-# 	]
-# }
+scheduler_events = {
+	"daily": [
+		"samaria.tasks.cron.daily"
+	],
+	"hourly": [
+		"samaria.tasks.cron.hourly"
+	]
+}
 
 # Fixtures
 # --------

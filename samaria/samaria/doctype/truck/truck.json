@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:plate_no",
+ "creation": "2026-09-02 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_truck",
+  "plate_no",
+  "transporter",
+  "transporter_name",
+  "column_break_1",
+  "status",
+  "truck_type",
+  "capacity",
+  "capacity_unit",
+  "section_driver",
+  "driver_name",
+  "driver_phone",
+  "column_break_2",
+  "owner_name",
+  "owner_tin"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_truck",
+   "fieldtype": "Section Break",
+   "label": "Truck Information"
+  },
+  {
+   "fieldname": "plate_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plate Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "transporter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Transporter / Supplier",
+   "options": "Supplier",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "transporter.supplier_name",
+   "fieldname": "transporter_name",
+   "fieldtype": "Data",
+   "label": "Transporter Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nInactive\nMaintenance"
+  },
+  {
+   "default": "Trailer",
+   "fieldname": "truck_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Truck Type",
+   "options": "Trailer\nTruck\nPickup\nDump Truck"
+  },
+  {
+   "fieldname": "capacity",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Holding Capacity (m³ / Tons)",
+   "reqd": 1
+  },
+  {
+   "default": "m3",
+   "fieldname": "capacity_unit",
+   "fieldtype": "Select",
+   "label": "Capacity Unit",
+   "options": "m3\nquintal\nton"
+  },
+  {
+   "fieldname": "section_driver",
+   "fieldtype": "Section Break",
+   "label": "Driver & Owner Details"
+  },
+  {
+   "fieldname": "driver_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Driver Name"
+  },
+  {
+   "fieldname": "driver_phone",
+   "fieldtype": "Data",
+   "label": "Driver Phone"
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "owner_name",
+   "fieldtype": "Data",
+   "label": "Owner Name"
+  },
+  {
+   "fieldname": "owner_tin",
+   "fieldtype": "Data",
+   "label": "Owner TIN"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-02 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Truck",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

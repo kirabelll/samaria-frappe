@@ -1,0 +1,122 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-09-15 12:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "delivery",
+  "dispatch_date",
+  "pad_number",
+  "truck",
+  "loaded_volume",
+  "delivered_volume",
+  "shortage_volume",
+  "transport_rate",
+  "gross_truck_fee",
+  "shortage_deduction",
+  "net_truck_payment"
+ ],
+ "fields": [
+  {
+   "fieldname": "delivery",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Aggregate Delivery",
+   "options": "Aggregate Delivery",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "delivery.dispatch_date",
+   "fieldname": "dispatch_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.pad_number",
+   "fieldname": "pad_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Pad No",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.truck",
+   "fieldname": "truck",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Truck",
+   "options": "Truck",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.loaded_volume",
+   "fieldname": "loaded_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Loaded (m³)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.delivered_volume",
+   "fieldname": "delivered_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Delivered (m³)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.shortage_volume",
+   "fieldname": "shortage_volume",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Shortage (m³)",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.transport_rate",
+   "fieldname": "transport_rate",
+   "fieldtype": "Currency",
+   "label": "Rate",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.gross_truck_fee",
+   "fieldname": "gross_truck_fee",
+   "fieldtype": "Currency",
+   "label": "Gross Fee",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.shortage_deduction",
+   "fieldname": "shortage_deduction",
+   "fieldtype": "Currency",
+   "label": "Shortage Ded.",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "delivery.net_truck_payment",
+   "fieldname": "net_truck_payment",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Net Payable",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-09-15 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Samaria",
+ "name": "Aggregate Settlement Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

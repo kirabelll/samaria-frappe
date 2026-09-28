@@ -1,4 +1,4 @@
-# Samaria (v15)
+# Samaria (Version-15)
 
 **Samaria ERP Specialized Operations App for Frappe Framework Version 15.**
 

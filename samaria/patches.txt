@@ -1,1 +1,2 @@
 # Patches for Samaria
+samaria.patches.v1_0.organize_samaria_workspaces
