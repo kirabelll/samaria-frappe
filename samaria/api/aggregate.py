@@ -1,22 +1,21 @@
-# Copyright (c) 2026, Samaria ERP Team and contributors
-# For license information, please see license.txt
-
+# -*- coding: utf-8 -*-
+"""
+Samaria Aggregate API
+Exposes aggregate delivery and settlement query endpoints.
+Frappe v15
+"""
 import frappe
-from frappe import _
 from frappe.utils import flt
+
 
 @frappe.whitelist()
 def get_unsettled_deliveries(transporter, from_date=None, to_date=None):
-	"""
-	Fetch all submitted, delivered or verified Aggregate Deliveries
-	for a given transporter that have not been settled yet.
-	"""
+	"""Return submitted, un-settled Aggregate Deliveries for a transporter."""
 	filters = {
 		"transporter": transporter,
-		"docstatus": 1,
-		"status": ["in", ["Dispatched", "Delivered", "Verified"]]
+		"status": ["in", ["Dispatched", "Delivered", "Verified"]],
+		"docstatus": 1
 	}
-
 	if from_date and to_date:
 		filters["dispatch_date"] = ["between", [from_date, to_date]]
 	elif from_date:
@@ -24,51 +23,83 @@ def get_unsettled_deliveries(transporter, from_date=None, to_date=None):
 	elif to_date:
 		filters["dispatch_date"] = ["<=", to_date]
 
-	deliveries = frappe.get_all(
+	return frappe.get_all(
 		"Aggregate Delivery",
 		filters=filters,
 		fields=[
-			"name",
-			"dispatch_date",
-			"truck",
-			"customer",
-			"supplier",
-			"item_name",
-			"loaded_volume",
-			"delivered_volume",
-			"shortage_volume",
-			"transport_rate",
-			"aggregate_value",
-			"gross_truck_fee",
-			"shortage_deduction",
-			"net_truck_payment",
+			"name", "dispatch_date", "pad_number", "truck",
+			"customer", "customer_name",
+			"loaded_volume", "delivered_volume", "shortage_volume",
+			"transport_rate", "aggregate_value", "customer_price",
+			"gross_truck_fee", "shortage_deduction", "net_truck_payment",
+			"customer_receivable", "supplier_payable", "net_profit_amount",
 			"status"
 		],
 		order_by="dispatch_date asc"
 	)
-	return deliveries
 
 
 @frappe.whitelist()
-def get_aggregate_analytics():
-	"""
-	Summary statistics for the Aggregate dashboard.
-	"""
-	total_dispatches = frappe.db.count("Aggregate Delivery", {"docstatus": 1})
-	total_volume = frappe.db.sql("""
-		SELECT 
-			COALESCE(SUM(loaded_volume), 0) as total_loaded,
-			COALESCE(SUM(delivered_volume), 0) as total_delivered,
-			COALESCE(SUM(shortage_volume), 0) as total_shortage,
-			COALESCE(SUM(net_truck_payment), 0) as total_paid
-		FROM `tabAggregate Delivery`
-		WHERE docstatus = 1
-	""", as_dict=True)[0]
+def get_aggregate_analytics(customer=None, from_date=None, to_date=None):
+	"""Return aggregate summary statistics."""
+	if not frappe.db.table_exists("tabAggregate Delivery"):
+		return {}
 
-	return {
-		"total_dispatches": total_dispatches,
-		"total_loaded_volume": flt(total_volume.total_loaded, 2),
-		"total_delivered_volume": flt(total_volume.total_delivered, 2),
-		"total_shortage": flt(total_volume.total_shortage, 2),
-		"total_paid_transport": flt(total_volume.total_paid, 2)
-	}
+	conds = ["docstatus < 2"]
+	vals  = {}
+	if customer:
+		conds.append("customer = %(customer)s"); vals["customer"] = customer
+	if from_date:
+		conds.append("dispatch_date >= %(from_date)s"); vals["from_date"] = from_date
+	if to_date:
+		conds.append("dispatch_date <= %(to_date)s");   vals["to_date"]   = to_date
+
+	result = frappe.db.sql(f"""
+		SELECT
+			COUNT(name)                          AS total_dispatches,
+			COALESCE(SUM(loaded_volume),    0)   AS total_loaded,
+			COALESCE(SUM(delivered_volume), 0)   AS total_delivered,
+			COALESCE(SUM(shortage_volume),  0)   AS total_shortage,
+			COALESCE(SUM(net_truck_payment),0)   AS total_net_transport,
+			COALESCE(SUM(net_profit_amount),0)   AS total_net_profit
+		FROM `tabAggregate Delivery`
+		WHERE {" AND ".join(conds)}
+	""", vals, as_dict=True)
+
+	if result:
+		r = result[0]
+		return {
+			"total_dispatches":    r.total_dispatches or 0,
+			"total_loaded_m3":     round(flt(r.total_loaded),    1),
+			"total_delivered_m3":  round(flt(r.total_delivered), 1),
+			"total_shortage_m3":   round(flt(r.total_shortage),  1),
+			"total_net_transport": round(flt(r.total_net_transport), 2),
+			"total_net_profit":    round(flt(r.total_net_profit),    2),
+		}
+	return {}
+
+
+@frappe.whitelist()
+def get_deliveries_by_transporter(from_date=None, to_date=None):
+	"""Return delivery counts and totals grouped by transporter."""
+	if not frappe.db.table_exists("tabAggregate Delivery"):
+		return []
+
+	conds = ["docstatus < 2"]
+	vals  = {}
+	if from_date:
+		conds.append("dispatch_date >= %(from_date)s"); vals["from_date"] = from_date
+	if to_date:
+		conds.append("dispatch_date <= %(to_date)s");   vals["to_date"]   = to_date
+
+	return frappe.db.sql(f"""
+		SELECT
+			COALESCE(transporter_name, transporter) AS transporter_name,
+			COUNT(name)                              AS total_trips,
+			COALESCE(SUM(delivered_volume), 0)       AS delivered_m3,
+			COALESCE(SUM(net_truck_payment), 0)      AS total_payment
+		FROM `tabAggregate Delivery`
+		WHERE {" AND ".join(conds)}
+		GROUP BY transporter
+		ORDER BY total_trips DESC
+	""", vals, as_dict=True)

@@ -1,23 +1,19 @@
 {
  "creation": "2026-09-02 12:00:00.000000",
- "docstatus": 0,
  "doctype": "Page",
- "icon": "layout-dashboard",
- "idx": 0,
- "modified": "2026-09-02 12:00:00.000000",
- "modified_by": "Administrator",
  "module": "Samaria",
  "name": "samaria_dashboard",
- "owner": "Administrator",
  "page_name": "samaria_dashboard",
  "roles": [
-  {
-   "role": "System Manager"
-  },
-  {
-   "role": "All"
-  }
+  {"role": "System Manager"},
+  {"role": "Aggregate Manager"},
+  {"role": "Cement Manager"},
+  {"role": "Medical Pharmacist"},
+  {"role": "Transporter Coordinator"}
  ],
  "standard": "Yes",
- "title": "Samaria Executive Dashboard"
+ "title": "Samaria Executive Dashboard",
+ "modified": "2026-09-15 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator"
 }

@@ -1,322 +1,228 @@
 /**
- * Samaria Executive Dashboard Desk Page Controller
- * Frappe Framework Version-15
+ * Samaria Executive Dashboard — Desk Page Controller
+ * Frappe v15
  */
 
-frappe.pages['samaria_dashboard'].on_page_load = function(wrapper) {
-	var page = frappe.ui.make_app_page({
+frappe.pages["samaria_dashboard"].on_page_load = function (wrapper) {
+	const page = frappe.ui.make_app_page({
 		parent: wrapper,
-		title: __('Samaria Executive Dashboard'),
+		title: __("Samaria Executive Dashboard"),
 		single_column: true
 	});
-
 	frappe.breadcrumbs.add("Samaria");
 	new SamariaDashboard(page);
 };
 
 class SamariaDashboard {
 	constructor(page) {
-		this.page = page;
-		this.filters = {
-			customer: null,
-			from_date: null,
-			to_date: null
-		};
+		this.page    = page;
+		this.filters = { customer: null, from_date: null, to_date: null };
 		this.init();
 	}
 
 	init() {
-		this.setup_actions();
-		this.setup_filter_fields();
-		this.render_layout();
+		this._setup_actions();
+		this._setup_filters();
+		this._render_skeleton();
 		this.refresh();
 	}
 
-	setup_actions() {
-		// Quick Action Buttons
-		this.page.set_primary_action(
-			__('New Dispatch'),
-			() => frappe.new_doc('Aggregate Delivery'),
-			'add'
-		);
+	// ── Actions ─────────────────────────────────────────────────────────
+	_setup_actions() {
+		this.page.set_primary_action(__("New Dispatch"), () => frappe.new_doc("Aggregate Delivery"), "add");
+		this.page.add_secondary_action(__("New Cement Lifting"), () => frappe.new_doc("Cement Lifting"));
 
-		this.page.add_secondary_action(
-			__('New Cement Lifting'),
-			() => frappe.new_doc('Cement Lifting')
-		);
+		this.page.add_inner_button(__("New Sales Agreement"), () => frappe.new_doc("Sales Agreement"), __("Quick Actions"));
+		this.page.add_inner_button(__("New Medical Request"),  () => frappe.new_doc("Medical Request"),  __("Quick Actions"));
 
-		this.page.add_inner_button(__('New Sales Agreement'), () => {
-			frappe.new_doc('Sales Agreement');
-		}, __('Quick Actions'));
-
-		this.page.add_inner_button(__('Open Project Reports'), () => {
-			frappe.set_route('query-report', 'Aggregate Project Dispatch Report');
-		}, __('Reports'));
-
-		this.page.add_inner_button(__('Cement Lifting Report'), () => {
-			frappe.set_route('query-report', 'Cement Project Lifting and Balance Report');
-		}, __('Reports'));
-
-		this.page.add_inner_button(__('Medical Inventory Report'), () => {
-			frappe.set_route('query-report', 'Medical Project Inventory Report');
-		}, __('Reports'));
-
-		this.page.add_inner_button(__('Financial Summary Report'), () => {
-			frappe.set_route('query-report', 'Project Financial Summary Report');
-		}, __('Reports'));
-	}
-
-	setup_filter_fields() {
-		// Customer / Project Filter
-		this.customer_field = this.page.add_field({
-			fieldname: 'customer',
-			label: __('Project / Customer'),
-			fieldtype: 'Link',
-			options: 'Customer',
-			change: () => {
-				this.filters.customer = this.customer_field.get_value();
-				this.refresh();
-			}
-		});
-
-		// From Date Filter
-		this.from_date_field = this.page.add_field({
-			fieldname: 'from_date',
-			label: __('From Date'),
-			fieldtype: 'Date',
-			change: () => {
-				this.filters.from_date = this.from_date_field.get_value();
-				this.refresh();
-			}
-		});
-
-		// To Date Filter
-		this.to_date_field = this.page.add_field({
-			fieldname: 'to_date',
-			label: __('To Date'),
-			fieldtype: 'Date',
-			change: () => {
-				this.filters.to_date = this.to_date_field.get_value();
-				this.refresh();
-			}
+		[
+			[__("Aggregate Dispatch Report"),      "Aggregate Project Dispatch Report"],
+			[__("Cement Lifting Report"),           "Cement Project Lifting and Balance Report"],
+			[__("Medical Inventory Report"),        "Medical Project Inventory Report"],
+			[__("Financial Summary Report"),        "Project Financial Summary Report"],
+		].forEach(([label, report]) => {
+			this.page.add_inner_button(label, () => frappe.set_route("query-report", report), __("Reports"));
 		});
 	}
 
-	render_layout() {
-		this.$container = $(`
-			<div class="samaria-dashboard-container">
-				<!-- KPI Cards Row -->
-				<div class="samaria-kpi-grid" id="samaria-kpis">
-					<div class="text-muted">${__('Loading KPI metrics...')}</div>
-				</div>
+	// ── Filter fields ────────────────────────────────────────────────────
+	_setup_filters() {
+		this._f_customer = this.page.add_field({
+			fieldname: "customer", label: __("Customer / Project"),
+			fieldtype: "Link", options: "Customer",
+			change: () => { this.filters.customer = this._f_customer.get_value(); this.refresh(); }
+		});
+		this._f_from = this.page.add_field({
+			fieldname: "from_date", label: __("From Date"), fieldtype: "Date",
+			change: () => { this.filters.from_date = this._f_from.get_value(); this.refresh(); }
+		});
+		this._f_to = this.page.add_field({
+			fieldname: "to_date", label: __("To Date"), fieldtype: "Date",
+			change: () => { this.filters.to_date = this._f_to.get_value(); this.refresh(); }
+		});
+	}
 
-				<!-- Charts Row -->
-				<div class="samaria-charts-grid">
+	// ── Skeleton layout ──────────────────────────────────────────────────
+	_render_skeleton() {
+		this.$wrap = $(`
+			<div class="samaria-db">
+				<div class="samaria-kpi-row" id="s-kpis">
+					<p class="text-muted">${__("Loading KPIs…")}</p>
+				</div>
+				<div class="samaria-chart-row">
 					<div class="samaria-chart-card">
-						<h4>${__('Aggregate Dispatch Volume Trend (m³)')}</h4>
-						<div id="chart-aggregate-trend" style="min-height: 240px;"></div>
+						<h4 class="samaria-card-title">${__("Aggregate Dispatch Trend (m³)")}</h4>
+						<div id="s-chart-agg" style="min-height:220px;"></div>
 					</div>
 					<div class="samaria-chart-card">
-						<h4>${__('Cement Lifting Distribution by Factory')}</h4>
-						<div id="chart-cement-factory" style="min-height: 240px;"></div>
+						<h4 class="samaria-card-title">${__("Cement Lifted by Factory")}</h4>
+						<div id="s-chart-cem" style="min-height:220px;"></div>
 					</div>
 				</div>
-
-				<!-- Tables Row -->
-				<div class="samaria-tables-grid">
+				<div class="samaria-table-row">
 					<div class="samaria-table-card">
-						<h4>
-							<span>${__('Recent Aggregate Deliveries')}</span>
-							<a href="/app/aggregate-delivery" class="text-muted" style="font-size: 0.8rem;">${__('View All')} &rarr;</a>
+						<h4 class="samaria-card-title">
+							${__("Recent Aggregate Deliveries")}
+							<a href="/app/aggregate-delivery" class="samaria-viewall">${__("View All →")}</a>
 						</h4>
-						<div id="recent-aggregate-table"></div>
+						<div id="s-tbl-agg"></div>
 					</div>
 					<div class="samaria-table-card">
-						<h4>
-							<span>${__('Recent Cement Liftings')}</span>
-							<a href="/app/cement-lifting" class="text-muted" style="font-size: 0.8rem;">${__('View All')} &rarr;</a>
+						<h4 class="samaria-card-title">
+							${__("Recent Cement Liftings")}
+							<a href="/app/cement-lifting" class="samaria-viewall">${__("View All →")}</a>
 						</h4>
-						<div id="recent-cement-table"></div>
+						<div id="s-tbl-cem"></div>
 					</div>
 				</div>
 			</div>
 		`).appendTo(this.page.main);
 	}
 
+	// ── Refresh ──────────────────────────────────────────────────────────
 	refresh() {
 		frappe.call({
-			method: 'samaria.samaria.page.samaria_dashboard.samaria_dashboard.get_dashboard_data',
-			args: {
-				customer: this.filters.customer,
-				from_date: this.filters.from_date,
-				to_date: this.filters.to_date
-			},
+			method: "samaria.samaria.page.samaria_dashboard.samaria_dashboard.get_dashboard_data",
+			args: this.filters,
 			callback: (r) => {
-				if (r.message) {
-					this.render_kpis(r.message.metrics);
-					this.render_charts(r.message.charts);
-					this.render_tables(r.message);
-				}
+				if (!r.message) return;
+				const d = r.message;
+				this._render_kpis(d.metrics);
+				this._render_charts(d.charts);
+				this._render_tables(d);
 			}
 		});
 	}
 
-	render_kpis(metrics) {
-		const m = metrics;
-		const html = `
-			<div class="samaria-kpi-card orange">
-				<div class="samaria-kpi-title">
-					<span>${__('Aggregate Volume')}</span>
-					<span class="indicator orange">${m.aggregate.total_dispatches} ${__('Loads')}</span>
-				</div>
-				<div class="samaria-kpi-value">${m.aggregate.delivered_volume} <span style="font-size: 1rem; font-weight: 500;">m³</span></div>
-				<div class="samaria-kpi-subtext">
-					<span>${__('Net Margin:')} <strong>ETB ${format_number(m.aggregate.net_profit, null, 2)}</strong></span>
-				</div>
-			</div>
+	// ── KPI Cards ────────────────────────────────────────────────────────
+	_render_kpis(m) {
+		const fmt = (n) => format_number(n, null, 2);
+		const cards = [
+			{
+				color: "orange",
+				title: __("Aggregate Volume"), badge: `${m.aggregate.total_dispatches} ${__("Loads")}`,
+				value: `${m.aggregate.delivered_volume} <small>m³</small>`,
+				sub:   `${__("Net Margin:")} <b>ETB ${fmt(m.aggregate.net_profit)}</b>`
+			},
+			{
+				color: "green",
+				title: __("Cement Lifted"), badge: `${m.cement.total_liftings} ${__("Tickets")}`,
+				value: `${m.cement.total_weight_tons} <small>Tons</small>`,
+				sub:   `${__("Shortage Penalty:")} <b>ETB ${fmt(m.cement.total_penalties)}</b>`
+			},
+			{
+				color: "red",
+				title: __("Medical Batches"), badge: `${m.medical.quarantined_batches} ${__("Quarantine")}`,
+				value: `${m.medical.active_batches} <small>${__("Active")}</small>`,
+				sub:   `${__("Near Expiry:")} <b>${m.medical.near_expiry_batches}</b> | ${__("Pending Req:")} <b>${m.medical.pending_requests}</b>`
+			},
+			{
+				color: "purple",
+				title: __("Active Contracts"), badge: `${m.commercial.active_agreements} ${__("Active")}`,
+				value: `<small>ETB</small> ${fmt(m.commercial.total_contract_value)}`,
+				sub:   __("Aggregate, Cement &amp; Medical Agreements")
+			},
+		];
 
-			<div class="samaria-kpi-card emerald">
-				<div class="samaria-kpi-title">
-					<span>${__('Cement Lifted')}</span>
-					<span class="indicator green">${m.cement.total_liftings} ${__('Tickets')}</span>
+		const html = cards.map(c => `
+			<div class="samaria-kpi-card samaria-kpi-${c.color}">
+				<div class="samaria-kpi-head">
+					<span class="samaria-kpi-title">${c.title}</span>
+					<span class="indicator ${c.color}">${c.badge}</span>
 				</div>
-				<div class="samaria-kpi-value">${m.cement.total_weight_tons} <span style="font-size: 1rem; font-weight: 500;">Tons</span></div>
-				<div class="samaria-kpi-subtext">
-					<span>${__('Shortage Penalty:')} <strong>ETB ${format_number(m.cement.total_penalties, null, 2)}</strong></span>
-				</div>
+				<div class="samaria-kpi-value">${c.value}</div>
+				<div class="samaria-kpi-sub">${c.sub}</div>
 			</div>
-
-			<div class="samaria-kpi-card rose">
-				<div class="samaria-kpi-title">
-					<span>${__('Medical Batches')}</span>
-					<span class="indicator red">${m.medical.quarantined_batches} ${__('Quarantine')}</span>
-				</div>
-				<div class="samaria-kpi-value">${m.medical.active_batches} <span style="font-size: 1rem; font-weight: 500;">Active</span></div>
-				<div class="samaria-kpi-subtext">
-					<span>${__('Expiring <90 Days:')} <strong>${m.medical.near_expiry_batches}</strong> | ${__('Pending Req:')} <strong>${m.medical.pending_requests}</strong></span>
-				</div>
-			</div>
-
-			<div class="samaria-kpi-card purple">
-				<div class="samaria-kpi-title">
-					<span>${__('Active Contracts')}</span>
-					<span class="indicator purple">${m.commercial.active_agreements} ${__('Active')}</span>
-				</div>
-				<div class="samaria-kpi-value"><span style="font-size: 1.1rem; font-weight: 600;">ETB</span> ${format_number(m.commercial.total_contract_value, null, 2)}</div>
-				<div class="samaria-kpi-subtext">
-					<span>${__('Aggregate, Cement & Medical Agreements')}</span>
-				</div>
-			</div>
-		`;
-		this.$container.find('#samaria-kpis').html(html);
+		`).join("");
+		this.$wrap.find("#s-kpis").html(html);
 	}
 
-	render_charts(charts) {
-		// 1. Aggregate Trend Chart
-		const trendData = charts.aggregate_trend;
-		const $trendWrapper = this.$container.find('#chart-aggregate-trend');
-		$trendWrapper.empty();
-
-		if (trendData.labels && trendData.labels.length > 0) {
-			new frappe.Chart($trendWrapper[0], {
-				data: trendData,
-				type: 'line',
-				height: 220,
-				colors: ['#f97316'],
+	// ── Charts ───────────────────────────────────────────────────────────
+	_render_charts(charts) {
+		// Aggregate trend
+		const $agg = this.$wrap.find("#s-chart-agg").empty();
+		if (charts.aggregate_trend.labels.length) {
+			new frappe.Chart($agg[0], {
+				data: charts.aggregate_trend,
+				type: "line", height: 210,
+				colors: ["#f97316"],
 				lineOptions: { hideDots: 0, regionFill: 1 }
 			});
 		} else {
-			$trendWrapper.html(`<div class="text-muted text-center" style="padding: 4rem 0;">${__('No aggregate dispatch data in selected range')}</div>`);
+			$agg.html(`<p class="text-muted text-center" style="padding:4rem 0">${__("No data")}</p>`);
 		}
 
-		// 2. Cement Distribution Chart
-		const cementData = charts.cement_by_factory;
-		const $cementWrapper = this.$container.find('#chart-cement-factory');
-		$cementWrapper.empty();
-
-		if (cementData.labels && cementData.labels.length > 0) {
-			new frappe.Chart($cementWrapper[0], {
-				data: cementData,
-				type: 'donut',
-				height: 220,
-				colors: ['#10b981', '#06b6d4', '#3b82f6', '#8b5cf6', '#f59e0b']
+		// Cement by factory
+		const $cem = this.$wrap.find("#s-chart-cem").empty();
+		if (charts.cement_by_factory.labels.length) {
+			new frappe.Chart($cem[0], {
+				data: charts.cement_by_factory,
+				type: "donut", height: 210,
+				colors: ["#10b981","#06b6d4","#3b82f6","#8b5cf6","#f59e0b"]
 			});
 		} else {
-			$cementWrapper.html(`<div class="text-muted text-center" style="padding: 4rem 0;">${__('No cement lifting records found')}</div>`);
+			$cem.html(`<p class="text-muted text-center" style="padding:4rem 0">${__("No data")}</p>`);
 		}
 	}
 
-	render_tables(data) {
-		// Recent Dispatches Table
-		const $aggTable = this.$container.find('#recent-aggregate-table');
-		if (data.recent_dispatches && data.recent_dispatches.length > 0) {
-			let rows = data.recent_dispatches.map(d => `
+	// ── Tables ───────────────────────────────────────────────────────────
+	_render_tables(d) {
+		// Aggregate
+		const $at = this.$wrap.find("#s-tbl-agg");
+		if (d.recent_dispatches && d.recent_dispatches.length) {
+			const rows = d.recent_dispatches.map(r => `
 				<tr>
-					<td>
-						<a href="/app/aggregate-delivery/${d.name}"><strong>${d.name}</strong></a><br>
-						<small class="text-muted">${d.customer_name || ''}</small>
-					</td>
-					<td>${d.item_name || 'Aggregate'}<br><small class="text-muted">Pad: ${d.pad_number || '-'}</small></td>
-					<td><strong>${d.delivered_volume || 0}</strong> m³</td>
-					<td>
-						<span class="samaria-badge-sm ${d.status === 'Delivered' || d.status === 'Settled' ? 'green' : 'blue'}">
-							${d.status}
-						</span>
-					</td>
-				</tr>
-			`).join('');
-
-			$aggTable.html(`
-				<table class="samaria-dash-table">
-					<thead>
-						<tr>
-							<th>${__('Dispatch / Site')}</th>
-							<th>${__('Material')}</th>
-							<th>${__('Delivered')}</th>
-							<th>${__('Status')}</th>
-						</tr>
-					</thead>
-					<tbody>${rows}</tbody>
-				</table>
-			`);
+					<td><a href="/app/aggregate-delivery/${r.name}"><b>${r.name}</b></a><br>
+						<small class="text-muted">${r.customer_name || ""}</small></td>
+					<td>${r.item_name || "Aggregate"}<br>
+						<small class="text-muted">${__("Pad:")} ${r.pad_number || "-"}</small></td>
+					<td><b>${r.delivered_volume || 0}</b> m³</td>
+					<td><span class="indicator-pill ${["Delivered","Settled"].includes(r.status) ? "green" : "blue"} filterable">${r.status}</span></td>
+				</tr>`).join("");
+			$at.html(`<table class="table table-sm samaria-mini-table">
+				<thead><tr><th>${__("Dispatch")}</th><th>${__("Material")}</th><th>${__("Delivered")}</th><th>${__("Status")}</th></tr></thead>
+				<tbody>${rows}</tbody></table>`);
 		} else {
-			$aggTable.html(`<div class="text-muted text-center" style="padding: 2rem 0;">${__('No recent aggregate dispatches')}</div>`);
+			$at.html(`<p class="text-muted text-center" style="padding:2rem 0">${__("No recent dispatches")}</p>`);
 		}
 
-		// Recent Cement Liftings Table
-		const $cementTable = this.$container.find('#recent-cement-table');
-		if (data.recent_liftings && data.recent_liftings.length > 0) {
-			let rows = data.recent_liftings.map(c => `
+		// Cement
+		const $ct = this.$wrap.find("#s-tbl-cem");
+		if (d.recent_liftings && d.recent_liftings.length) {
+			const rows = d.recent_liftings.map(r => `
 				<tr>
-					<td>
-						<a href="/app/cement-lifting/${c.name}"><strong>${c.name}</strong></a><br>
-						<small class="text-muted">${c.customer_name || ''}</small>
-					</td>
-					<td>${c.factory || '-'}<br><small class="text-muted">${c.lifting_date || ''}</small></td>
-					<td><strong>${c.buyer_weighbridge_qty || 0}</strong> Tons</td>
-					<td>
-						<span class="samaria-badge-sm ${c.status === 'Delivered' || c.status === 'Verified' ? 'green' : 'blue'}">
-							${c.status}
-						</span>
-					</td>
-				</tr>
-			`).join('');
-
-			$cementTable.html(`
-				<table class="samaria-dash-table">
-					<thead>
-						<tr>
-							<th>${__('Lifting Ref / Buyer')}</th>
-							<th>${__('Factory / Date')}</th>
-							<th>${__('Weight')}</th>
-							<th>${__('Status')}</th>
-						</tr>
-					</thead>
-					<tbody>${rows}</tbody>
-				</table>
-			`);
+					<td><a href="/app/cement-lifting/${r.name}"><b>${r.name}</b></a><br>
+						<small class="text-muted">${r.customer_name || ""}</small></td>
+					<td>${r.factory || "-"}<br>
+						<small class="text-muted">${r.lifting_date || ""}</small></td>
+					<td><b>${r.buyer_weighbridge_qty || 0}</b> Tons</td>
+					<td><span class="indicator-pill ${["Delivered","Verified"].includes(r.status) ? "green" : "blue"} filterable">${r.status}</span></td>
+				</tr>`).join("");
+			$ct.html(`<table class="table table-sm samaria-mini-table">
+				<thead><tr><th>${__("Lifting")}</th><th>${__("Factory/Date")}</th><th>${__("Weight")}</th><th>${__("Status")}</th></tr></thead>
+				<tbody>${rows}</tbody></table>`);
 		} else {
-			$cementTable.html(`<div class="text-muted text-center" style="padding: 2rem 0;">${__('No recent cement liftings')}</div>`);
+			$ct.html(`<p class="text-muted text-center" style="padding:2rem 0">${__("No recent liftings")}</p>`);
 		}
 	}
 }
