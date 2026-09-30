@@ -1,186 +1,278 @@
 """
-Samaria API Module
-Exposes RESTful whitelisted endpoints for Samaria ERP v15 Integration
+Samaria v1 REST API
+Unified REST wrapper exposing all division endpoints with consistent response format
 """
+
 import frappe
 from frappe import _
-from frappe.utils import flt, getdate, nowdate, add_days
+from typing import Dict, Any, List, Optional
+from datetime import datetime
+
+from samaria.api import aggregate, cement, medical, transporter
 
 
-@frappe.whitelist(allow_guest=False)
-def ping():
-	"""Simple ping endpoint to verify Frappe v15 App API availability."""
-	return {
-		"status": "success",
-		"message": _("Samaria Frappe v15 App is running"),
-		"version": "15.0.0",
-		"user": frappe.session.user
-	}
+# ============================================================================
+# UTILITY FUNCTIONS
+# ============================================================================
+
+def api_response(success: bool = True, data: Any = None, message: str = None, error: str = None) -> Dict:
+    """Standardized API response format"""
+    response = {
+        "success": success,
+        "timestamp": datetime.now().isoformat(),
+    }
+    if data is not None:
+        response["data"] = data
+    if message:
+        response["message"] = message
+    if error:
+        response["error"] = error
+    return response
 
 
-@frappe.whitelist()
-def get_app_info():
-	"""Returns metadata and runtime configuration."""
-	return {
-		"app_name": "samaria",
-		"app_title": "Samaria",
-		"version": "1.0.0",
-		"divisions": ["Aggregate", "Cement", "Medical", "Commercial"]
-	}
+# ============================================================================
+# GENERAL ENDPOINTS
+# ============================================================================
 
-
-@frappe.whitelist()
-def get_dashboard_data(customer=None, from_date=None, to_date=None):
-	"""Proxy to samaria executive dashboard metrics."""
-	from samaria.samaria.page.samaria_dashboard.samaria_dashboard import get_dashboard_data as _get_data
-	return _get_data(customer=customer, from_date=from_date, to_date=to_date)
-
-
-# -------------------------------------------------------------
-# AGGREGATE API ENDPOINTS
-# -------------------------------------------------------------
-@frappe.whitelist()
-def get_aggregate_deliveries(status=None, customer=None, transporter=None, from_date=None, to_date=None, limit=50):
-	"""Query aggregate delivery dispatches with pricing breakdowns."""
-	filters = {}
-	if status:
-		filters["status"] = status
-	if customer:
-		filters["customer"] = customer
-	if transporter:
-		filters["transporter"] = transporter
-	if from_date and to_date:
-		filters["dispatch_date"] = ["between", [from_date, to_date]]
-	elif from_date:
-		filters["dispatch_date"] = [">=", from_date]
-	elif to_date:
-		filters["dispatch_date"] = ["<=", to_date]
-
-	return frappe.get_all(
-		"Aggregate Delivery",
-		filters=filters,
-		fields=[
-			"name", "naming_series", "customer", "customer_name",
-			"supplier", "supplier_name", "transporter", "transporter_name",
-			"truck", "truck_capacity", "item", "item_name",
-			"pad_number", "dispatch_date", "delivery_date", "status",
-			"loaded_volume", "delivered_volume", "shortage_volume", "billable_volume",
-			"transport_rate", "aggregate_value", "customer_price",
-			"gross_truck_fee", "shortage_deduction", "net_truck_payment",
-			"customer_receivable", "supplier_payable", "net_profit_amount"
-		],
-		order_by="dispatch_date desc, creation desc",
-		limit=flt(limit) or 50
-	)
-
-
-# -------------------------------------------------------------
-# CEMENT API ENDPOINTS
-# -------------------------------------------------------------
-@frappe.whitelist()
-def get_cement_liftings(status=None, customer=None, factory=None, from_date=None, to_date=None, limit=50):
-	"""Query cement lifting records with weighbridge & shortage details."""
-	filters = {}
-	if status:
-		filters["status"] = status
-	if customer:
-		filters["customer"] = customer
-	if factory:
-		filters["factory"] = factory
-	if from_date and to_date:
-		filters["lifting_date"] = ["between", [from_date, to_date]]
-	elif from_date:
-		filters["lifting_date"] = [">=", from_date]
-	elif to_date:
-		filters["lifting_date"] = ["<=", to_date]
-
-	return frappe.get_all(
-		"Cement Lifting",
-		filters=filters,
-		fields=[
-			"name", "purchase", "factory", "customer", "customer_name",
-			"truck", "self_transport", "self_plate_no", "self_driver_name",
-			"coupon", "delivery_note_no", "pod_number", "pad_number",
-			"lifting_date", "status",
-			"factory_weighbridge_ref", "factory_weight", "buyer_weighbridge_qty",
-			"shortage_qty", "shortage_penalty"
-		],
-		order_by="lifting_date desc, creation desc",
-		limit=flt(limit) or 50
-	)
+@frappe.whitelist(allow_guest=True)
+def ping() -> Dict:
+    """Health check endpoint"""
+    return api_response(data={"status": "ok", "app": "Samaria", "version": "1.0.0"})
 
 
 @frappe.whitelist()
-def get_cement_purchases(status=None, factory=None):
-	"""Query active cement purchase contracts and remaining balances."""
-	filters = {}
-	if status:
-		filters["status"] = status
-	if factory:
-		filters["factory"] = factory
-
-	return frappe.get_all(
-		"Cement Purchase",
-		filters=filters,
-		fields=[
-			"name", "factory", "cement_type", "quantity_tons",
-			"unit_price", "total_amount", "vat_rate", "vat_amount",
-			"paid_amount", "balance_remaining", "status", "payment_status", "purchase_date"
-		],
-		order_by="purchase_date desc"
-	)
+def get_app_info() -> Dict:
+    """Get application metadata"""
+    return api_response(data={
+        "app_name": "Samaria",
+        "version": "1.0.0",
+        "frappe_version": frappe.__version__,
+        "divisions": ["aggregate", "cement", "medical", "transporter"],
+        "user": frappe.session.user,
+        "company": frappe.defaults.get_user_default("Company"),
+    })
 
 
-# -------------------------------------------------------------
-# MEDICAL API ENDPOINTS
-# -------------------------------------------------------------
+# ============================================================================
+# AGGREGATE DIVISION
+# ============================================================================
+
 @frappe.whitelist()
-def get_medical_batches(status=None, item_code=None, warehouse=None):
-	"""Query medical batches with FEFO sorting and expiry info."""
-	filters = {}
-	if status:
-		filters["status"] = status
-	if item_code:
-		filters["item_code"] = item_code
-	if warehouse:
-		filters["warehouse"] = warehouse
-
-	return frappe.get_all(
-		"Medical Batch",
-		filters=filters,
-		fields=[
-			"name", "item_code", "item_name", "batch_no",
-			"status", "expiry_date", "days_to_expiry",
-			"quantity", "cost_price", "warehouse", "supplier", "received_date"
-		],
-		order_by="expiry_date asc"
-	)
+def get_unsettled_deliveries(customer: str = None, project: str = None, transporter: str = None) -> Dict:
+    """Get all unsettled aggregate deliveries"""
+    try:
+        data = aggregate.get_unsettled_deliveries(customer, project, transporter)
+        return api_response(data=data, message=f"Found {len(data)} unsettled deliveries")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_unsettled_deliveries")
+        return api_response(success=False, error=str(e))
 
 
 @frappe.whitelist()
-def get_medical_requests(status=None, customer=None):
-	"""Query medical customer requests."""
-	filters = {}
-	if status:
-		filters["status"] = status
-	if customer:
-		filters["customer"] = customer
+def get_aggregate_analytics(customer: str = None, from_date: str = None, to_date: str = None) -> Dict:
+    """Get aggregate division analytics"""
+    try:
+        data = aggregate.get_aggregate_analytics(customer, from_date, to_date)
+        return api_response(data=data)
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_aggregate_analytics")
+        return api_response(success=False, error=str(e))
 
-	requests = frappe.get_all(
-		"Medical Request",
-		filters=filters,
-		fields=[
-			"name", "customer", "customer_name", "license_no", "license_expiry",
-			"status", "priority", "request_date", "total_items_count", "total_amount"
-		],
-		order_by="request_date desc, creation desc"
-	)
 
-	for req in requests:
-		req["items"] = frappe.get_all(
-			"Medical Request Item",
-			filters={"parent": req["name"]},
-			fields=["item_code", "item_name", "qty", "unit", "unit_price", "total_amount", "batch_preference", "notes"]
-		)
+@frappe.whitelist()
+def get_deliveries_by_transporter(transporter: str, from_date: str = None, to_date: str = None) -> Dict:
+    """Get aggregate deliveries by transporter"""
+    try:
+        data = aggregate.get_deliveries_by_transporter(transporter, from_date, to_date)
+        return api_response(data=data, message=f"Found {len(data)} deliveries")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_deliveries_by_transporter")
+        return api_response(success=False, error=str(e))
 
-	return requests
+
+# ============================================================================
+# CEMENT DIVISION
+# ============================================================================
+
+@frappe.whitelist()
+def get_factory_balances(factory: str = None, show_exhausted: bool = False) -> Dict:
+    """Get cement factory balances"""
+    try:
+        data = cement.get_factory_balances(factory, show_exhausted)
+        return api_response(data=data, message=f"Found {len(data)} balance records")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_factory_balances")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def get_cement_analytics(factory: str = None, from_date: str = None, to_date: str = None) -> Dict:
+    """Get cement division analytics"""
+    try:
+        data = cement.get_cement_analytics(factory, from_date, to_date)
+        return api_response(data=data)
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_cement_analytics")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def get_liftings_by_factory(factory: str, from_date: str = None, to_date: str = None, customer: str = None) -> Dict:
+    """Get cement liftings by factory"""
+    try:
+        data = cement.get_liftings_by_factory(factory, from_date, to_date, customer)
+        return api_response(data=data, message=f"Found {len(data)} liftings")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_liftings_by_factory")
+        return api_response(success=False, error=str(e))
+
+
+# ============================================================================
+# MEDICAL DIVISION
+# ============================================================================
+
+@frappe.whitelist()
+def get_fefo_batches(item_code: str = None, min_qty: float = None) -> Dict:
+    """Get available medical batches in FEFO order"""
+    try:
+        data = medical.get_fefo_batches(item_code, min_qty)
+        return api_response(data=data, message=f"Found {len(data)} available batches")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_fefo_batches")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def create_store_issue_from_request(medical_request: str) -> Dict:
+    """Create Medical Store Issue from Medical Request with FEFO allocation"""
+    try:
+        store_issue_name = medical.create_store_issue_from_request(medical_request)
+        return api_response(
+            data={"store_issue": store_issue_name},
+            message=f"Store Issue {store_issue_name} created successfully"
+        )
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: create_store_issue_from_request")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def get_expiring_batches(days_threshold: int = 90) -> Dict:
+    """Get medical batches expiring within threshold"""
+    try:
+        data = medical.get_expiring_batches_report(days_threshold)
+        return api_response(data=data, message=f"Found {len(data)} batches expiring soon")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_expiring_batches")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def get_medical_inventory_summary(item_code: str = None) -> Dict:
+    """Get medical inventory summary by status"""
+    try:
+        data = medical.get_medical_inventory_summary(item_code)
+        return api_response(data=data)
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_medical_inventory_summary")
+        return api_response(success=False, error=str(e))
+
+
+# ============================================================================
+# TRANSPORTER DIVISION
+# ============================================================================
+
+@frappe.whitelist()
+def get_active_transport_rate(transporter: str, item_type: str, from_location: str = None, to_location: str = None) -> Dict:
+    """Get active transport rate from agreement"""
+    try:
+        rate = transporter.get_active_rate(transporter, item_type, from_location, to_location)
+        if rate:
+            return api_response(data={"rate": rate}, message="Active rate found")
+        else:
+            return api_response(success=False, error="No active agreement found for the given criteria")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_active_transport_rate")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def get_transporter_recovery_balance(transporter: str = None) -> Dict:
+    """Get transporter recovery outstanding balance"""
+    try:
+        data = transporter.get_transporter_recovery_balance(transporter)
+        return api_response(data=data, message=f"Found {len(data)} recovery records")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_transporter_recovery_balance")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def get_active_trucks(transporter: str = None) -> Dict:
+    """Get all active trucks"""
+    try:
+        data = transporter.get_active_trucks(transporter)
+        return api_response(data=data, message=f"Found {len(data)} active trucks")
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_active_trucks")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def get_transporter_summary(transporter: str = None, from_date: str = None, to_date: str = None) -> Dict:
+    """Get transporter performance summary"""
+    try:
+        data = transporter.get_transporter_summary(transporter, from_date, to_date)
+        return api_response(data=data)
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_transporter_summary")
+        return api_response(success=False, error=str(e))
+
+
+# ============================================================================
+# CROSS-DIVISION QUERIES
+# ============================================================================
+
+@frappe.whitelist()
+def get_customer_overview(customer: str, from_date: str = None, to_date: str = None) -> Dict:
+    """Get comprehensive customer overview across all divisions"""
+    try:
+        overview = {
+            "customer": customer,
+            "aggregate": aggregate.get_aggregate_analytics(customer, from_date, to_date),
+            "cement": cement.get_cement_analytics(None, from_date, to_date),  # Filter by customer in query
+            "medical": medical.get_medical_inventory_summary(),  # Filter by customer in subsequent call
+        }
+        return api_response(data=overview)
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_customer_overview")
+        return api_response(success=False, error=str(e))
+
+
+@frappe.whitelist()
+def get_project_summary(project: str) -> Dict:
+    """Get project summary across aggregate and cement divisions"""
+    try:
+        # Aggregate data
+        agg_deliveries = frappe.db.sql("""
+            SELECT COUNT(*) as count, SUM(quantity) as total_qty, SUM(amount) as total_amount
+            FROM `tabAggregate Delivery`
+            WHERE project = %s AND docstatus = 1
+        """, project, as_dict=True)[0]
+        
+        # Cement data
+        cement_liftings = frappe.db.sql("""
+            SELECT COUNT(*) as count, SUM(factory_weighbridge_qty) as total_qty, SUM(customer_amount) as total_amount
+            FROM `tabCement Lifting`
+            WHERE project = %s AND docstatus = 1
+        """, project, as_dict=True)[0]
+        
+        data = {
+            "project": project,
+            "aggregate": agg_deliveries,
+            "cement": cement_liftings,
+        }
+        return api_response(data=data)
+    except Exception as e:
+        frappe.log_error(frappe.get_traceback(), "API: get_project_summary")
+        return api_response(success=False, error=str(e))
