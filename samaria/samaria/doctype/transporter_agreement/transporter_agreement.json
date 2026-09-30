@@ -12,24 +12,25 @@
   "transporter",
   "transporter_name",
   "supplier",
-  "product_type",
   "column_break_1",
+  "product_type",
   "status",
   "valid_from",
   "valid_to",
+  "section_rates",
   "loading_site",
   "offloading_site",
   "association_service_charge_percent",
   "section_items",
   "items",
-  "section_terms",
+  "section_notes",
   "terms"
  ],
  "fields": [
   {
    "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Transporter Agreement"
+   "label": "Agreement Details"
   },
   {
    "default": "TAGR-.YYYY.-.#####",
@@ -58,51 +59,58 @@
   {
    "fieldname": "supplier",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Supplier Source (Quarry)",
+   "label": "Quarry / Supplier (Source)",
    "options": "Supplier"
-  },
-  {
-   "default": "Aggregate",
-   "fieldname": "product_type",
-   "fieldtype": "Select",
-   "label": "Product Type",
-   "options": "Aggregate\nCement\nSand\nMixed"
   },
   {
    "fieldname": "column_break_1",
    "fieldtype": "Column Break"
   },
   {
+   "default": "Aggregate",
+   "fieldname": "product_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Product Type",
+   "options": "Aggregate\nCement\nSand\nMixed"
+  },
+  {
    "default": "Active",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Draft\nActive\nExpired\nCancelled"
   },
   {
-   "default": "Today",
    "fieldname": "valid_from",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Valid From",
    "reqd": 1
   },
   {
    "fieldname": "valid_to",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Valid To",
    "reqd": 1
   },
   {
+   "fieldname": "section_rates",
+   "fieldtype": "Section Break",
+   "label": "Route & Charges"
+  },
+  {
    "fieldname": "loading_site",
    "fieldtype": "Data",
-   "label": "Loading Site"
+   "label": "Loading Site / Quarry"
   },
   {
    "fieldname": "offloading_site",
    "fieldtype": "Data",
-   "label": "Offloading Site"
+   "label": "Offloading Site / Project"
   },
   {
    "default": "0",
@@ -113,29 +121,29 @@
   {
    "fieldname": "section_items",
    "fieldtype": "Section Break",
-   "label": "Agreement Rates Per Material Item"
+   "label": "Item Rates"
   },
   {
    "fieldname": "items",
    "fieldtype": "Table",
-   "label": "Items",
+   "label": "Item Rates",
    "options": "Transporter Agreement Item",
    "reqd": 1
   },
   {
-   "fieldname": "section_terms",
+   "fieldname": "section_notes",
    "fieldtype": "Section Break",
-   "label": "Terms & Conditions"
+   "label": "Terms & Notes"
   },
   {
    "fieldname": "terms",
    "fieldtype": "Small Text",
-   "label": "Terms"
+   "label": "Terms / Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Transporter Agreement",
@@ -153,9 +161,22 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transporter Coordinator",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Aggregate Manager"
   }
  ],
- "sort_field": "modified",
+ "sort_field": "valid_from",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

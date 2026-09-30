@@ -1,1 +1,0 @@
-# Samaria Aggregate Proof

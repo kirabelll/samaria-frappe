@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2026-09-15 12:00:00.000000",
+ "creation": "2026-09-02 12:00:00.000000",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -32,7 +32,7 @@
   {
    "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Store Issue Details"
+   "label": "Issue Details"
   },
   {
    "default": "MSI-.YYYY.-.#####",
@@ -46,8 +46,7 @@
    "fieldname": "request",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Medical Request Ref",
+   "label": "Medical Request",
    "options": "Medical Request"
   },
   {
@@ -55,7 +54,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Customer / Health Center",
+   "label": "Customer",
    "options": "Customer",
    "reqd": 1
   },
@@ -63,6 +62,7 @@
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Customer Name",
    "read_only": 1
   },
@@ -97,12 +97,12 @@
   {
    "fieldname": "section_receiver",
    "fieldtype": "Section Break",
-   "label": "Receiver & Delivery Proof"
+   "label": "Receiver Information"
   },
   {
    "fieldname": "receiver_name",
    "fieldtype": "Data",
-   "label": "Receiver Contact Name"
+   "label": "Received By"
   },
   {
    "fieldname": "receiver_phone",
@@ -112,12 +112,12 @@
   {
    "fieldname": "signed_proof",
    "fieldtype": "Attach",
-   "label": "Signed Delivery / Gate Pass Proof"
+   "label": "Signed Delivery Proof"
   },
   {
    "fieldname": "section_items",
    "fieldtype": "Section Break",
-   "label": "Issued Items & Assigned Batches"
+   "label": "Items Issued"
   },
   {
    "fieldname": "items",
@@ -129,19 +129,19 @@
   {
    "fieldname": "section_totals",
    "fieldtype": "Section Break",
-   "label": "Financials"
+   "label": "Totals"
   },
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Issue Value (ETB)",
+   "label": "Total Amount (ETB)",
    "read_only": 1
   },
   {
    "fieldname": "section_notes",
    "fieldtype": "Section Break",
-   "label": "Audit & Remarks"
+   "label": "Audit"
   },
   {
    "fieldname": "issued_by_user",
@@ -152,10 +152,11 @@
   {
    "fieldname": "notes",
    "fieldtype": "Small Text",
-   "label": "Remarks"
+   "label": "Notes"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
  "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
@@ -174,10 +175,26 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Medical Pharmacist",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Medical Druggist"
   }
  ],
- "sort_field": "modified",
+ "sort_field": "issue_date",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

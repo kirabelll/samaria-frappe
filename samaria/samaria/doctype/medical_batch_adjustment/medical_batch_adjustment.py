@@ -1,19 +1,30 @@
 import frappe
-from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
 
+
 class MedicalBatchAdjustment(Document):
 	def on_submit(self):
-		for row in getattr(self, "items", []):
-			if row.batch:
-				new_qty = flt(row.adjusted_qty)
-				frappe.db.set_value("Medical Batch", row.batch, "quantity", new_qty)
-				if new_qty <= 0 and getattr(row, "reason", "") in ["Damaged", "Expired", "Recalled"]:
-					frappe.db.set_value("Medical Batch", row.batch, "status", getattr(row, "reason", "Damaged"))
+		for item in self.get("items") or []:
+			if not item.batch:
+				continue
+			batch = frappe.get_doc("Medical Batch", item.batch)
+			batch.quantity = flt(item.adjusted_qty)
+			# Write-off status rules
+			if flt(item.adjusted_qty) <= 0:
+				if self.reason == "Expired Goods Write-off":
+					batch.status = "Expired"
+				elif self.reason == "Damaged / Broken Ampoules":
+					batch.status = "Damaged"
+				elif self.reason == "Recall Adjustment":
+					batch.status = "Recalled"
+			batch.save(ignore_permissions=True)
 
 	def on_cancel(self):
-		for row in getattr(self, "items", []):
-			if row.batch:
-				frappe.db.set_value("Medical Batch", row.batch, "quantity", flt(row.current_qty))
-				frappe.db.set_value("Medical Batch", row.batch, "status", "Available")
+		for item in self.get("items") or []:
+			if not item.batch:
+				continue
+			batch = frappe.get_doc("Medical Batch", item.batch)
+			batch.quantity = flt(item.current_qty)
+			batch.status   = "Available"
+			batch.save(ignore_permissions=True)

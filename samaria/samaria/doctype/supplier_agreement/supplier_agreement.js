@@ -1,41 +1,32 @@
-frappe.ui.form.on('Supplier Agreement', {
-	refresh: function(frm) {
-		if (frm.doc.status === 'Deactivated') {
-			frm.add_custom_button(__('Reactivate Agreement'), function() {
-				frm.set_value('status', 'Active');
-				frm.save();
-			}, __('Actions'));
-		} else if (frm.doc.status === 'Active') {
-			frm.add_custom_button(__('Deactivate Agreement'), function() {
-				frm.set_value('status', 'Deactivated');
-				frm.save();
-			}, __('Actions'));
+// Supplier Agreement — Client-side controller (mirrors Sales Agreement)
+// Frappe v15
+
+frappe.ui.form.on("Supplier Agreement", {
+	refresh: function (frm) {
+		if (!frm.is_new()) {
+			frm.add_custom_button(__("View Deliveries"), function () {
+				frappe.set_route("List", "Aggregate Delivery", { supplier: frm.doc.supplier });
+			}, __("Links"));
 		}
 	}
 });
 
-frappe.ui.form.on('Supplier Agreement Item', {
-	qty: function(frm, cdt, cdn) {
-		calculate_item_amount(frm, cdt, cdn);
-	},
-	unit_price: function(frm, cdt, cdn) {
-		calculate_item_amount(frm, cdt, cdn);
-	},
-	price_type: function(frm, cdt, cdn) {
-		calculate_item_amount(frm, cdt, cdn);
-	}
+frappe.ui.form.on("Supplier Agreement Item", {
+	qty:        (frm, cdt, cdn) => calc_item(frm, cdt, cdn),
+	unit_price: (frm, cdt, cdn) => calc_item(frm, cdt, cdn),
+	price_type: (frm, cdt, cdn) => calc_item(frm, cdt, cdn),
+	items_remove: (frm) => update_total(frm)
 });
 
-function calculate_item_amount(frm, cdt, cdn) {
-	let row = locals[cdt][cdn];
-	let qty = flt(row.qty);
-	let price = flt(row.unit_price);
-	let amount = (row.price_type === 'incl') ? (qty * price * 1.15) : (qty * price);
-	frappe.model.set_value(cdt, cdn, 'amount', amount);
+function calc_item(frm, cdt, cdn) {
+	const row  = locals[cdt][cdn];
+	const base = flt(row.qty) * flt(row.unit_price);
+	frappe.model.set_value(cdt, cdn, "amount", row.price_type === "incl" ? base * 1.15 : base);
+	update_total(frm);
+}
 
-	let total = 0;
-	(frm.doc.items || []).forEach(d => {
-		total += flt(d.amount);
-	});
-	frm.set_value('total_amount', total);
+function update_total(frm) {
+	frm.set_value("total_amount",
+		(frm.doc.items || []).reduce((s, r) => s + flt(r.amount), 0)
+	);
 }

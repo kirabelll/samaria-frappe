@@ -1,12 +1,22 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import flt, getdate
+from frappe.utils import flt
+
 
 class AggregateSettlement(Document):
 	def validate(self):
 		self.calculate_totals()
 
+	def on_submit(self):
+		self.mark_deliveries_settled()
+
+	def on_cancel(self):
+		self.unmark_deliveries_settled()
+
+	# ------------------------------------------------------------------
+	# Totals aggregation
+	# ------------------------------------------------------------------
 	def calculate_totals(self):
 		total_dispatches = 0
 		total_loaded = 0.0
@@ -16,7 +26,7 @@ class AggregateSettlement(Document):
 		total_deduction = 0.0
 		total_net = 0.0
 
-		for item in getattr(self, "items", []):
+		for item in self.get("items") or []:
 			total_dispatches += 1
 			total_loaded += flt(item.loaded_volume)
 			total_delivered += flt(item.delivered_volume)
@@ -33,40 +43,46 @@ class AggregateSettlement(Document):
 		self.total_shortage_deduction = total_deduction
 		self.total_net_payment = total_net
 
-		# Association service charge calculation
+		# Association service charge
 		if self.association_charge_enabled and flt(self.association_rate) > 0:
 			self.association_amount = (flt(self.association_rate) / 100.0) * total_net
 		else:
 			self.association_amount = 0.0
 
-		recovery = flt(self.recovery_deduction)
-		self.final_payable = max(0.0, total_net - self.association_amount - recovery)
+		self.final_payable = max(
+			0.0,
+			total_net - flt(self.association_amount) - flt(self.recovery_deduction)
+		)
 
-	def on_submit(self):
-		self.mark_deliveries_settled()
-
+	# ------------------------------------------------------------------
+	# Delivery status updates
+	# ------------------------------------------------------------------
 	def mark_deliveries_settled(self):
-		for item in getattr(self, "items", []):
+		for item in self.get("items") or []:
 			if item.delivery:
 				frappe.db.set_value("Aggregate Delivery", item.delivery, "status", "Settled")
 
-	def on_cancel(self):
-		for item in getattr(self, "items", []):
+	def unmark_deliveries_settled(self):
+		for item in self.get("items") or []:
 			if item.delivery:
 				frappe.db.set_value("Aggregate Delivery", item.delivery, "status", "Verified")
 
+	# ------------------------------------------------------------------
+	# Whitelisted method — called from JS button
+	# ------------------------------------------------------------------
 	@frappe.whitelist()
 	def populate_deliveries(self):
-		"""Fetch matching dispatches for the selected transporter and period."""
+		"""Fetch all un-settled deliveries for the transporter within the period."""
 		if not self.transporter or not self.period_from or not self.period_to:
-			frappe.throw(_("Please select Transporter, Period From, and Period To first."))
+			frappe.throw(_("Please set Transporter, Period From and Period To first."))
 
 		deliveries = frappe.get_all(
 			"Aggregate Delivery",
 			filters={
 				"transporter": self.transporter,
 				"dispatch_date": ["between", [self.period_from, self.period_to]],
-				"status": ["in", ["Delivered", "Verified", "Dispatched"]]
+				"status": ["in", ["Delivered", "Verified", "Dispatched"]],
+				"docstatus": 1
 			},
 			fields=[
 				"name", "dispatch_date", "pad_number", "truck",

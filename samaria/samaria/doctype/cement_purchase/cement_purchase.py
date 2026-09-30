@@ -3,34 +3,36 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
 
+
 class CementPurchase(Document):
 	def validate(self):
-		qty = flt(self.quantity_tons)
-		price = flt(self.unit_price)
-		base_total = qty * price
+		self.calculate_amounts()
+		self.set_balances()
+		self.update_statuses()
 
-		vat_r = flt(self.vat_rate)
-		vat_amt = (vat_r / 100.0) * base_total
-		self.vat_amount = vat_amt
-		self.total_amount = base_total + vat_amt
+	def calculate_amounts(self):
+		base = flt(self.quantity_tons) * flt(self.unit_price)
+		vat = base * (flt(self.vat_rate) / 100.0)
+		self.vat_amount = vat
+		self.total_amount = base + vat
 
-		# If new doc, initialize balance_remaining to quantity_tons
-		if self.is_new() or self.balance_remaining is None:
-			self.balance_remaining = qty
+	def set_balances(self):
+		# Initialise balance_remaining only for brand-new docs
+		if self.is_new():
+			self.balance_remaining = flt(self.quantity_tons)
 
-		# Update payment status
+	def update_statuses(self):
 		paid = flt(self.paid_amount)
-		if paid >= self.total_amount and self.total_amount > 0:
+		total = flt(self.total_amount)
+
+		if paid >= total and total > 0:
 			self.payment_status = "Paid"
-			if self.status == "Pending" or self.status == "Checked":
+			if self.status in ["Pending", "Checked"]:
 				self.status = "Active"
 		elif paid > 0:
 			self.payment_status = "Partial"
 		else:
 			self.payment_status = "Unpaid"
 
-		# If balance remaining reaches zero
-		if flt(self.balance_remaining) <= 0 and not self.is_new():
+		if flt(self.balance_remaining) <= 0 and self.status == "Active":
 			self.status = "Exhausted"
-		elif flt(self.balance_remaining) > 0 and self.payment_status == "Paid" and self.status == "Exhausted":
-			self.status = "Active"

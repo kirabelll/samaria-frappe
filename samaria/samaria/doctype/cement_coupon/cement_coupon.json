@@ -19,8 +19,8 @@
   "section_handover",
   "handed_over_to",
   "handover_date",
-  "column_break_2",
   "used_date",
+  "section_notes",
   "notes"
  ],
  "fields": [
@@ -50,8 +50,7 @@
    "fieldname": "cement_purchase",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Cement Purchase Order",
+   "label": "Cement Purchase",
    "options": "Cement Purchase",
    "reqd": 1
   },
@@ -59,9 +58,7 @@
    "default": "40",
    "fieldname": "tonnage",
    "fieldtype": "Float",
-   "in_list_view": 1,
-   "label": "Tonnage (Tons)",
-   "reqd": 1
+   "label": "Tonnage (Tons)"
   },
   {
    "fieldname": "column_break_1",
@@ -82,10 +79,9 @@
    "label": "Collected By"
   },
   {
-   "default": "Today",
    "fieldname": "collected_date",
    "fieldtype": "Date",
-   "label": "Collected Date"
+   "label": "Collection Date"
   },
   {
    "fieldname": "section_handover",
@@ -95,7 +91,7 @@
   {
    "fieldname": "handed_over_to",
    "fieldtype": "Data",
-   "label": "Handed Over To (Driver/Transporter)"
+   "label": "Handed Over To"
   },
   {
    "fieldname": "handover_date",
@@ -103,13 +99,15 @@
    "label": "Handover Date"
   },
   {
-   "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "used_date",
    "fieldtype": "Date",
-   "label": "Used / Lifted Date"
+   "label": "Used Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
   },
   {
    "fieldname": "notes",
@@ -119,11 +117,10 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Cement Coupon",
- "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -136,6 +133,16 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager",
    "write": 1
   }
  ],

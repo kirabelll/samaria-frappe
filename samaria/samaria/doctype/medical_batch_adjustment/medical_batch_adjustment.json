@@ -14,7 +14,9 @@
   "column_break_1",
   "reason",
   "section_items",
-  "items"
+  "items",
+  "section_notes",
+  "notes"
  ],
  "fields": [
   {
@@ -35,13 +37,14 @@
    "fieldname": "warehouse",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Warehouse / Store",
+   "label": "Store / Warehouse",
    "reqd": 1
   },
   {
    "default": "Today",
    "fieldname": "adjustment_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Adjustment Date",
    "reqd": 1
   },
@@ -60,19 +63,30 @@
   {
    "fieldname": "section_items",
    "fieldtype": "Section Break",
-   "label": "Adjusted Batches"
+   "label": "Batch Adjustments"
   },
   {
    "fieldname": "items",
    "fieldtype": "Table",
-   "label": "Batch Items",
+   "label": "Items",
    "options": "Medical Batch Adjustment Item",
    "reqd": 1
+  },
+  {
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes / Justification"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Medical Batch Adjustment",
@@ -89,10 +103,21 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Medical Pharmacist",
+   "submit": 1,
    "write": 1
   }
  ],
- "sort_field": "modified",
+ "sort_field": "adjustment_date",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

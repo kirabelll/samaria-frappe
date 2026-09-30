@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2026-09-15 12:00:00.000000",
+ "creation": "2026-09-02 12:00:00.000000",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -26,7 +26,7 @@
   {
    "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Recovery Information"
+   "label": "Recovery Details"
   },
   {
    "default": "TREC-.YYYY.-.#####",
@@ -46,19 +46,17 @@
    "reqd": 1
   },
   {
-   "default": "Aggregate",
    "fieldname": "source_module",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Source Module",
-   "options": "Aggregate\nCement",
-   "reqd": 1
+   "options": "Aggregate\nCement"
   },
   {
    "fieldname": "source_record",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Source Reference / Voucher No"
+   "label": "Source Voucher / Record"
   },
   {
    "fieldname": "column_break_1",
@@ -69,6 +67,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Open\nPartial\nRecovered\nWritten_Off"
   },
@@ -77,19 +76,19 @@
    "fieldname": "recovery_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Date",
+   "label": "Recovery Date",
    "reqd": 1
   },
   {
    "fieldname": "section_amounts",
    "fieldtype": "Section Break",
-   "label": "Financials (ETB)"
+   "label": "Recovery Amounts (ETB)"
   },
   {
    "fieldname": "original_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Original Claim Amount",
+   "label": "Original Claim (ETB)",
    "reqd": 1
   },
   {
@@ -97,13 +96,13 @@
    "fieldname": "recovered_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Recovered Amount"
+   "label": "Recovered Amount (ETB)"
   },
   {
    "fieldname": "pending_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Pending Amount",
+   "label": "Pending Amount (ETB)",
    "read_only": 1
   },
   {
@@ -137,9 +136,17 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transporter Coordinator",
+   "write": 1
   }
  ],
- "sort_field": "modified",
+ "sort_field": "recovery_date",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

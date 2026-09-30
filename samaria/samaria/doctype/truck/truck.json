@@ -7,7 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "section_truck",
+  "section_general",
   "plate_no",
   "transporter",
   "transporter_name",
@@ -25,9 +25,9 @@
  ],
  "fields": [
   {
-   "fieldname": "section_truck",
+   "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Truck Information"
+   "label": "Truck Details"
   },
   {
    "fieldname": "plate_no",
@@ -42,7 +42,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Transporter / Supplier",
+   "label": "Transporter (Owner)",
    "options": "Supplier",
    "reqd": 1
   },
@@ -78,7 +78,7 @@
    "fieldname": "capacity",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Holding Capacity (m³ / Tons)",
+   "label": "Capacity",
    "reqd": 1
   },
   {
@@ -91,12 +91,11 @@
   {
    "fieldname": "section_driver",
    "fieldtype": "Section Break",
-   "label": "Driver & Owner Details"
+   "label": "Driver & Ownership"
   },
   {
    "fieldname": "driver_name",
    "fieldtype": "Data",
-   "in_list_view": 1,
    "label": "Driver Name"
   },
   {
@@ -121,11 +120,10 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Truck",
- "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -139,10 +137,28 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transporter Coordinator",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Aggregate Manager"
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager"
   }
  ],
- "sort_field": "modified",
- "sort_order": "DESC",
+ "sort_field": "plate_no",
+ "sort_order": "ASC",
  "states": [],
  "track_changes": 1
 }

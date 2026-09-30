@@ -165,7 +165,7 @@
    "fetch_from": "truck.capacity",
    "fieldname": "truck_capacity",
    "fieldtype": "Float",
-   "label": "Truck Capacity (m³)"
+   "label": "Truck Capacity (m\u00b3)"
   },
   {
    "fieldname": "item",
@@ -205,31 +205,31 @@
   {
    "fieldname": "section_volume",
    "fieldtype": "Section Break",
-   "label": "Volume & Quantities (m³)"
+   "label": "Volume & Quantities (m\u00b3)"
   },
   {
    "fieldname": "loaded_volume",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Loaded Volume (m³)",
+   "label": "Loaded Volume (m\u00b3)",
    "reqd": 1
   },
   {
    "fieldname": "delivered_volume",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Delivered Volume (m³)"
+   "label": "Delivered Volume (m\u00b3)"
   },
   {
    "fieldname": "shortage_volume",
    "fieldtype": "Float",
-   "label": "Shortage Volume (m³)",
+   "label": "Shortage Volume (m\u00b3)",
    "read_only": 1
   },
   {
    "fieldname": "billable_volume",
    "fieldtype": "Float",
-   "label": "Billable Truck Volume (m³)",
+   "label": "Billable Truck Volume (m\u00b3)",
    "read_only": 1
   },
   {
@@ -241,19 +241,19 @@
    "fieldname": "transport_rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Transport Rate (ETB/m³)",
+   "label": "Transport Rate (ETB/m\u00b3)",
    "reqd": 1
   },
   {
    "fieldname": "aggregate_value",
    "fieldtype": "Currency",
-   "label": "Supplier Aggregate Rate (ETB/m³)",
+   "label": "Supplier Aggregate Rate (ETB/m\u00b3)",
    "reqd": 1
   },
   {
    "fieldname": "customer_price",
    "fieldtype": "Currency",
-   "label": "Customer Selling Price (ETB/m³)"
+   "label": "Customer Selling Price (ETB/m\u00b3)"
   },
   {
    "fieldname": "column_break_3",
@@ -358,10 +358,29 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "submit": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Aggregate Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Transporter Coordinator"
   }
  ],
- "sort_field": "modified",
+ "is_submittable": 1,
+ "sort_field": "dispatch_date",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

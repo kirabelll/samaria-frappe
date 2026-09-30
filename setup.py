@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 with open("requirements.txt") as f:
 	install_requires = f.read().strip().split("\n")
+	install_requires = [r for r in install_requires if r and not r.startswith("#")]
 
 from samaria import __version__ as version
 

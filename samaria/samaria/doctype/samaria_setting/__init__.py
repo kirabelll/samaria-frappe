@@ -1,1 +1,0 @@
-"""Samaria Setting DocType"""

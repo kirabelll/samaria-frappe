@@ -1,1 +1,0 @@
-# Samaria Medical Store Issue

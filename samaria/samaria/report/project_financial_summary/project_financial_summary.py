@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Project Financial Summary Report
-Cross-division executive profitability and operational commitment analysis by project.
-Frappe Framework Version-15
+Cross-division profitability view: contract value vs executed revenue, freight paid, shortages, net margin.
+Frappe v15
 """
 import frappe
 from frappe import _
@@ -11,244 +11,143 @@ from frappe.utils import flt
 
 def execute(filters=None):
 	columns = get_columns()
-	data = get_data(filters)
-	chart = get_chart_data(data)
-	report_summary = get_report_summary(data)
-	return columns, data, None, chart, report_summary
+	data    = get_data(filters)
+	chart   = get_chart_data(data)
+	summary = get_report_summary(data)
+	return columns, data, None, chart, summary
 
 
 def get_columns():
 	return [
-		{
-			"label": _("Agreement Ref"),
-			"fieldname": "agreement",
-			"fieldtype": "Link",
-			"options": "Sales Agreement",
-			"width": 140
-		},
-		{
-			"label": _("Project / Offloading Site"),
-			"fieldname": "project_site",
-			"fieldtype": "Data",
-			"width": 180
-		},
-		{
-			"label": _("Customer Entity"),
-			"fieldname": "customer_name",
-			"fieldtype": "Data",
-			"width": 180
-		},
-		{
-			"label": _("Division"),
-			"fieldname": "division",
-			"fieldtype": "Data",
-			"width": 110
-		},
-		{
-			"label": _("Contract Value (ETB)"),
-			"fieldname": "total_amount",
-			"fieldtype": "Currency",
-			"width": 150
-		},
-		{
-			"label": _("Executed Revenue (ETB)"),
-			"fieldname": "executed_revenue",
-			"fieldtype": "Currency",
-			"width": 160
-		},
-		{
-			"label": _("Freight & Haulage Paid"),
-			"fieldname": "freight_paid",
-			"fieldtype": "Currency",
-			"width": 150
-		},
-		{
-			"label": _("Shortage Penalties"),
-			"fieldname": "shortages_deducted",
-			"fieldtype": "Currency",
-			"width": 140
-		},
-		{
-			"label": _("Estimated Net Margin"),
-			"fieldname": "net_margin",
-			"fieldtype": "Currency",
-			"width": 150
-		},
-		{
-			"label": _("Margin %"),
-			"fieldname": "margin_pct",
-			"fieldtype": "Percent",
-			"width": 100
-		},
-		{
-			"label": _("Agreement Status"),
-			"fieldname": "status",
-			"fieldtype": "Data",
-			"width": 120
-		}
+		{"label": _("Agreement"),          "fieldname": "name",            "fieldtype": "Link",     "options": "Sales Agreement", "width": 145},
+		{"label": _("Project / Site"),      "fieldname": "offloading_site", "fieldtype": "Data",     "width": 160},
+		{"label": _("Customer"),            "fieldname": "customer_name",   "fieldtype": "Data",     "width": 180},
+		{"label": _("Division"),            "fieldname": "division",        "fieldtype": "Data",     "width": 100},
+		{"label": _("Contract Value"),      "fieldname": "total_amount",    "fieldtype": "Currency", "width": 140},
+		{"label": _("Executed Revenue"),    "fieldname": "exec_revenue",    "fieldtype": "Currency", "width": 140},
+		{"label": _("Freight Paid (ETB)"),  "fieldname": "freight_paid",    "fieldtype": "Currency", "width": 130},
+		{"label": _("Shortage Loss"),       "fieldname": "shortage_loss",   "fieldtype": "Currency", "width": 120},
+		{"label": _("Net Margin (ETB)"),    "fieldname": "net_margin",      "fieldtype": "Currency", "width": 130},
+		{"label": _("Margin %"),            "fieldname": "margin_pct",      "fieldtype": "Percent",  "width": 95},
+		{"label": _("Status"),              "fieldname": "status",          "fieldtype": "Data",     "width": 90},
 	]
 
 
 def get_data(filters=None):
-	if not frappe.db.table_exists("Sales Agreement"):
+	if not frappe.db.table_exists("tabSales Agreement"):
 		return []
 
-	conds = ["docstatus < 2"]
-	vals = {}
+	conditions = ["1=1"]
+	values = {}
 
 	if filters:
 		if filters.get("customer"):
-			conds.append("customer = %(customer)s")
-			vals["customer"] = filters.get("customer")
+			conditions.append("customer = %(customer)s")
+			values["customer"] = filters["customer"]
 		if filters.get("division"):
-			conds.append("division = %(division)s")
-			vals["division"] = filters.get("division")
+			conditions.append("division = %(division)s")
+			values["division"] = filters["division"]
 		if filters.get("status"):
-			conds.append("status = %(status)s")
-			vals["status"] = filters.get("status")
+			conditions.append("status = %(status)s")
+			values["status"] = filters["status"]
 
-	where_clause = " AND ".join(conds)
-
+	where = " AND ".join(conditions)
 	agreements = frappe.db.sql(f"""
-		SELECT
-			name as agreement,
-			customer,
-			COALESCE(customer_name, customer) as customer_name,
-			division,
-			offloading_site as project_site,
-			total_amount,
+		SELECT name,
+			COALESCE(customer_name, customer) AS customer_name,
+			customer, division, offloading_site,
+			COALESCE(total_amount, 0) AS total_amount,
 			status
 		FROM `tabSales Agreement`
-		WHERE {where_clause}
-		ORDER BY total_amount DESC, creation DESC
-	""", vals, as_dict=True)
+		WHERE {where}
+		ORDER BY valid_from DESC
+	""", values, as_dict=True)
 
-	rows = []
+	result = []
 	for agr in agreements:
-		cust = agr.customer
-		div = agr.division or "Aggregate"
-		contract_val = flt(agr.total_amount)
-
-		executed_rev = 0.0
+		exec_revenue = 0.0
 		freight_paid = 0.0
-		shortages = 0.0
-		net_margin = 0.0
+		shortage_loss = 0.0
 
-		# Aggregate calculation
-		if div in ("Aggregate", "General") and frappe.db.table_exists("Aggregate Delivery"):
-			agg_res = frappe.db.sql("""
+		# Pull aggregate actuals for this customer
+		if frappe.db.table_exists("tabAggregate Delivery"):
+			agg = frappe.db.sql("""
 				SELECT
-					COALESCE(SUM(customer_receivable), 0) as rev,
-					COALESCE(SUM(net_truck_payment), 0) as freight,
-					COALESCE(SUM(shortage_deduction), 0) as short,
-					COALESCE(SUM(net_profit_amount), 0) as profit
+					COALESCE(SUM(customer_receivable), 0) AS revenue,
+					COALESCE(SUM(gross_truck_fee), 0)     AS freight,
+					COALESCE(SUM(shortage_deduction), 0)  AS shortage
 				FROM `tabAggregate Delivery`
-				WHERE customer = %s AND docstatus < 2
-			""", (cust,), as_dict=True)
+				WHERE customer = %(customer)s AND docstatus = 1
+			""", {"customer": agr.customer}, as_dict=True)
+			if agg:
+				exec_revenue  += flt(agg[0].revenue)
+				freight_paid  += flt(agg[0].freight)
+				shortage_loss += flt(agg[0].shortage)
 
-			if agg_res:
-				ar = agg_res[0]
-				executed_rev += flt(ar.rev)
-				freight_paid += flt(ar.freight)
-				shortages += flt(ar.short)
-				net_margin += flt(ar.profit)
-
-		# Cement calculation
-		if div in ("Cement", "General") and frappe.db.table_exists("Cement Lifting"):
-			cem_res = frappe.db.sql("""
+		# Pull cement actuals for this customer
+		if frappe.db.table_exists("tabCement Lifting"):
+			cem = frappe.db.sql("""
 				SELECT
-					COALESCE(SUM(shortage_penalty), 0) as penalty,
-					COALESCE(SUM(buyer_weighbridge_qty), 0) as qty
+					COALESCE(SUM(factory_weight), 0)   AS revenue_tons,
+					COALESCE(SUM(shortage_penalty), 0) AS shortage
 				FROM `tabCement Lifting`
-				WHERE customer = %s AND docstatus < 2
-			""", (cust,), as_dict=True)
+				WHERE customer = %(customer)s AND docstatus = 1
+			""", {"customer": agr.customer}, as_dict=True)
+			if cem:
+				shortage_loss += flt(cem[0].shortage)
 
-			if cem_res:
-				cr = cem_res[0]
-				shortages += flt(cr.penalty)
-				# If aggregate profit wasn't primary, estimate cement margin
-				if net_margin == 0 and flt(cr.qty) > 0:
-					executed_rev += flt(cr.qty) * 8000.0  # approximate standard tonnage valuation
-					net_margin += (executed_rev * 0.08) - flt(cr.penalty)
+		net_margin  = exec_revenue - freight_paid - shortage_loss
+		contract    = flt(agr.total_amount)
+		margin_pct  = round((net_margin / contract * 100) if contract > 0 else 0.0, 1)
 
-		margin_pct = (net_margin / executed_rev * 100.0) if executed_rev > 0 else 0.0
-
-		rows.append({
-			"agreement": agr.agreement,
-			"project_site": agr.project_site or agr.customer_name,
-			"customer_name": agr.customer_name,
-			"division": div,
-			"total_amount": contract_val,
-			"executed_revenue": round(executed_rev, 2),
-			"freight_paid": round(freight_paid, 2),
-			"shortages_deducted": round(shortages, 2),
-			"net_margin": round(net_margin, 2),
-			"margin_pct": round(margin_pct, 1),
-			"status": agr.status
+		result.append({
+			"name":           agr.name,
+			"customer_name":  agr.customer_name,
+			"division":       agr.division,
+			"offloading_site": agr.offloading_site or "",
+			"total_amount":   contract,
+			"exec_revenue":   round(exec_revenue, 2),
+			"freight_paid":   round(freight_paid, 2),
+			"shortage_loss":  round(shortage_loss, 2),
+			"net_margin":     round(net_margin, 2),
+			"margin_pct":     margin_pct,
+			"status":         agr.status,
 		})
 
-	return rows
+	return result
 
 
 def get_chart_data(data):
 	if not data:
 		return None
-
-	labels = []
-	margin_values = []
-	rev_values = []
-
-	for row in data[:6]:
-		proj = row.get("project_site") or row.get("agreement")
-		labels.append(proj[:18])
-		margin_values.append(flt(row.get("net_margin", 0)))
-		rev_values.append(flt(row.get("executed_revenue", 0)))
-
+	top = sorted(data, key=lambda x: flt(x.get("exec_revenue")), reverse=True)[:6]
+	labels   = [r.get("customer_name") or r.get("name") for r in top]
+	revenues = [flt(r.get("exec_revenue")) for r in top]
+	margins  = [flt(r.get("net_margin")) for r in top]
 	return {
 		"data": {
 			"labels": labels,
 			"datasets": [
-				{"name": _("Executed Revenue (ETB)"), "values": rev_values},
-				{"name": _("Net Margin (ETB)"), "values": margin_values}
+				{"name": _("Executed Revenue (ETB)"), "values": revenues},
+				{"name": _("Net Margin (ETB)"),       "values": margins}
 			]
 		},
 		"type": "bar",
-		"colors": ["#3b82f6", "#10b981"]
+		"colors": ["#3b82f6", "#10b981"],
+		"barOptions": {"stacked": 0}
 	}
 
 
 def get_report_summary(data):
 	if not data:
 		return []
-
-	total_contract = sum(flt(r.get("total_amount", 0)) for r in data)
-	total_executed = sum(flt(r.get("executed_revenue", 0)) for r in data)
-	total_freight = sum(flt(r.get("freight_paid", 0)) for r in data)
-	total_margin = sum(flt(r.get("net_margin", 0)) for r in data)
-
 	return [
-		{
-			"value": round(total_contract, 2),
-			"label": _("Total Committed Value (ETB)"),
-			"datatype": "Currency",
-			"indicator": "Purple"
-		},
-		{
-			"value": round(total_executed, 2),
-			"label": _("Executed Turnover (ETB)"),
-			"datatype": "Currency",
-			"indicator": "Blue"
-		},
-		{
-			"value": round(total_freight, 2),
-			"label": _("Freight / Logistics Paid (ETB)"),
-			"datatype": "Currency",
-			"indicator": "Orange"
-		},
-		{
-			"value": round(total_margin, 2),
-			"label": _("Estimated Net Margin (ETB)"),
-			"datatype": "Currency",
-			"indicator": "Green"
-		}
+		{"value": round(sum(flt(r.get("total_amount"))  for r in data), 2),
+		 "label": _("Total Committed (ETB)"),   "datatype": "Currency", "indicator": "Blue"},
+		{"value": round(sum(flt(r.get("exec_revenue"))  for r in data), 2),
+		 "label": _("Executed Revenue (ETB)"),   "datatype": "Currency", "indicator": "Green"},
+		{"value": round(sum(flt(r.get("freight_paid"))  for r in data), 2),
+		 "label": _("Total Freight Paid (ETB)"), "datatype": "Currency", "indicator": "Orange"},
+		{"value": round(sum(flt(r.get("net_margin"))    for r in data), 2),
+		 "label": _("Estimated Net Margin (ETB)"), "datatype": "Currency", "indicator": "Green"},
 	]

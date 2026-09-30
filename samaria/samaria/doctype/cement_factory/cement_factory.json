@@ -14,20 +14,20 @@
   "supplied_material",
   "column_break_1",
   "status",
+  "use_coupons",
+  "weighbridge_required",
+  "section_contact",
   "location",
   "phone",
   "contact_person",
-  "section_operations",
-  "use_coupons",
-  "weighbridge_required",
-  "column_break_2",
+  "section_terms",
   "terms"
  ],
  "fields": [
   {
    "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Factory Information"
+   "label": "Factory Details"
   },
   {
    "fieldname": "factory_name",
@@ -40,8 +40,7 @@
   {
    "fieldname": "code",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Factory Code"
+   "label": "Short Code"
   },
   {
    "default": "Cement",
@@ -49,13 +48,12 @@
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Factory Type",
-   "options": "Cement\nAggregate\nSand\nMixed",
-   "reqd": 1
+   "options": "Cement\nAggregate\nSand\nMixed"
   },
   {
    "fieldname": "supplied_material",
    "fieldtype": "Data",
-   "label": "Supplied Material (e.g. OPC, PPC)"
+   "label": "Supplied Material Description"
   },
   {
    "fieldname": "column_break_1",
@@ -66,13 +64,31 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Active\nInactive"
   },
   {
+   "default": "0",
+   "fieldname": "use_coupons",
+   "fieldtype": "Check",
+   "label": "Uses Coupons"
+  },
+  {
+   "default": "1",
+   "fieldname": "weighbridge_required",
+   "fieldtype": "Check",
+   "label": "Weighbridge Required"
+  },
+  {
+   "fieldname": "section_contact",
+   "fieldtype": "Section Break",
+   "label": "Contact Information"
+  },
+  {
    "fieldname": "location",
    "fieldtype": "Data",
-   "label": "Location / Plant Site"
+   "label": "Location / Address"
   },
   {
    "fieldname": "phone",
@@ -85,39 +101,22 @@
    "label": "Contact Person"
   },
   {
-   "fieldname": "section_operations",
+   "fieldname": "section_terms",
    "fieldtype": "Section Break",
-   "label": "Operating Rules"
-  },
-  {
-   "default": "0",
-   "fieldname": "use_coupons",
-   "fieldtype": "Check",
-   "label": "Use Physical Coupons"
-  },
-  {
-   "default": "1",
-   "fieldname": "weighbridge_required",
-   "fieldtype": "Check",
-   "label": "Weighbridge Measurement Required"
-  },
-  {
-   "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
+   "label": "Terms & Notes"
   },
   {
    "fieldname": "terms",
    "fieldtype": "Small Text",
-   "label": "Special Terms"
+   "label": "Terms / Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Cement Factory",
- "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -131,10 +130,20 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager",
+   "write": 1
   }
  ],
- "sort_field": "modified",
- "sort_order": "DESC",
+ "sort_field": "factory_name",
+ "sort_order": "ASC",
  "states": [],
  "track_changes": 1
 }

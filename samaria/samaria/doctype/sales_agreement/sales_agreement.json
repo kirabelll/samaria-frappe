@@ -21,14 +21,14 @@
   "items",
   "section_totals",
   "total_amount",
-  "column_break_2",
+  "section_notes",
   "terms"
  ],
  "fields": [
   {
    "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Agreement Information"
+   "label": "Agreement Details"
   },
   {
    "default": "SAGR-.YYYY.-.#####",
@@ -51,6 +51,7 @@
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Customer Name",
    "read_only": 1
   },
@@ -61,8 +62,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Division",
-   "options": "Aggregate\nCement\nMedical\nGeneral",
-   "reqd": 1
+   "options": "Aggregate\nCement\nMedical\nGeneral"
   },
   {
    "fieldname": "column_break_1",
@@ -79,27 +79,28 @@
    "reqd": 1
   },
   {
-   "default": "Today",
    "fieldname": "valid_from",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Valid From",
    "reqd": 1
   },
   {
    "fieldname": "valid_to",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Valid To",
    "reqd": 1
   },
   {
    "fieldname": "offloading_site",
    "fieldtype": "Data",
-   "label": "Offloading Site / Destination"
+   "label": "Project / Offloading Site"
   },
   {
    "fieldname": "section_items",
    "fieldtype": "Section Break",
-   "label": "Agreement Items"
+   "label": "Agreed Items & Pricing"
   },
   {
    "fieldname": "items",
@@ -111,28 +112,29 @@
   {
    "fieldname": "section_totals",
    "fieldtype": "Section Break",
-   "label": "Totals & Terms"
+   "label": "Totals"
   },
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Amount (ETB)",
+   "label": "Total Contract Value (ETB)",
    "read_only": 1
   },
   {
-   "fieldname": "column_break_2",
-   "fieldtype": "Column Break"
+   "fieldname": "section_notes",
+   "fieldtype": "Section Break",
+   "label": "Terms & Notes"
   },
   {
    "fieldname": "terms",
    "fieldtype": "Small Text",
-   "label": "Terms & Conditions"
+   "label": "Terms / Notes"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Sales Agreement",
@@ -153,18 +155,22 @@
   },
   {
    "create": 1,
-   "delete": 0,
    "email": 1,
    "export": 1,
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Sales User",
+   "role": "Aggregate Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager"
   }
  ],
- "sort_field": "modified",
+ "sort_field": "valid_from",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

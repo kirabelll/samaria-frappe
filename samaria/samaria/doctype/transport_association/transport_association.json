@@ -7,6 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "section_general",
   "association_name",
   "code",
   "contact_person",
@@ -14,9 +15,15 @@
   "status",
   "phone",
   "email",
+  "section_address",
   "address"
  ],
  "fields": [
+  {
+   "fieldname": "section_general",
+   "fieldtype": "Section Break",
+   "label": "Association Details"
+  },
   {
    "fieldname": "association_name",
    "fieldtype": "Data",
@@ -28,8 +35,7 @@
   {
    "fieldname": "code",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Association Code"
+   "label": "Short Code"
   },
   {
    "fieldname": "contact_person",
@@ -45,6 +51,7 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Status",
    "options": "Active\nInactive"
   },
@@ -56,7 +63,13 @@
   {
    "fieldname": "email",
    "fieldtype": "Data",
-   "label": "Email"
+   "label": "Email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "section_address",
+   "fieldtype": "Section Break",
+   "label": "Address"
   },
   {
    "fieldname": "address",
@@ -66,11 +79,10 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Transport Association",
- "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
@@ -84,10 +96,18 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Transporter Coordinator",
+   "write": 1
   }
  ],
- "sort_field": "modified",
- "sort_order": "DESC",
+ "sort_field": "association_name",
+ "sort_order": "ASC",
  "states": [],
  "track_changes": 1
 }

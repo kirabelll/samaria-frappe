@@ -1,24 +1,31 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "allow_rename": 0,
  "creation": "2026-09-02 12:00:00.000000",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "section_general",
   "factory",
   "cement_type",
-  "balance_tons",
   "column_break_1",
+  "balance_tons",
   "total_purchased_tons",
   "total_lifted_tons",
   "last_updated"
  ],
  "fields": [
   {
+   "fieldname": "section_general",
+   "fieldtype": "Section Break",
+   "label": "Balance Details"
+  },
+  {
    "fieldname": "factory",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Factory",
    "options": "Cement Factory",
    "reqd": 1
@@ -28,20 +35,20 @@
    "fieldname": "cement_type",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Cement Type",
-   "options": "PPC\nOPC\nSpecial",
-   "reqd": 1
+   "options": "PPC\nOPC\nSpecial"
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "balance_tons",
    "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Available Balance (Tons)",
+   "label": "Current Balance (Tons)",
    "read_only": 1
-  },
-  {
-   "fieldname": "column_break_1",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "total_purchased_tons",
@@ -58,7 +65,6 @@
    "read_only": 1
   },
   {
-   "default": "Now",
    "fieldname": "last_updated",
    "fieldtype": "Datetime",
    "label": "Last Updated",
@@ -67,7 +73,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-02 12:00:00.000000",
+ "modified": "2026-09-15 12:00:00.000000",
  "modified_by": "Administrator",
  "module": "Samaria",
  "name": "Cement Balance",
@@ -76,18 +82,21 @@
   {
    "create": 1,
    "delete": 1,
-   "email": 1,
    "export": 1,
-   "print": 1,
    "read": 1,
    "report": 1,
    "role": "System Manager",
-   "share": 1,
    "write": 1
+  },
+  {
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager"
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "track_changes": 1
+ "track_changes": 0
 }

@@ -13,7 +13,6 @@
   "customer_name",
   "license_no",
   "license_expiry",
-  "license_type",
   "column_break_1",
   "status",
   "priority",
@@ -30,7 +29,7 @@
   {
    "fieldname": "section_general",
    "fieldtype": "Section Break",
-   "label": "Request Details & Healthcare Center"
+   "label": "Request Details"
   },
   {
    "default": "MREQ-.YYYY.-.#####",
@@ -45,7 +44,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Customer / Health Institution",
+   "label": "Customer (Health Institution)",
    "options": "Customer",
    "reqd": 1
   },
@@ -53,29 +52,19 @@
    "fetch_from": "customer.customer_name",
    "fieldname": "customer_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Customer Name",
    "read_only": 1
   },
   {
-   "fetch_from": "customer.license_no",
    "fieldname": "license_no",
    "fieldtype": "Data",
-   "label": "Medical License No",
-   "read_only": 1
+   "label": "License Number"
   },
   {
-   "fetch_from": "customer.license_expiry",
    "fieldname": "license_expiry",
    "fieldtype": "Date",
-   "label": "License Expiry Date",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "customer.license_type",
-   "fieldname": "license_type",
-   "fieldtype": "Data",
-   "label": "License Type",
-   "read_only": 1
+   "label": "License Expiry"
   },
   {
    "fieldname": "column_break_1",
@@ -102,12 +91,14 @@
    "default": "Today",
    "fieldname": "request_date",
    "fieldtype": "Date",
-   "label": "Request Date"
+   "in_list_view": 1,
+   "label": "Request Date",
+   "reqd": 1
   },
   {
    "fieldname": "section_items",
    "fieldtype": "Section Break",
-   "label": "Requested Medicines / Reagents"
+   "label": "Requested Items"
   },
   {
    "fieldname": "items",
@@ -119,30 +110,30 @@
   {
    "fieldname": "section_totals",
    "fieldtype": "Section Break",
-   "label": "Financials & Totals"
+   "label": "Totals"
   },
   {
    "fieldname": "total_items_count",
    "fieldtype": "Int",
-   "label": "Total Line Items",
+   "label": "Total Items",
    "read_only": 1
   },
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Quote Amount (ETB)",
+   "label": "Total Amount (ETB)",
    "read_only": 1
   },
   {
    "fieldname": "section_notes",
    "fieldtype": "Section Break",
-   "label": "Notes & Instructions"
+   "label": "Notes"
   },
   {
    "fieldname": "notes",
    "fieldtype": "Small Text",
-   "label": "Notes"
+   "label": "Notes / Special Instructions"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -165,9 +156,25 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Medical Pharmacist",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Medical Druggist"
   }
  ],
- "sort_field": "modified",
+ "sort_field": "request_date",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

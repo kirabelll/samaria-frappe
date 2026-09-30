@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "naming_series:",
- "creation": "2026-09-15 12:00:00.000000",
+ "creation": "2026-09-02 12:00:00.000000",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -22,8 +22,8 @@
   "penalty_amount",
   "column_break_2",
   "recovered_amount",
+  "section_approvals",
   "approved_by",
-  "section_notes",
   "notes"
  ],
  "fields": [
@@ -44,8 +44,7 @@
    "fieldname": "lifting",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Cement Lifting Ref",
+   "label": "Cement Lifting",
    "options": "Cement Lifting"
   },
   {
@@ -59,8 +58,7 @@
   {
    "fieldname": "truck",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Truck Plate No",
+   "label": "Truck",
    "options": "Truck"
   },
   {
@@ -68,7 +66,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Shortage",
    "fieldname": "penalty_type",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -89,18 +86,18 @@
    "fieldname": "recovery_status",
    "fieldtype": "Select",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Recovery Status",
    "options": "Pending\nDeducted\nRecovered\nWaived"
   },
   {
    "fieldname": "section_amounts",
    "fieldtype": "Section Break",
-   "label": "Financials (ETB)"
+   "label": "Penalty Amounts (ETB)"
   },
   {
    "fieldname": "shortage_qty",
    "fieldtype": "Float",
-   "in_list_view": 1,
    "label": "Shortage Quantity (Tons)"
   },
   {
@@ -112,7 +109,7 @@
    "fieldname": "penalty_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Total Penalty Amount",
+   "label": "Penalty Amount (ETB)",
    "reqd": 1
   },
   {
@@ -124,18 +121,18 @@
    "fieldname": "recovered_amount",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Recovered Amount"
+   "label": "Recovered Amount (ETB)"
+  },
+  {
+   "fieldname": "section_approvals",
+   "fieldtype": "Section Break",
+   "label": "Approvals"
   },
   {
    "fieldname": "approved_by",
    "fieldtype": "Link",
    "label": "Approved By",
    "options": "User"
-  },
-  {
-   "fieldname": "section_notes",
-   "fieldtype": "Section Break",
-   "label": "Notes"
   },
   {
    "fieldname": "notes",
@@ -163,9 +160,18 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Cement Manager",
+   "write": 1
   }
  ],
- "sort_field": "modified",
+ "sort_field": "penalty_date",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

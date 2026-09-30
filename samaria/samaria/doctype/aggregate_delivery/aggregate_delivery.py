@@ -1,8 +1,8 @@
-import json
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import getdate
+from frappe.utils import flt, getdate
+
 
 class AggregateDelivery(Document):
 	def validate(self):
@@ -10,11 +10,22 @@ class AggregateDelivery(Document):
 		self.calculate_financials()
 		self.validate_status_transitions()
 
+	def on_submit(self):
+		# Status guard: only submitted records should be Delivered or Verified
+		if self.status == "Dispatched":
+			self.status = "Delivered"
+			self.db_set("status", "Delivered")
+
+	def on_cancel(self):
+		self.db_set("status", "Cancelled")
+
+	# ------------------------------------------------------------------
+	# Price auto-resolution from Sales / Supplier Agreements
+	# ------------------------------------------------------------------
 	def resolve_agreement_prices(self):
-		"""Auto-resolve prices from Sales Agreement and Supplier Agreement if not set."""
 		dispatch_date = getdate(self.dispatch_date) if self.dispatch_date else getdate()
 
-		# Resolve Customer Price from Sales Agreement if empty
+		# Customer price from active Sales Agreement
 		if not self.customer_price and self.customer and self.item:
 			cust_agreements = frappe.get_all(
 				"Sales Agreement",
@@ -31,11 +42,11 @@ class AggregateDelivery(Document):
 			if cust_agreements:
 				agreement_doc = frappe.get_doc("Sales Agreement", cust_agreements[0].name)
 				for item_row in getattr(agreement_doc, "items", []):
-					if item_row.item == self.item or getattr(item_row, "item_code", None) == self.item:
-						self.customer_price = float(item_row.unit_price or 0)
+					if item_row.item_code == self.item:
+						self.customer_price = flt(item_row.unit_price)
 						break
 
-		# Resolve Supplier Aggregate Rate from Supplier Agreement if empty
+		# Supplier aggregate rate from active Supplier Agreement
 		if not self.aggregate_value and self.supplier and self.item:
 			supp_agreements = frappe.get_all(
 				"Supplier Agreement",
@@ -52,38 +63,40 @@ class AggregateDelivery(Document):
 			if supp_agreements:
 				agreement_doc = frappe.get_doc("Supplier Agreement", supp_agreements[0].name)
 				for item_row in getattr(agreement_doc, "items", []):
-					if item_row.item == self.item or getattr(item_row, "item_code", None) == self.item:
-						self.aggregate_value = float(item_row.unit_price or 0)
+					if item_row.item_code == self.item:
+						self.aggregate_value = flt(item_row.unit_price)
 						break
 
-		# Default customer price to aggregate value if still 0
+		# Fallback: customer price defaults to aggregate value
 		if not self.customer_price and self.aggregate_value:
 			self.customer_price = self.aggregate_value
 
+	# ------------------------------------------------------------------
+	# Core financial calculations
+	# ------------------------------------------------------------------
 	def calculate_financials(self):
-		loaded = float(self.loaded_volume or 0)
-		delivered = float(self.delivered_volume) if self.delivered_volume is not None else loaded
-		rate = float(self.transport_rate or 0)
-		supp_rate = float(self.aggregate_value or 0)
-		cust_rate = float(self.customer_price or self.aggregate_value or 0)
+		loaded = flt(self.loaded_volume)
+		delivered = flt(self.delivered_volume) if self.delivered_volume is not None else loaded
+		rate = flt(self.transport_rate)
+		supp_rate = flt(self.aggregate_value)
+		cust_rate = flt(self.customer_price) or supp_rate
 
-		# Truck capacity cap
-		capacity = float(self.truck_capacity or 0)
-		billable_volume = capacity if (capacity > 0 and loaded > capacity) else loaded
-		self.billable_volume = billable_volume
+		# Billable volume capped at truck capacity
+		capacity = flt(self.truck_capacity)
+		self.billable_volume = capacity if (capacity > 0 and loaded > capacity) else loaded
 
-		# Shortage calculation
+		# Shortage
 		if self.delivered_volume is not None:
 			self.shortage_volume = max(0.0, loaded - delivered)
 		else:
 			self.shortage_volume = 0.0
 
-		# Transporter fee & shortage deduction
-		self.gross_truck_fee = billable_volume * rate
+		# Transport payments
+		self.gross_truck_fee = self.billable_volume * rate
 		self.shortage_deduction = self.shortage_volume * supp_rate
 		self.net_truck_payment = max(0.0, self.gross_truck_fee - self.shortage_deduction)
 
-		# Customer & Supplier amounts
+		# Commercial amounts
 		self.customer_receivable = loaded * cust_rate
 		self.supplier_payable = delivered * supp_rate
 		self.net_profit_amount = self.customer_receivable - self.supplier_payable - self.gross_truck_fee
