@@ -1,75 +1,110 @@
-# Samaria (Version-15)
+# Samaria ERP (Frappe Framework Version 15)
 
-**Samaria ERP Specialized Operations App for Frappe Framework Version 15.**
+![Frappe v15 Compatible](https://img.shields.io/badge/Frappe-v15.0%2B-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-brightgreen.svg)
+![License](https://img.shields.io/badge/License-MIT-orange.svg)
 
-This app implements the specialized enterprise domains for Samaria ERP:
-1. **Aggregate Operations**: Quarry-to-client dispatches, volume measurements, shortage deductions, proof verification, and transporter batch settlements.
-2. **Cement Operations**: Factory procurement orders, coupon registry and driver handovers, weighbridge lifting records, buyer shortage penalty calculations, and factory balances.
-3. **Medical Operations**: FEFO (First Expiry, First Out) batch management, comprehensive landed-cost buildup pricing formulas, customer prescription/orders, and store dispensing issues.
-4. **Transporter Operations**: Association management, transporter registry, fleet/truck master, dynamic category & item rate agreements, claim recoveries, and automated payment sheets.
+**Samaria ERP** is a specialized, production-ready enterprise operations app designed and optimized specifically for **Frappe Framework Version 15** and **ERPNext v15**.
 
 ---
 
-## 📁 Modules & DocTypes
+## 🌟 Frappe Version 15 Compatibility Matrix
 
-### 1. Aggregate Module
-- **Aggregate Delivery** (`is_submittable`): Records material dispatches, loaded vs delivered volumes, calculates shortages, applies shortage deductions against transport fees, and attaches telegram/signed receipts.
-- **Aggregate Settlement** (`is_submittable`): Transporter periodic settlement sheet aggregating deliveries, applying association fees and recovery deductions to compute net payable.
-- **Aggregate Settlement Item** (Child Table): Delivery line item within settlement sheets.
+This project is built from the ground up to be 100% compliant with Frappe Version 15 specifications:
 
-### 2. Cement Module
-- **Factory**: Cement/Aggregate plant and supplier source registry with weighbridge and coupon settings.
-- **Cement Purchase**: Procurement contracts with factory tracking purchased tonnage, unit price, advance payments, and remaining balance.
-- **Cement Coupon**: Coupon tracking lifecycle (`Collected` ➔ `In Custody` ➔ `Handed Over` ➔ `Used` ➔ `Returned`).
-- **Cement Lifting** (`is_submittable`): Offloading record linking factory weighbridge, buyer weighbridge, coupon, and truck, with automated balance deduction on submit.
-- **Cement Weighbridge**: Gross, tare, and net weighbridge ticket capture with photo proof and operator verification.
-- **Cement Penalty**: Penalty assessment and claim recovery for shortage, damage, or delivery delays.
-
-### 3. Medical Module
-- **Medical Batch**: Batch tracking with expiry dates, stock quantities, cost prices, and automated expired status handling.
-- **Medical Pricing**: 10-tier cost buildup (FOB price + Freight + Insurance + Customs + Inland Transport + Bank + Storage + Handling + Wastage + Overheads) + Target margin to calculate recommended and approved selling prices.
-- **Medical Request**: Customer/Hospital order request with prioritization.
-- **Medical Request Item** (Child Table): Medicine line items with batch preferences.
-- **Medical Store Issue** (`is_submittable`): Dispatch and store release note validating stock availability and batch expiry, deducting inventory on submit.
-- **Medical Store Issue Item** (Child Table): Batch allocation line items.
-
-### 4. Transporter Module
-- **Transport Association**: Association master with default service charge deduction rates and bank info.
-- **Transporter**: Transporter entity with withholding tax rules, association links, and payment details.
-- **Truck**: Fleet master with plate number, category (Sinotruk, Dump Truck, Trailer, etc.), capacity, and driver info.
-- **Transporter Agreement**: Rate contract supporting route pricing, item rates, shortage penalty rates, and category capacity matrix.
-- **Transporter Agreement Item** (Child Table): Material transport rate and shortage value.
-- **Transporter Pricing** (Child Table): Truck category capacity pricing.
-- **Transporter Recovery**: Claim and shortage recovery tracking across aggregate and cement divisions.
-- **Truck Payment** (`is_submittable`): Payment batch sheet calculating gross fee, shortage deduction, association charge, and recovery deductions.
+| Requirement / Standard | Compatibility Status | Details |
+| :--- | :---: | :--- |
+| **Python Version** | ✅ Compatible | Supports **Python 3.10, 3.11, and 3.12** (Standard Frappe v15 runtime) |
+| **Packaging (PEP 517/621)** | ✅ Compatible | Uses standard `pyproject.toml` with `flit_core` and fallback `setup.py` |
+| **Frappe v15 Desk & Workspaces** | ✅ Compatible | Standard block-based Workspace JSON schemas with shortcuts and cards |
+| **DocType Engine** | ✅ Compatible | InnoDB MySQL/MariaDB schemas with `naming_rule`, `is_submittable`, and Role Permissions |
+| **Document Controllers** | ✅ Compatible | Standard `frappe.model.document.Document` classes and `frappe.whitelist` APIs |
+| **Asset Pipeline** | ✅ Compatible | Pure ES6 JavaScript and CSS bundles compatible with `bench build` |
 
 ---
 
-## 🚀 Installation & Setup on Frappe Bench (v15)
+## 🏗️ Operational Modules & Features
 
-### 1. Clone or copy `samaria` into your bench `apps` folder:
+### 1. 🪨 Aggregate Operations
+- **Aggregate Delivery** (`is_submittable`): Manage dispatch and delivery tickets, loaded vs. delivered volume (m³), automatic shortage volume deduction, and driver fee calculations.
+- **Aggregate Settlement** (`is_submittable`): Periodic transporter reconciliation batch sheets calculating net payout after shortage and union fee deductions.
+- **Transporter Agreements & Rates**: Route-based and material-based transport pricing matrices.
+
+### 2. 🏗️ Cement Operations
+- **Cement Purchase**: Procurement contracts tracking quotas, advance payments, and remaining balances per factory.
+- **Cement Lifting** (`is_submittable`): Dispatch records linking factory weighbridge, buyer weighbridge, and coupons with automatic stock and balance deductions.
+- **Cement Coupon**: Physical coupon custody tracking (`Collected` ➔ `In Custody` ➔ `Handed Over` ➔ `Used` ➔ `Returned`).
+- **Cement Weighbridge**: Accurate gross, tare, and net tonnage recording with shortage penalty calculations.
+
+### 3. 💊 Medical Operations
+- **Medical Batch**: Lot inventory management with FEFO (First Expiry, First Out) sorting and quarantine flags.
+- **Medical Pricing**: 10-tier landed cost buildup formula (FOB + Freight + Insurance + Customs + Inland Transport + Bank + Storage + Handling + Wastage + Overhead) with target profit margin.
+- **Medical Request & Store Issue** (`is_submittable`): Customer/Hospital drug orders and store dispensing with batch validation.
+
+### 4. 🚛 Transporter & Fleet Operations
+- **Truck & Fleet Master**: Plate numbers, vehicle types, capacity (m³ / Tons), and driver registry.
+- **Transport Associations**: Union management, service fee percentages, and bank routing.
+- **Transporter Recovery**: Cross-division claim recovery for damages or lost cargo.
+
+### 5. 📊 Executive Dashboard & Reports
+- **Samaria Operations Workspace**: Centralized dashboard hub for aggregate, cement, medical, and agreement workflows.
+- **Samaria Executive Dashboard Page**: Real-time business intelligence cards, volume trends, factory lifting breakdowns, and recent activity streams.
+- **Standard Reports**:
+  - *Aggregate Project Dispatch Report*
+  - *Cement Project Lifting and Balance Report*
+  - *Medical Project Inventory Report*
+  - *Project Financial Summary Report*
+
+---
+
+## 🚀 Installation Guide on Frappe Bench (v15)
+
+### Prerequisites
+- Frappe Bench v5.20+ with Frappe Version 15 installed.
+- Python 3.10, 3.11, or 3.12.
+
+---
+
+### Step 1: Download & Install the App
+
+Navigate to your bench directory and fetch the repository:
+
 ```bash
-cd /path/to/frappe-bench/apps
-# If copying locally:
-cp -r /path/to/samariaERP/samaria ./samaria
+cd ~/frappe-bench
+
+# Fetch app from GitHub repository
+bench get-app samaria https://github.com/kirabelll/samaria-frappe.git
 ```
 
-### 2. Install the app in your bench environment:
+> **Note:** Providing the explicit app name `samaria` before the URL ensures the folder clones directly to `apps/samaria`.
+
+---
+
+### Step 2: Install App on Your Site
+
+Install the Samaria app on your target Frappe / ERPNext site:
+
 ```bash
-bench pip install -e apps/samaria
+bench --site <your-site-name> install-app samaria
+```
+*(Replace `<your-site-name>` with your site name, e.g., `frontend.localhost` or `mysite.local`)*
+
+---
+
+### Step 3: Run Database Migrations
+
+Run database migrations to initialize all DocTypes, Workspaces, and Roles:
+
+```bash
+bench --site <your-site-name> migrate
 ```
 
-### 3. Install the app onto your site:
-```bash
-bench --site [your-site-name] install-app samaria
-```
+---
 
-### 4. Run database migrations:
-```bash
-bench --site [your-site-name] migrate
-```
+### Step 4: Build Assets & Restart Bench
 
-### 5. Build assets:
+Build frontend assets and restart bench background workers:
+
 ```bash
 bench build --app samaria
 bench restart
@@ -77,34 +112,62 @@ bench restart
 
 ---
 
-## 🔌 REST APIs & Frontend Integration
+## 🔧 Troubleshooting Common Installation Issues
 
-Samaria includes whitelisted Python API endpoints for Next.js / frontend integration:
+### Issue 1: `OSError: [Errno 39] Directory not empty`
+**Cause:** A previous clone attempt failed or an existing folder exists in `apps/samaria` or `apps/samaria-frappe`.
 
-### Aggregate API (`samaria.api.aggregate`)
-- `get_unsettled_deliveries(transporter, from_date, to_date)`: Returns all unsettled dispatches for a transporter.
-- `get_aggregate_analytics()`: Summary metrics (total dispatches, loaded volume, delivered volume, shortages, paid transport).
+**Fix:**
+```bash
+# 1. Remove lingering app folders
+rm -rf ~/frappe-bench/apps/samaria ~/frappe-bench/apps/samaria-frappe
 
-### Cement API (`samaria.api.cement`)
-- `get_factory_balances()`: Factory-wise purchased vs remaining quota.
-- `get_cement_analytics()`: Analytics for cement liftings, active coupons, and shortage penalties.
-
-### Medical API (`samaria.api.medical`)
-- `get_fefo_batches(item_code, required_qty)`: Auto-selects batches sorted by FEFO (earliest expiry first).
-- `create_store_issue_from_request(request_id)`: Generates a Store Issue pre-allocated with FEFO batches.
-- `get_expiring_batches_report(days_threshold=90)`: List batches expiring in upcoming days.
-
-### Transporter API (`samaria.api.transporter`)
-- `get_active_rate(transporter, product_type, item_code)`: Looks up agreed transport rate and shortage penalty rate.
-- `get_transporter_recovery_balance(transporter)`: Calculates outstanding claims and recoveries.
+# 2. Re-run bench get-app with explicit app name
+bench get-app samaria https://github.com/kirabelll/samaria-frappe.git
+```
 
 ---
 
-## 👥 Roles & Permissions Included
-- **Aggregate Manager**
-- **Cement Manager**
-- **Medical Pharmacist**
-- **Medical Druggist**
-- **Transporter Coordinator**
-- **Weighbridge Operator**
-- **System Manager**
+### Issue 2: DocTypes Not Showing in Workspace
+**Cause:** Frappe desk cache needs refreshing after installation.
+
+**Fix:**
+```bash
+bench --site <your-site-name> clear-cache
+bench --site <your-site-name> migrate
+```
+
+---
+
+## 🔌 Whitelisted REST APIs (for Custom Frontends & Integrations)
+
+Samaria provides secure, whitelisted Python REST endpoints for integrations:
+
+| Endpoint | Method | Description |
+| :--- | :---: | :--- |
+| `samaria.api.v1.ping` | `GET` | Health check endpoint returning app status and version |
+| `samaria.api.v1.get_app_info` | `GET` | App metadata and division list |
+| `samaria.api.v1.get_dashboard_data` | `GET` | Consolidated executive metrics and chart datasets |
+| `samaria.api.v1.get_aggregate_deliveries` | `GET` | Filterable aggregate dispatches and pricing breakdowns |
+| `samaria.api.v1.get_cement_liftings` | `GET` | Cement lifting logs with weighbridge and penalty details |
+| `samaria.api.v1.get_cement_purchases` | `GET` | Factory purchase orders with remaining quotas |
+| `samaria.api.v1.get_medical_batches` | `GET` | Batch inventory sorted by FEFO (expiry date) |
+| `samaria.api.v1.get_medical_requests` | `GET` | Medical order requests and line items |
+
+---
+
+## 👥 Standard User Roles
+
+During migration, the app automatically configures the following roles:
+- `Aggregate Manager`
+- `Cement Manager`
+- `Medical Pharmacist`
+- `Medical Druggist`
+- `Transporter Coordinator`
+- `Weighbridge Operator`
+- `System Manager` (Full Access)
+
+---
+
+## 📄 License
+This project is licensed under the MIT License - see the [license.txt](file:///d:/samaria/license.txt) file for details.
